@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/features/authentication/controllers/onboading/onboading_controller.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/device/device_utility.dart';
@@ -19,7 +20,9 @@ class OnBoardBottonNavigationButton extends StatelessWidget {
             style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 backgroundColor: dark ? TColors.primary : TColors.dark),
-            onPressed: () {},
+            onPressed: () {
+              OnboardingController.instance.nextPage();
+            },
             child: const Icon(Icons.arrow_forward_ios_rounded)));
   }
 }

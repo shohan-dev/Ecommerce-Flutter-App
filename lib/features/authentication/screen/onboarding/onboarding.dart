@@ -18,9 +18,6 @@ class OnBoardingScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // skip buttons
-          const OnBoardingSkip(),
-
           // pageview swaps
           PageView(
             controller: controller.pageController,
@@ -43,8 +40,12 @@ class OnBoardingScreen extends StatelessWidget {
               ),
             ],
           ),
+          // Navigation style bar
           const OnBoradingNavigation(),
+          // Navigation button
           const OnBoardBottonNavigationButton(),
+          // skip buttons
+          const OnBoardingSkip(),
         ],
       ),
     );

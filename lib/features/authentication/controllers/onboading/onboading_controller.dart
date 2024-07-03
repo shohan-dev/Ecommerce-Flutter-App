@@ -20,8 +20,21 @@ class OnboardingController extends GetxController {
   }
 
 // Update Current Index & jump to next page
-  void nextPage() {}
+  void nextPage() {
+    if (currentPageindex.value == 2) {
+      print("Next page Goind");
+    } else {
+      currentPageindex.value = currentPageindex.value + 1;
+      pageController.nextPage(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
 // Update Current Index & jump to the last page
-  void skipPage() {}
+  void skipPage() {
+    currentPageindex.value = 2;
+    pageController.jumpToPage(2);
+  }
 }
