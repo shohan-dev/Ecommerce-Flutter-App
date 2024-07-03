@@ -1,46 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/features/authentication/screen/onboarding/onboarding.dart';
-import 'package:t_store/features/authentication/screen/onboarding/widgets/onboardingpage.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
 
-class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+class OnboardingController extends GetxController {
+  static OnboardingController get instance => Get.find();
 
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(OnboardingController());
-    return Scaffold(
-      body: Stack(
-        children: [
-          // skip buttons
-          const OnBoardingSkip(),
+  // Variables
+  final pageController = PageController();
+  final currentPageindex = 0.obs;
 
-          // pageview swaps
-          PageView(
-            children: const [
-              OnBoardPage(
-                image: TImages.onBoardingImage1,
-                title: TTexts.onBoardingTitle1,
-                subtitle: TTexts.onBoardingSubTitle1,
-              ),
-              OnBoardPage(
-                image: TImages.onBoardingImage2,
-                title: TTexts.onBoardingTitle2,
-                subtitle: TTexts.onBoardingSubTitle2,
-              ),
-              OnBoardPage(
-                image: TImages.onBoardingImage3,
-                title: TTexts.onBoardingTitle3,
-                subtitle: TTexts.onBoardingSubTitle3,
-              ),
-            ],
-          ),
-          const OnBoradingNavigation(),
-          const OnBoardBottonNavigationButton(),
-        ],
-      ),
-    );
+// Update Current Index when Page Scroll
+  void updatePageIndicator(index) {
+    currentPageindex.value = index;
   }
+
+// Jump to the specific dot selected page
+  void dotNavigationClick(index) {
+    currentPageindex.value = index;
+    pageController.jumpTo(index);
+  }
+
+// Update Current Index & jump to next page
+  void nextPage() {}
+
+// Update Current Index & jump to the last page
+  void skipPage() {}
 }
