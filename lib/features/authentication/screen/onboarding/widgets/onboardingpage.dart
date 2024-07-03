@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/device/device_utility.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
@@ -51,6 +53,47 @@ class OnBoardPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class OnBoardBottonNavigationButton extends StatelessWidget {
+  const OnBoardBottonNavigationButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+    return Positioned(
+        bottom: TDeviceUtils.getBottomNavigationBarHeight() + 25,
+        right: TSizes.defaultSpace,
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                backgroundColor: dark ? TColors.primary : TColors.dark),
+            onPressed: () {},
+            child: const Icon(Icons.arrow_forward_ios_rounded)));
+  }
+}
+
+class OnBoradingNavigation extends StatelessWidget {
+  const OnBoradingNavigation({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+    return Positioned(
+      bottom: TDeviceUtils.getBottomNavigationBarHeight() + 25,
+      left: TSizes.defaultSpace,
+      child: SmoothPageIndicator(
+        controller: PageController(),
+        count: 3,
+        effect: ExpandingDotsEffect(
+            activeDotColor: dark ? TColors.light : TColors.dark, dotHeight: 6),
       ),
     );
   }

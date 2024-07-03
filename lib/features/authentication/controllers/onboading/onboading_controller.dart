@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:t_store/features/authentication/screen/onboarding/onboarding.dart';
 import 'package:t_store/features/authentication/screen/onboarding/widgets/onboardingpage.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -8,11 +10,13 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnboardingController());
     return Scaffold(
       body: Stack(
         children: [
           // skip buttons
           const OnBoardingSkip(),
+
           // pageview swaps
           PageView(
             children: const [
@@ -33,6 +37,8 @@ class OnBoardingScreen extends StatelessWidget {
               ),
             ],
           ),
+          const OnBoradingNavigation(),
+          const OnBoardBottonNavigationButton(),
         ],
       ),
     );
