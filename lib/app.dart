@@ -17,11 +17,7 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme, // Replace with your dark theme
       debugShowCheckedModeBanner: false, // Set to false for production
       // initialBinding: GeneralBindings(), // Uncomment if using GetX bindings
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text(TTexts.appName), // Example app bar with title
-          ),
-          body: OnBoardingScreen()),
+      home: Scaffold(body: OnBoardingScreen()),
     );
   }
 }
