@@ -31,7 +31,7 @@ class SignupFooter extends StatelessWidget {
               image: TImages.google,
             ),
             SizedBox(
-              width: 4,
+              width: TSizes.spaceBtwItems,
             ),
             CircleIconImage(
               image: TImages.facebook,
