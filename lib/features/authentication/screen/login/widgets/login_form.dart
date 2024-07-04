@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/authentication/controllers/login/login_controller.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
@@ -44,7 +45,7 @@ class FormPageLogin extends StatelessWidget {
                     const Text(TTexts.rememberMe),
                   ],
                 ),
-                const TextButton(TTexts.forgetPassword),
+                const Text(TTexts.forgetPassword),
               ],
             ),
 
@@ -62,7 +63,9 @@ class FormPageLogin extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  LoginPageController.instance.signupbutton();
+                },
                 child: const Text(TTexts.createAccount),
               ),
             ),

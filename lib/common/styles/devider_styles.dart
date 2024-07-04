@@ -6,9 +6,11 @@ class DeviderWithText extends StatelessWidget {
   const DeviderWithText({
     super.key,
     required this.dark,
+    required this.text,
   });
 
   final bool dark;
+  final text;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class DeviderWithText extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            TTexts.orSignInWith,
+            text,
             style: TextStyle(
                 color: dark
                     ? TColors.grey
