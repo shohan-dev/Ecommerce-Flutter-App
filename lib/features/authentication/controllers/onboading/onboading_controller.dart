@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:t_store/features/authentication/screen/login/login.dart';
 
 class OnboardingController extends GetxController {
   static OnboardingController get instance => Get.find();
@@ -7,6 +8,7 @@ class OnboardingController extends GetxController {
   // Variables
   final pageController = PageController();
   final currentPageindex = 0.obs;
+  var isLoading = false.obs;
 
 // Update Current Index when Page Scroll
   void updatePageIndicator(index) {
@@ -20,13 +22,16 @@ class OnboardingController extends GetxController {
   }
 
 // Update Current Index & jump to next page
-  void nextPage() {
+  void nextPage() async {
     if (currentPageindex.value == 2) {
-      print("Next page Goind");
+      isLoading.value = true; // Start loading animation
+      await Future.delayed(const Duration(milliseconds: 500));
+      isLoading.value = false; // Stop loading animation
+      Get.off(const LoginPage()); // Navigate to LoginPage
     } else {
       currentPageindex.value = currentPageindex.value + 1;
       pageController.nextPage(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     }
@@ -34,7 +39,6 @@ class OnboardingController extends GetxController {
 
 // Update Current Index & jump to the last page
   void skipPage() {
-    currentPageindex.value = 2;
-    pageController.jumpToPage(2);
+    Get.off(const LoginPage());
   }
 }

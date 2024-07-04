@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       // Changed Scaffold to MaterialApp for full app setup
-      title: 'Your App Title', // Replace with your app's title
+      title: 'Ecomarce App', // Replace with your app's title
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme, // Replace with your light theme
       darkTheme: TAppTheme.darkTheme, // Replace with your dark theme
