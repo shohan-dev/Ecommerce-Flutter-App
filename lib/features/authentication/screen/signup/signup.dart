@@ -54,7 +54,9 @@ class SignupPage extends StatelessWidget {
               const LoginPageForm(),
 
               // checkboxes
-              const CheckboxAndTerms(),
+              CheckboxAndTerms(
+                dark: dark,
+              ),
 
               // Signup button
               const SignupButton(),

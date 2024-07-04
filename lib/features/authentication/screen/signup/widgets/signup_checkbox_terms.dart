@@ -6,7 +6,12 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
 class CheckboxAndTerms extends StatelessWidget {
-  const CheckboxAndTerms({super.key});
+  const CheckboxAndTerms({
+    super.key,
+    required this.dark,
+  });
+
+  final bool dark;
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,15 @@ class CheckboxAndTerms extends StatelessWidget {
             SizedBox(child: Checkbox(value: true, onChanged: (value) {})),
             const Text(TTexts.iAgreeTo),
             const SizedBox(width: 3),
+            // privacy policy
             GestureDetector(
               onTap: () {
                 Get.to(() => const PrivacyPolicyPage());
               },
-              child: const Text(
+              child: Text(
                 TTexts.privacyPolicy,
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: dark ? Colors.white : Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
               ),
@@ -32,14 +38,15 @@ class CheckboxAndTerms extends StatelessWidget {
             const SizedBox(width: 3),
             const Text(TTexts.and),
             const SizedBox(width: 3),
+            //  terms of condition
             GestureDetector(
               onTap: () {
                 Get.to(() => const TermsConditionsPage());
               },
-              child: const Text(
+              child: Text(
                 TTexts.termsOfUse,
                 style: TextStyle(
-                  color: Colors.blue,
+                  color: dark ? Colors.white : Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
               ),
