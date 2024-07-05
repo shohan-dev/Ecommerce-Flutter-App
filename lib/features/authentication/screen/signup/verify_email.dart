@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widget/success_screen.dart';
+import 'package:t_store/features/authentication/screen/login/login.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -12,12 +12,16 @@ class VerifyEmailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final email_get = "Sabbirshohan80@gmail.com";
+    const emailGet = "Sabbirshohan80@gmail.com";
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.clear))
+            IconButton(
+                onPressed: () {
+                  Get.off(() => const LoginPage());
+                },
+                icon: const Icon(CupertinoIcons.clear))
           ],
         ),
         body: Center(
@@ -36,7 +40,7 @@ class VerifyEmailScreen extends StatelessWidget {
                       fontSize: TSizes.defaultSpace,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(email_get),
+                const Text(emailGet),
                 const Padding(
                   padding: EdgeInsets.all(TSizes.defaultSpace),
                   child: Text(
@@ -49,7 +53,12 @@ class VerifyEmailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => SuccessScreenPage());
+                        Get.off(() => const SuccessScreenPage(
+                              title: TTexts.yourAccountCreatedTitle,
+                              subtitle: TTexts.yourAccountCreatedSubTitle,
+                              image: TImages.staticSuccessIllustration,
+                              buttonName: "Continue",
+                            ));
                       },
                       child: const Text("Continue")),
                 ),
@@ -57,14 +66,23 @@ class VerifyEmailScreen extends StatelessWidget {
                   height: TSizes.defaultSpace,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    TTexts.resendEmail,
-                    style: TextStyle(fontSize: 11),
-                  ),
-                )
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.off(() => const SuccessScreenPage(
+                              title: "",
+                              subtitle: "",
+                              image: TImages.verifyIllustration,
+                              buttonName: "Successful",
+                            ));
+                      },
+                      child: const Text(
+                        TTexts.resendEmail,
+                        style: TextStyle(fontSize: 11),
+                      ),
+                    ))
               ],
             ),
           ),

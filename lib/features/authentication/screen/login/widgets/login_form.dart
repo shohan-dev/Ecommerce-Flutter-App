@@ -45,7 +45,12 @@ class FormPageLogin extends StatelessWidget {
                     const Text(TTexts.rememberMe),
                   ],
                 ),
-                const Text(TTexts.forgetPassword),
+                GestureDetector(
+                  onTap: () {
+                    LoginPageController.instance.forgotpassword();
+                  },
+                  child: const Text(TTexts.forgetPassword),
+                ),
               ],
             ),
 
