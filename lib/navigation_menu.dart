@@ -63,7 +63,7 @@ class NavigationMenuConroller extends GetxController {
       color: Colors.green,
     ),
     Container(
-      color: Colors.blue,
+      color: Colors.red,
     ),
     Container(
       color: Colors.yellow,
