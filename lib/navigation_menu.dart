@@ -57,7 +57,7 @@ class NavigationMenuConroller extends GetxController {
 
   final screen = [
     Container(
-      color: Colors.red,
+      color: Colors.blue,
     ),
     Container(
       color: Colors.green,
