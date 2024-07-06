@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:t_store/common/widget/success_screen.dart';
-import 'package:t_store/features/authentication/screen/login/login.dart';
+import 'package:t_store/features/authentication/controllers/signup/verify_controller.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
@@ -19,7 +17,8 @@ class VerifyEmailScreen extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
-                  Get.off(() => const LoginPage());
+                  VerifyPageController.instance
+                      .closeActionButton(); // close ActionButton
                 },
                 icon: const Icon(CupertinoIcons.clear))
           ],
@@ -53,12 +52,8 @@ class VerifyEmailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.off(() => const SuccessScreenPage(
-                              title: TTexts.yourAccountCreatedTitle,
-                              subtitle: TTexts.yourAccountCreatedSubTitle,
-                              image: TImages.staticSuccessIllustration,
-                              buttonName: "Continue",
-                            ));
+                        VerifyPageController.instance
+                            .continueButton(); // continue button
                       },
                       child: const Text("Continue")),
                 ),
@@ -71,12 +66,8 @@ class VerifyEmailScreen extends StatelessWidget {
                     },
                     child: GestureDetector(
                       onTap: () {
-                        Get.off(() => const SuccessScreenPage(
-                              title: "",
-                              subtitle: "",
-                              image: TImages.verifyIllustration,
-                              buttonName: "Successful",
-                            ));
+                        VerifyPageController.instance
+                            .resendEmailActionButton(); // resend email action button
                       },
                       child: const Text(
                         TTexts.resendEmail,

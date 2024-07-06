@@ -55,26 +55,6 @@ class FormPageLogin extends StatelessWidget {
             ),
 
             const SizedBox(height: TSizes.spaceBtwSections),
-            // button signin
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text(TTexts.signIn),
-              ),
-            ),
-            const SizedBox(height: TSizes.defaultSpace),
-            // button signup
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {
-                  LoginPageController.instance.signupbutton();
-                },
-                child: const Text(TTexts.createAccount),
-              ),
-            ),
-            const SizedBox(height: TSizes.defaultSpace),
           ],
         ),
       ),

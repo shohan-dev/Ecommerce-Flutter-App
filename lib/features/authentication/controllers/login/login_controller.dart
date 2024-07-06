@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:t_store/features/authentication/screen/forget_reset/forget_email.dart';
 import 'package:t_store/features/authentication/screen/signup/signup.dart';
+import 'package:t_store/navigation_menu.dart';
 
 class LoginPageController extends GetxController {
   static LoginPageController get instance => Get.put(LoginPageController());
@@ -13,7 +14,10 @@ class LoginPageController extends GetxController {
     Get.to(() => const ForgetPageScreen());
   }
 
-  void signinbutton() {}
+  void signinbutton() {
+    Get.offAll(() => const NavigationMenuPage());
+  }
+
   void signupbutton() {
     Get.to(() => const SignupPage());
   }

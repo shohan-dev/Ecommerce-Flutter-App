@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/styles/devider_styles.dart';
 import 'package:t_store/common/styles/spacing_styles.dart';
+import 'package:t_store/features/authentication/screen/login/widgets/login_button.dart';
 import 'package:t_store/features/authentication/screen/login/widgets/login_footer.dart';
 import 'package:t_store/features/authentication/screen/login/widgets/login_form.dart';
 import 'package:t_store/features/authentication/screen/login/widgets/login_header.dart';
@@ -26,6 +27,8 @@ class LoginPage extends StatelessWidget {
 
               // form page
               const FormPageLogin(),
+              // Login Button
+              const LoginButton(),
 
               // Divider with text
               DeviderWithText(
