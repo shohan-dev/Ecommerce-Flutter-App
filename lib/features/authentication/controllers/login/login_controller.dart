@@ -25,3 +25,4 @@ class LoginPageController extends GetxController {
   void signinwithgoogle() {}
   void signinwithfacebook() {}
 }
+
