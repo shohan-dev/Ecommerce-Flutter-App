@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:t_store/common/Privacy/privacy_policy.dart';
-import 'package:t_store/common/Privacy/terms_of_condition.dart';
+import 'package:t_store/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
@@ -25,7 +23,7 @@ class CheckboxAndTerms extends StatelessWidget {
             // privacy policy
             GestureDetector(
               onTap: () {
-                Get.to(() => const PrivacyPolicyPage());
+                SignupController.instance.privacyPolicyChanged();
               },
               child: Text(
                 TTexts.privacyPolicy,
@@ -41,7 +39,7 @@ class CheckboxAndTerms extends StatelessWidget {
             //  terms of condition
             GestureDetector(
               onTap: () {
-                Get.to(() => const TermsConditionsPage());
+                SignupController.instance.termsOfServiceChanged();
               },
               child: Text(
                 TTexts.termsOfUse,

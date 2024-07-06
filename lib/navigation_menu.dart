@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class NavigationMenuPage extends StatelessWidget {
   const NavigationMenuPage({super.key});
@@ -8,6 +10,7 @@ class NavigationMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationMenuConroller());
+    final darkMode = THelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Navigation Menu'),
@@ -17,8 +20,13 @@ class NavigationMenuPage extends StatelessWidget {
           height: 80,
           elevation: 0,
           selectedIndex: controller.selectedindex.value,
-          onDestinationSelected: (value) =>
-              controller.selectedindex.value = value, // selected index page
+          backgroundColor: darkMode ? TColors.black : TColors.white,
+          indicatorColor: darkMode
+              ? TColors.white.withOpacity(0.1)
+              : TColors.black.withOpacity(0.1),
+
+          onDestinationSelected: (value) => controller.selectedindex.value =
+              value, // selected index page currently selected
           destinations: const [
             NavigationDestination(
               icon: Icon(Iconsax.home),

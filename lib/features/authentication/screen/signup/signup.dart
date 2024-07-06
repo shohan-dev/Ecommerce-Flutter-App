@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:t_store/common/styles/spacing_styles.dart';
-import 'package:t_store/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:t_store/features/authentication/screen/signup/widgets/signup_button.dart';
 import 'package:t_store/features/authentication/screen/signup/widgets/signup_checkbox_terms.dart';
 import 'package:t_store/features/authentication/screen/signup/widgets/signup_footer.dart';
@@ -29,7 +27,7 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize the controller
-    final SignupController controller = Get.put(SignupController());
+    // final SignupController controller = Get.put(SignupController());
     final dark = THelperFunctions.isDarkMode(context);
 
     return Scaffold(
