@@ -10,19 +10,19 @@ class TCustomCurvedEdges extends CustomClipper<Path> {
     final firstControlPoint = Offset(0, size.height - 20);
     final firstEndPoint = Offset(30, size.height - 20);
     path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-        firstEndPoint.dx, firstEndPoint.dy);
+        firstEndPoint.dx, firstEndPoint.dy); // first control point round shape
 
     // Second curve
     final secondControlPoint = Offset(0, size.height - 20);
     final secondEndPoint = Offset(size.width - 30, size.height - 20);
     path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
+        secondEndPoint.dx, secondEndPoint.dy); // middle straight line
 
     // Third curve
     final thirdControlPoint = Offset(size.width, size.height - 20);
     final thirdEndPoint = Offset(size.width, size.height);
     path.quadraticBezierTo(thirdControlPoint.dx, thirdControlPoint.dy,
-        thirdEndPoint.dx, thirdEndPoint.dy);
+        thirdEndPoint.dx, thirdEndPoint.dy); // Last control point round shape
 
     path.lineTo(size.width, 0);
     path.close();
