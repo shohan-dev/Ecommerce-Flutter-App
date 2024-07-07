@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/shop/screens/home/home.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -38,7 +39,7 @@ class NavigationMenuPage extends StatelessWidget {
             ),
             NavigationDestination(
               icon: Icon(Iconsax.heart),
-              label: "Profile",
+              label: "Wishlist",
             ),
             NavigationDestination(
               icon: Icon(Iconsax.user),
@@ -56,9 +57,7 @@ class NavigationMenuConroller extends GetxController {
   final Rx<int> selectedindex = 0.obs;
 
   final screen = [
-    Container(
-      color: Colors.blue,
-    ),
+    const HomeScreen(),
     Container(
       color: Colors.green,
     ),
@@ -66,7 +65,7 @@ class NavigationMenuConroller extends GetxController {
       color: Colors.red,
     ),
     Container(
-      color: Colors.yellow,
+      color: Colors.blue,
     ),
   ];
 }
