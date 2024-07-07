@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             ClipPath(
-              // clipper: TCustomCurvedEdges(),
+              clipper: TCustomCurvedEdges(),
               child: Container(
                 color: TColors.primary,
                 padding: const EdgeInsets.all(0),
