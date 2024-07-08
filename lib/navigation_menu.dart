@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/shop/screens/home/home.dart';
+import 'package:t_store/features/shop/screens/store/store.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -13,9 +14,9 @@ class NavigationMenuPage extends StatelessWidget {
     final controller = Get.put(NavigationMenuConroller());
     final darkMode = THelperFunctions.isDarkMode(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Navigation Menu'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Navigation Menu'),
+      // ),
       bottomNavigationBar: Obx(
         () => NavigationBar(
           height: 80,
@@ -58,9 +59,10 @@ class NavigationMenuConroller extends GetxController {
 
   final screen = [
     const HomeScreen(),
-    Container(
-      color: Colors.green,
-    ),
+    // Container(
+    //   color: Colors.green,
+    // ),
+    const StoreScreen(),
     Container(
       color: Colors.red,
     ),
