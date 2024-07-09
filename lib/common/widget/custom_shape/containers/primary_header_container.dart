@@ -36,6 +36,16 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                       .withOpacity(0.1), // round shape design 2nd
                 ),
               ),
+              Positioned.fill(
+                //full page content show
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    child, // Add the child here
+                  ],
+                ),
+              ),
             ],
           ),
         ),

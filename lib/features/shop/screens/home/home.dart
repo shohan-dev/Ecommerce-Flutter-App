@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/appbar/appbar.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
+import 'package:t_store/utils/constants/text_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,15 +13,15 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             TPrimaryHeaderContainer(
-              child: Column(
-                children: [
-                  TAppBar(
-                    showBackArrow: true,
-                    tittle: Text("Home Screen"),
-                  )
-                ],
-              ),
-            ),
+                child: Column(
+              children: [
+                TAppBar(
+                  title: Column(
+                    children: [Text(TTexts.homeAppbarTitle)],
+                  ),
+                ),
+              ],
+            ))
           ],
         ),
       ),
