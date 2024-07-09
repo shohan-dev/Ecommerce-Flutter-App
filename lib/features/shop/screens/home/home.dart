@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
+import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:t_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +16,13 @@ class HomeScreen extends StatelessWidget {
             TPrimaryHeaderContainer(
                 child: Column(
               children: [
-                THomeAppbar(), // appbar
+                THomeAppbar(), // Appbar
+                SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                TSearchBarContainer(
+                  text: "Search", // SearchBar
+                ),
               ],
             ))
           ],
