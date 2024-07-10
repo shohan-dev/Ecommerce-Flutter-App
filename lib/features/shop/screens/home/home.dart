@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
+import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
+import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,6 +26,26 @@ class HomeScreen extends StatelessWidget {
                 TSearchBarContainer(
                   text: "Search", // SearchBar
                 ),
+
+                //Catagory Section
+                SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: TSizes.defaultSpace),
+                  child: TSectionHeading(
+                    title: 'Popular Catagory',
+                    showActionButton: false,
+                    textcolor: TColors.white,
+                  ),
+                ),
+                SizedBox(
+                  height: TSizes.spaceBtwSections / 2,
+                ),
+
+                /// Catagory Section image section
+
+                THomeCategories()
               ],
             ))
           ],
