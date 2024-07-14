@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
-import 'package:t_store/common/widget/images/t_round_images.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
+import 'package:t_store/features/shop/screens/home/widgets/home_promo_slider.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -52,12 +51,7 @@ class HomeScreen extends StatelessWidget {
               ],
             )),
             // Scroll section
-            Padding(
-              padding: EdgeInsets.all(TSizes.defaultSpace),
-              child: TRoundImage(
-                imageUrl: TImages.banner1,
-              ),
-            ),
+            TPromoSlider(),
           ],
         ),
       ),
