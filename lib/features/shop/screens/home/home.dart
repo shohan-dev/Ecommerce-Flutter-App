@@ -4,8 +4,9 @@ import 'package:t_store/common/widget/custom_shape/containers/searchbar_containe
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
-import 'package:t_store/features/shop/screens/home/widgets/home_promo_slider.dart';
+import 'package:t_store/common/widget/slide_bar/promo_slider.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -51,7 +52,18 @@ class HomeScreen extends StatelessWidget {
               ],
             )),
             // Scroll section
-            TPromoSlider(),
+            TPromoSlider(
+              banner: [
+                TImages.banner1,
+                TImages.banner2,
+                TImages.banner3,
+                TImages.banner4,
+                // TImages.banner5,
+                // TImages.banner6,
+                // TImages.banner7,
+                // TImages.banner8,
+              ],
+            ),
           ],
         ),
       ),

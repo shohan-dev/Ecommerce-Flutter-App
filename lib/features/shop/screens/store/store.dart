@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
 
 class StoreScreen extends StatelessWidget {
