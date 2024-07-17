@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
+import 'package:t_store/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
@@ -58,12 +59,9 @@ class HomeScreen extends StatelessWidget {
                 TImages.banner2,
                 TImages.banner3,
                 TImages.banner4,
-                // TImages.banner5,
-                // TImages.banner6,
-                // TImages.banner7,
-                // TImages.banner8,
               ],
             ),
+            TProductCardVertical(),
           ],
         ),
       ),
