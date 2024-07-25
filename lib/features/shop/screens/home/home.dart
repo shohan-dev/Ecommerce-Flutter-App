@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
+import 'package:t_store/common/widget/layouts/grid_layout.dart';
 import 'package:t_store/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
@@ -17,10 +18,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            TPrimaryHeaderContainer(
+            const TPrimaryHeaderContainer(
                 child: Column(
               children: [
                 THomeAppbar(), // Appbar
@@ -53,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               ],
             )),
             // Scroll section
-            TPromoSlider(
+            const TPromoSlider(
               banner: [
                 TImages.banner1,
                 TImages.banner2,
@@ -61,7 +62,10 @@ class HomeScreen extends StatelessWidget {
                 TImages.banner4,
               ],
             ),
-            TProductCardVertical(),
+            // Product list section
+            TGridLayout(
+                itemcount: 5,
+                itemBuilder: (_, index) => const TProductCardVertical())
           ],
         ),
       ),

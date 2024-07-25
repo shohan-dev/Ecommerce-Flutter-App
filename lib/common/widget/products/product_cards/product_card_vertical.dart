@@ -97,7 +97,7 @@ class TProductCardVertical extends StatelessWidget {
                         "\$35.5",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Container(
                           decoration: const BoxDecoration(
