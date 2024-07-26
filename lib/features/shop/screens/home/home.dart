@@ -62,6 +62,21 @@ class HomeScreen extends StatelessWidget {
                 TImages.banner4,
               ],
             ),
+            // Popular Products section
+            const SizedBox(
+              height: TSizes.spaceBtwSections / 5,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(
+                  left: TSizes.spaceBtwItems, right: TSizes.spaceBtwItems),
+              child: TSectionHeading(
+                title: "Popular Products",
+              ),
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwSections,
+            ),
+
             // Product list section
             TGridLayout(
                 itemcount: 5,

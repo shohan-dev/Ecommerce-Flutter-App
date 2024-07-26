@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
 
-class Testing_STore extends StatelessWidget {
-  const Testing_STore({super.key});
+void main() {
+  runApp(MyApp());
+}
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Testing_STore'),
-      ),
-      body: Center(
-        child: Text('Testing_STore'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Spacer Example'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                color: Colors.blue,
+                height: 100,
+                width: 100,
+                child: Center(child: Text('Box 1')),
+              ),
+              // Spacer(), // This creates a flexible space that expands to fill the available space
+              Container(
+                color: Colors.red,
+                height: 100,
+                width: 100,
+                child: Center(child: Text('Box 2')),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
