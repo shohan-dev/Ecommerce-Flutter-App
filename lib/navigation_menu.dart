@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/shop/screens/home/home.dart';
+import 'package:t_store/features/shop/screens/profile/profile.dart';
 import 'package:t_store/features/shop/screens/store/store.dart';
 import 'package:t_store/features/shop/screens/wishlist/wishlist.dart';
 import 'package:t_store/utils/constants/colors.dart';
@@ -62,8 +63,6 @@ class NavigationMenuConroller extends GetxController {
     const HomeScreen(),
     const StoreScreen(),
     const WishListScreen(),
-    Container(
-      color: Colors.blue,
-    ),
+    const ProfileScreen(),
   ];
 }

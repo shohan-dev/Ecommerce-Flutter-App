@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/common/widget/images/t_circular_image.dart';
-import 'package:t_store/common/widget/layouts/grid_layout.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -24,6 +21,8 @@ class TBrandShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
+
     return TRoundedContainer(
       padding: const EdgeInsets.all(TSizes.sm),
       backgroundColor: Colors.transparent,
@@ -32,8 +31,11 @@ class TBrandShowCase extends StatelessWidget {
         children: [
           Row(
             children: [
-              TCircularImage(
-                image: image,
+              Image(
+                height: 56,
+                width: 56,
+                image: AssetImage(image),
+                color: dark ? TColors.white : TColors.dark,
               ),
               const SizedBox(width: 8),
               Expanded(

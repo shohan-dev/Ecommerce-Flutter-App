@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/brands/brandsCards.dart';
 import 'package:t_store/common/widget/brands/brandscardswithimage.dart';
 import 'package:t_store/common/widget/layouts/grid_layout.dart';
 import 'package:t_store/common/widget/products/product_cards/product_card_vertical.dart';
@@ -22,7 +21,7 @@ class TCatagoryTab extends StatelessWidget {
           children: [
             const TBrandShowCase(
               brandName: "Nike",
-              image: TImages.clothIcon,
+              image: TImages.shoeIcon,
               productImages: [
                 TImages.productImage1,
                 TImages.productImage2,

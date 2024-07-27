@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
+// ignore: unused_import
 import 'package:t_store/common/widget/images/t_circular_image.dart';
 import 'package:t_store/common/widget/layouts/grid_layout.dart';
+import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class TBrandCards extends StatelessWidget {
   const TBrandCards({
@@ -21,6 +24,7 @@ class TBrandCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return TGridLayout(
       mainAxisExtent: 80,
       itemcount: itemcount,
@@ -31,8 +35,11 @@ class TBrandCards extends StatelessWidget {
           showBorder: true,
           child: Row(
             children: [
-              TCircularImage(
-                image: image,
+              Image(
+                height: 56,
+                width: 56,
+                image: AssetImage(image),
+                color: dark ? TColors.white : TColors.dark,
               ),
               const SizedBox(width: 8),
               Expanded(
