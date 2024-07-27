@@ -6,6 +6,7 @@ import 'package:t_store/common/widget/custom_shape/containers/rounded_container.
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
 import 'package:t_store/common/widget/images/t_circular_image.dart';
+import 'package:t_store/common/widget/layouts/grid_layout.dart';
 import 'package:t_store/common/widget/products/cart/cart_menu_icon.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
@@ -35,42 +36,58 @@ class StoreScreen extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      SizedBox(
+                    children: [
+                      const SizedBox(
                         height: TSizes.spaceBtwItems,
                       ),
-                      TSearchBarContainer(text: "Search in Store"),
-                      SizedBox(
+                      const TSearchBarContainer(text: "Search in Store"),
+                      const SizedBox(
                         height: TSizes.spaceBtwSections,
                       ),
-                      TSectionHeading(
+                      const TSectionHeading(
                         title: "Featured Brands ",
                       ),
                       // Container with image and text
-                      TRoundedContainer(
-                        padding: EdgeInsets.all(TSizes.sm),
-                        backgroundColor: Colors.transparent,
-                        showBorder: true,
-                        child: Row(
-                          children: [
-                            TCircularImage(
-                              image: TImages.clothIcon,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TVerifyText(
-                                  text: "Nike",
-                                  textsize: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text("256 Product")
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
+                      TGridLayout(
+                          mainAxisExtent: 80,
+                          itemcount: 4,
+                          itemBuilder: (_, index) {
+                            return const TRoundedContainer(
+                              padding: EdgeInsets.all(TSizes.sm),
+                              backgroundColor: Colors.transparent,
+                              showBorder: true,
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TCircularImage(
+                                      image: TImages.clothIcon,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        TVerifyText(
+                                          text: "Nike",
+                                          textsize: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          "256 Product",
+                                          style: TextStyle(
+                                              overflow: TextOverflow.ellipsis),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          })
                     ],
                   ),
                 ),
