@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
 import 'package:t_store/common/widget/icons/circular_icons.dart';
 import 'package:t_store/common/widget/images/t_round_images.dart';
@@ -71,22 +72,11 @@ class TProductCardVertical extends StatelessWidget {
                       smallSize: true,
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
-                    Row(
-                      children: [
-                        Text(
-                          "Nike",
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        const Icon(
-                          Iconsax.verify5,
-                          color: TColors.primary,
-                          size: TSizes.iconXs,
-                        ),
-                      ],
+                    // Nikey verify
+                    const TVerifyText(
+                      text: 'Nike',
                     ),
-                    Spacer(), // Pushes the last row to the bottom
+                    const Spacer(), // Pushes the last row to the bottom
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

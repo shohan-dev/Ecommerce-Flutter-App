@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/appbar/appbar.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
+import 'package:t_store/common/widget/images/t_circular_image.dart';
 import 'package:t_store/common/widget/products/cart/cart_menu_icon.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
@@ -42,10 +46,31 @@ class StoreScreen extends StatelessWidget {
                       TSectionHeading(
                         title: "Featured Brands ",
                       ),
-                      // image
+                      // Container with image and text
                       TRoundedContainer(
-                        child: Text("data"),
-                      )
+                        padding: EdgeInsets.all(TSizes.sm),
+                        backgroundColor: Colors.transparent,
+                        showBorder: true,
+                        child: Row(
+                          children: [
+                            TCircularImage(
+                              image: TImages.clothIcon,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TVerifyText(
+                                  text: "Nike",
+                                  textsize: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text("256 Product")
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
