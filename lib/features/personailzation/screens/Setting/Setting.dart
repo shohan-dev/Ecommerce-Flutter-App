@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/features/shop/screens/Setting/widgets/account_setting.dart';
-import 'package:t_store/features/shop/screens/Setting/widgets/app_setting.dart';
-import 'package:t_store/features/shop/screens/Setting/widgets/appbar.dart';
+import 'package:t_store/features/personailzation/screens/Setting/widgets/account_setting.dart';
+import 'package:t_store/features/personailzation/screens/Setting/widgets/app_setting.dart';
+import 'package:t_store/features/personailzation/screens/Setting/widgets/appbar.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});

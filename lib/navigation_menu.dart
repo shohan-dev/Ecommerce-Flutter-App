@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/shop/screens/home/home.dart';
-import 'package:t_store/features/shop/screens/Setting/Setting.dart';
+import 'package:t_store/features/personailzation/screens/Setting/Setting.dart';
 import 'package:t_store/features/shop/screens/store/store.dart';
 import 'package:t_store/features/shop/screens/wishlist/wishlist.dart';
 import 'package:t_store/utils/constants/colors.dart';

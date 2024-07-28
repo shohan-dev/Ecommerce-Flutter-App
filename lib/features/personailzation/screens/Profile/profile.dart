@@ -67,6 +67,7 @@ class ProfileScreen extends StatelessWidget {
               const TProfileMenu(
                 title: 'User ID',
                 value: '496523',
+                icon: Iconsax.copy,
               ),
               const TProfileMenu(
                 title: 'E-mail',
