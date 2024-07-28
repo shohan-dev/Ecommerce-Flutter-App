@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
-import 'package:t_store/common/widget/list_tile/user_profile_tiles.dart';
-import 'package:t_store/features/shop/screens/profile/widgets/account_setting.dart';
-import 'package:t_store/features/shop/screens/profile/widgets/app_setting.dart';
-import 'package:t_store/utils/constants/colors.dart';
+import 'package:t_store/common/widget/images/t_circular_image.dart';
+import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:t_store/common/widget/texts/section_heading.dart';
+import 'package:t_store/features/shop/screens/Profile/widgets/profile_menu.dart';
+import 'package:t_store/utils/constants/image_strings.dart';
+import 'package:t_store/utils/constants/sizes.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -12,40 +14,78 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: TAppBar(
+        showBackArrow: true,
+        title: Text(
+          "Profile",
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TPrimaryHeaderContainer(
-                height: 230,
-                child: Column(
-                  children: [
-                    TAppBar(
-                      title: Text(
-                        "Account",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .apply(color: TColors.white),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: TUserProfileTiles(),
-                    ),
-                  ],
-                )),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  //-------Account Settings
-                  AccountSetting(),
-                  //----------App Settings
-                  AppSetting(),
-                ],
+        child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: Column(
+            children: [
+              const Center(
+                  child: TCircularImage(
+                image: TImages.user,
+                height: 100,
+                width: 100,
+              )),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text("Change Profile picture")),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
               ),
-            )
-          ],
+              const Divider(),
+              const TSizeboxBtwItems(),
+
+              //--Profile Information
+              const TSizeboxBtwItems(),
+              const TSectionHeading(
+                title: "Profile Information",
+                showActionButton: false,
+              ),
+
+              const TProfileMenu(
+                title: 'Name',
+                value: 'Md Sabbir Roshid Shohan',
+              ),
+              const TProfileMenu(
+                title: 'Username',
+                value: 'shohan',
+              ),
+              const TSizeboxBtwItems(),
+              const Divider(),
+              const TSizeboxBtwItems(),
+              //-- Personal Information
+              const TSectionHeading(
+                title: "Personal Information",
+                showActionButton: false,
+              ),
+              const TProfileMenu(
+                title: 'User ID',
+                value: '496523',
+              ),
+              const TProfileMenu(
+                title: 'E-mail',
+                value: 'shohan@gmail.com',
+              ),
+              const TProfileMenu(
+                title: 'Phone Number',
+                value: '+8801758496771',
+              ),
+              const TProfileMenu(
+                title: 'Gender',
+                value: 'Male',
+              ),
+              const TProfileMenu(
+                title: 'Date of Birth',
+                value: '11 July, 2001',
+              ),
+            ],
+          ),
         ),
       ),
     );

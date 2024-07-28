@@ -7,26 +7,33 @@ import 'package:t_store/utils/constants/image_strings.dart';
 class TUserProfileTiles extends StatelessWidget {
   const TUserProfileTiles({
     super.key,
+    required this.name,
+    required this.email,
+    this.onPressed,
   });
+
+  final String name;
+  final String email;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: const TCircularImage(image: TImages.user),
       title: Text(
-        "Md Sabbir Roshid Shohan",
+        name,
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
             .apply(color: TColors.white),
       ),
       subtitle: Text(
-        "shohan@gmail.com",
+        email,
         style:
             Theme.of(context).textTheme.bodyMedium!.apply(color: TColors.white),
       ),
       trailing: IconButton(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: const Icon(Iconsax.edit),
         color: TColors.white,
       ),

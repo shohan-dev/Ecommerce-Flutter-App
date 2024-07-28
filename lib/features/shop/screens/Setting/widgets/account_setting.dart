@@ -46,7 +46,7 @@ class AccountSetting extends StatelessWidget {
             title: "Account Privacy",
             subtitle: "Manage data usage and connected accounts"),
         SizedBox(
-          height: TSizes.spaceBtwSections,
+          height: TSizes.spaceBtwSections - 5,
         ),
       ],
     );
