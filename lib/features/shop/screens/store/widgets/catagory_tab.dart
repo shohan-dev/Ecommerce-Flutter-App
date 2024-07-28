@@ -21,7 +21,7 @@ class TCatagoryTab extends StatelessWidget {
           children: [
             const TBrandShowCase(
               brandName: "Nike",
-              image: TImages.shoeIcon,
+              image: TImages.nikeLogo,
               productImages: [
                 TImages.productImage1,
                 TImages.productImage2,

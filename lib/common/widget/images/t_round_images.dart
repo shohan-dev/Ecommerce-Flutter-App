@@ -35,8 +35,10 @@ class TRoundImage extends StatelessWidget {
       width: width,
       height: height,
       padding: padding,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(borderRadius)),
+      decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+          border: border),
       child: ClipRRect(
           borderRadius: BorderRadius.circular(borderRadius),
           child: Image(image: AssetImage(imageUrl))),

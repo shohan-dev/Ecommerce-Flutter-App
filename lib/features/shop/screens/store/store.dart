@@ -45,7 +45,7 @@ class StoreScreen extends StatelessWidget {
                         ),
                         TBrandCards(
                           brandName: "Nike",
-                          image: TImages.clothIcon,
+                          image: TImages.nikeLogo,
                         ),
                       ],
                     ),

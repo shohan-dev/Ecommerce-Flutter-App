@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
 import 'package:t_store/common/widget/icons/circular_icons.dart';
 import 'package:t_store/common/widget/images/t_round_images.dart';
 import 'package:t_store/common/widget/texts/product_title.dart';
+import 'package:t_store/features/shop/screens/product_details/product_details.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -18,7 +20,7 @@ class TProductCardVertical extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
         // width: 180,
         decoration: BoxDecoration(
@@ -44,7 +46,10 @@ class TProductCardVertical extends StatelessWidget {
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
-                      child: const Text("25%"), // Discount
+                      child: const Text(
+                        "25%",
+                        style: TextStyle(color: TColors.black),
+                      ), // Discount
                     ),
                   ),
                   const Positioned(
