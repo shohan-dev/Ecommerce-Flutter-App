@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 import 'package:t_store/common/widget/select/color_select.dart';
@@ -6,6 +7,7 @@ import 'package:t_store/common/widget/select/size_select.dart';
 import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/product_details/widgets/attributes/discription.dart';
+import 'package:t_store/features/shop/screens/product_review/product_review.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({
@@ -69,7 +71,10 @@ class TProductAttributes extends StatelessWidget {
               showActionButton: false,
             ),
             IconButton(
-                onPressed: () {}, icon: const Icon(Iconsax.arrow_right_3))
+                onPressed: () {
+                  Get.to(() => const ProductReviewScreen());
+                },
+                icon: const Icon(Iconsax.arrow_right_3))
           ],
         ),
         const TSizeboxBtwItems(),
