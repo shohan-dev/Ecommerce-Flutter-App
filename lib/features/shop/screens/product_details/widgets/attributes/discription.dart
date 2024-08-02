@@ -78,7 +78,9 @@ class TProductDiscriptions extends StatelessWidget {
             Text(
               "This is the Description of the Product and it can go up to max 4 lines",
               style: Theme.of(context).textTheme.labelSmall,
-            )
+            ),
+
+            
           ],
         ),
       ),

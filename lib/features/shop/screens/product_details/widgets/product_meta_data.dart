@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/Verify/t_verify_text.dart';
 import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/common/widget/images/t_circular_image.dart';
 import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';

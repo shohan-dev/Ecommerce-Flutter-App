@@ -10,6 +10,7 @@ class TCircularContainer extends StatelessWidget {
     this.padding = 0,
     this.child,
     this.backgroundColor = TColors.white,
+    this.showCheckIcon = false, // Add this parameter
   });
 
   final double? width;
@@ -18,18 +19,30 @@ class TCircularContainer extends StatelessWidget {
   final double padding;
   final Widget? child;
   final Color backgroundColor;
+  final bool showCheckIcon; // Add this parameter
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
-        color: backgroundColor,
-      ),
-      child: child,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: height,
+          width: width,
+          padding: EdgeInsets.all(padding),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius),
+            color: backgroundColor,
+          ),
+          child: child,
+        ),
+        if (showCheckIcon)
+          const Icon(
+            Icons.check,
+            color: Colors.white,
+            size: 20,
+          ),
+      ],
     );
   }
 }
