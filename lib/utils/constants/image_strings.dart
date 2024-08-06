@@ -257,4 +257,7 @@ class TImages {
   static const String paytm = "assets/icons/payment_methods/paytm.png";
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
+
+// Extra
+  static const String mahadi = "assets/images/user/mahadi.jpg";
 }
