@@ -17,7 +17,7 @@ class TCartCounterIcon extends StatelessWidget {
     return Stack(
       children: [
         IconButton(
-            onPressed: () {},
+            onPressed: onpressed,
             icon: const Icon(
               Iconsax.shopping_bag,
               color: TColors.white,
