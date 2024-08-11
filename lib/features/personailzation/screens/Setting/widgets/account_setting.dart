@@ -4,6 +4,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widget/list_tile/setting_menu_tiles.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/personailzation/screens/address/address.dart';
+import 'package:t_store/features/shop/screens/cart/widgets/cart.dart';
+import 'package:t_store/features/shop/screens/order/order.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AccountSetting extends StatelessWidget {
@@ -25,14 +27,22 @@ class AccountSetting extends StatelessWidget {
           subtitle: "Set Shopping delevery address",
           onTap: () => Get.to(const UserAddressScreen()),
         ),
-        const TSettingMenuTiles(
-            icon: Iconsax.shopping_cart,
-            title: "My Cart",
-            subtitle: "Add, Remove products and move to checkout"),
-        const TSettingMenuTiles(
-            icon: Iconsax.bag_tick,
-            title: "My Order",
-            subtitle: "In-progress and Completed Orders"),
+        TSettingMenuTiles(
+          icon: Iconsax.shopping_cart,
+          title: "My Cart",
+          subtitle: "Add, Remove products and move to checkout",
+          onTap: () => Get.to(
+            () => const CartScreen(),
+          ),
+        ),
+        TSettingMenuTiles(
+          icon: Iconsax.bag_tick,
+          title: "My Order",
+          subtitle: "In-progress and Completed Orders",
+          onTap: () => Get.to(
+            () => const OrderScreen(),
+          ),
+        ),
         const TSettingMenuTiles(
             icon: Iconsax.bank,
             title: "Bank Account",
