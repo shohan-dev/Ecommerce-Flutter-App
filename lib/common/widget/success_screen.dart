@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:t_store/features/authentication/screen/login/login.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class SuccessScreenPage extends StatelessWidget {
@@ -9,9 +7,11 @@ class SuccessScreenPage extends StatelessWidget {
       required this.title,
       required this.subtitle,
       required this.image,
-      required this.buttonName});
+      required this.buttonName,
+      required this.onPressed});
 
   final String title, subtitle, image, buttonName;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +43,8 @@ class SuccessScreenPage extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Get.offAll(() => const LoginPage());
-                  },
-                  child: Text(buttonName)),
+              child:
+                  ElevatedButton(onPressed: onPressed, child: Text(buttonName)),
             ),
             const SizedBox(
               height: TSizes.defaultSpace,

@@ -12,20 +12,26 @@ class VerifyPageController extends GetxController {
   }
 
   void continueButton() {
-    Get.off(() => const SuccessScreenPage(
+    Get.off(() => SuccessScreenPage(
           title: TTexts.yourAccountCreatedTitle,
           subtitle: TTexts.yourAccountCreatedSubTitle,
           image: TImages.staticSuccessIllustration,
           buttonName: "Continue",
+          onPressed: () {
+            Get.off(() => const LoginPage());
+          },
         ));
   }
 
   void resendEmailActionButton() {
-    Get.off(() => const SuccessScreenPage(
+    Get.off(() => SuccessScreenPage(
           title: "",
           subtitle: "",
           image: TImages.verifyIllustration,
           buttonName: "Successful",
+          onPressed: () {
+            Get.off(() => const LoginPage());
+          },
         ));
   }
 }
