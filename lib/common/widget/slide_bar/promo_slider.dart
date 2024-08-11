@@ -20,7 +20,7 @@ class TPromoSliderState extends State<TPromoSlider> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(TSizes.defaultSpace),
+      padding: const EdgeInsets.all(0),
       child: Column(
         children: [
           CarouselSlider(

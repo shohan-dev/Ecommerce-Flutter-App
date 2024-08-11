@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/common/widget/layouts/grid_layout.dart';
@@ -7,6 +8,7 @@ import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
 import 'package:t_store/common/widget/slide_bar/promo_slider.dart';
+import 'package:t_store/features/shop/screens/sub_category/sub_categories.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
