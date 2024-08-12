@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:t_store/common/widget/appbar/tabbar.dart';
 import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/common/widget/brands/brandsCards.dart';
+import 'package:t_store/features/shop/screens/brands/all_brands.dart';
+import 'package:t_store/features/shop/screens/brands_with_products/brands_with_products.dart';
 import 'package:t_store/features/shop/screens/store/widgets/catagory_tab.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
@@ -27,25 +30,30 @@ class StoreScreen extends StatelessWidget {
                     ? TColors.black
                     : TColors.white,
                 expandedHeight: 440,
-                flexibleSpace: const FlexibleSpaceBar(
+                flexibleSpace: FlexibleSpaceBar(
                   background: Padding(
-                    padding: EdgeInsets.all(TSizes.defaultSpace),
+                    padding: const EdgeInsets.all(TSizes.defaultSpace),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: TSizes.spaceBtwItems,
+                        const SizedBox(
+                          height: TSizes.spaceBtwItems * 3,
                         ),
-                        TSearchBarContainer(text: "Search in Store"),
-                        SizedBox(
+                        const TSearchBarContainer(text: "Search in Store"),
+                        const SizedBox(
                           height: TSizes.spaceBtwSections,
                         ),
                         TSectionHeading(
                           title: "Featured Brands",
+                          showActionButton: true,
+                          onPressed: () =>
+                              Get.to(() => const AllBrandsScreen()),
                         ),
                         TBrandCards(
                           brandName: "Nike",
                           image: TImages.nikeLogo,
+                          onPressed: () =>
+                              Get.to(() => const BrandsWithProducts()),
                         ),
                       ],
                     ),

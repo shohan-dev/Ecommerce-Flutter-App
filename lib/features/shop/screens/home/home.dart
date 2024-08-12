@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
-import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:t_store/common/widget/layouts/grid_layout.dart';
 import 'package:t_store/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
+import 'package:t_store/features/shop/screens/all_products/all_products.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
 import 'package:t_store/common/widget/slide_bar/promo_slider.dart';
-import 'package:t_store/features/shop/screens/sub_category/sub_categories.dart';
+import 'package:t_store/features/shop/screens/home/widgets/home_searchbar.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
-                TSearchBarContainer(
+                THomeSearchBar(
                   text: "Search", // SearchBar
                 ),
 
@@ -68,11 +68,15 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: TSizes.spaceBtwSections / 5,
             ),
-            const Padding(
-              padding: EdgeInsets.only(
+            Padding(
+              padding: const EdgeInsets.only(
                   left: TSizes.spaceBtwItems, right: TSizes.spaceBtwItems),
               child: TSectionHeading(
                 title: "Popular Products",
+                showActionButton: true,
+                onPressed: () {
+                  Get.to(() => const AllProductsScreen());
+                },
               ),
             ),
             const SizedBox(

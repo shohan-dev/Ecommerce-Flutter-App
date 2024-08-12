@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:t_store/common/widget/appbar/appbar.dart';
 import 'package:t_store/common/widget/images/t_round_images.dart';
 import 'package:t_store/common/widget/products/product_cards/product_card_horizontal.dart';
-import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:t_store/common/widget/texts/section_heading.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';

@@ -3,10 +3,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/device/device_utility.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
 
-class TSearchBarContainer extends StatelessWidget {
-  const TSearchBarContainer({
+class THomeSearchBar extends StatelessWidget {
+  const THomeSearchBar({
     super.key,
     required this.text,
     this.icon = Iconsax.search_normal,
@@ -20,14 +19,13 @@ class TSearchBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
       child: Container(
         width: TDeviceUtils.getScreenWidth(context),
         height: 50,
         decoration: BoxDecoration(
-            color: dark ? Colors.transparent : TColors.white,
+            color: TColors.darkContainer,
             borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
             border: Border.all(color: TColors.grey)),
         child: Padding(
@@ -36,14 +34,18 @@ class TSearchBarContainer extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: TColors.darkGrey,
+                color: TColors.white,
               ),
               const SizedBox(
                 width: TSizes.spaceBtwItems,
               ),
               Text(
                 text,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: const TextStyle(
+                  color: TColors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
               )
             ],
           ),
