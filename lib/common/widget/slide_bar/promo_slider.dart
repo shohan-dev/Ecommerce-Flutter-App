@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:t_store/common/widget/images/t_round_images.dart';
+import 'package:smartshop/common/widget/images/t_round_images.dart';
 
 class TPromoSlider extends StatefulWidget {
   const TPromoSlider({super.key, required this.banner});

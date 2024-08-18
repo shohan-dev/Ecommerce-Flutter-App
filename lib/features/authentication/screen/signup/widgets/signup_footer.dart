@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/styles/circle_border_icon_image.dart';
-import 'package:t_store/common/styles/devider_styles.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:smartshop/common/styles/circle_border_icon_image.dart';
+import 'package:smartshop/common/styles/devider_styles.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
 
 class SignupFooter extends StatelessWidget {
   const SignupFooter({

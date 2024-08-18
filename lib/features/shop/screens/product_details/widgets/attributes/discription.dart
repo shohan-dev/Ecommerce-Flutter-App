@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/utils/constants/colors.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/utils/constants/colors.dart';
 
 class TProductDiscriptions extends StatelessWidget {
   const TProductDiscriptions({
@@ -79,8 +79,6 @@ class TProductDiscriptions extends StatelessWidget {
               "This is the Description of the Product and it can go up to max 4 lines",
               style: Theme.of(context).textTheme.labelSmall,
             ),
-
-            
           ],
         ),
       ),

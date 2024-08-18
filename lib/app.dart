@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/features/authentication/screen/onboarding/onboarding.dart';
-import 'package:t_store/utils/theme/theme.dart';
+import 'package:smartshop/utils/theme/theme.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key); // Constructor corrected
@@ -16,7 +15,8 @@ class App extends StatelessWidget {
       darkTheme: TAppTheme.darkTheme, // Replace with your dark theme
       debugShowCheckedModeBanner: false, // Set to false for production
       // initialBinding: GeneralBindings(), // Uncomment if using GetX bindings
-      home: const Scaffold(body: OnBoardingScreen()),
+      // home: const Scaffold(body: OnBoardingScreen()),
+      home: const Scaffold(),
     );
   }
 }

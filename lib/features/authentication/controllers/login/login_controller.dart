@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:t_store/features/authentication/screen/forget_reset/forget_email.dart';
-import 'package:t_store/features/authentication/screen/signup/signup.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:smartshop/features/authentication/screen/forget_reset/forget_email.dart';
+import 'package:smartshop/features/authentication/screen/signup/signup.dart';
+import 'package:smartshop/navigation_menu.dart';
 
 class LoginPageController extends GetxController {
   static LoginPageController get instance => Get.put(LoginPageController());
@@ -25,4 +25,3 @@ class LoginPageController extends GetxController {
   void signinwithgoogle() {}
   void signinwithfacebook() {}
 }
-

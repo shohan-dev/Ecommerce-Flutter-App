@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class TProfileMenu extends StatelessWidget {
   const TProfileMenu(

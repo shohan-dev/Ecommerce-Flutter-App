@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/features/personailzation/screens/address/add_new_address.dart';
-import 'package:t_store/features/personailzation/screens/address/widgets/single_address.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/features/personailzation/screens/address/add_new_address.dart';
+import 'package:smartshop/features/personailzation/screens/address/widgets/single_address.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class UserAddressScreen extends StatelessWidget {
   const UserAddressScreen({super.key});

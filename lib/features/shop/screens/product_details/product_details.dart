@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
-import 'package:t_store/features/shop/screens/product_details/widgets/bottom_add_to_card.dart';
-import 'package:t_store/features/shop/screens/product_details/widgets/product_attributes.dart';
-import 'package:t_store/features/shop/screens/product_details/widgets/product_details_image_silder.dart';
-import 'package:t_store/features/shop/screens/product_details/widgets/product_meta_data.dart';
-import 'package:t_store/features/shop/screens/product_details/widgets/rating_share.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/features/shop/screens/product_details/widgets/bottom_add_to_card.dart';
+import 'package:smartshop/features/shop/screens/product_details/widgets/product_attributes.dart';
+import 'package:smartshop/features/shop/screens/product_details/widgets/product_details_image_silder.dart';
+import 'package:smartshop/features/shop/screens/product_details/widgets/product_meta_data.dart';
+import 'package:smartshop/features/shop/screens/product_details/widgets/rating_share.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
-import 'package:t_store/common/widget/images/t_round_images.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
+import 'package:smartshop/common/widget/images/t_round_images.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TProductImageSlider extends StatelessWidget {
   const TProductImageSlider({
     super.key,
   });
-
-
 
   @override
   Widget build(BuildContext context) {

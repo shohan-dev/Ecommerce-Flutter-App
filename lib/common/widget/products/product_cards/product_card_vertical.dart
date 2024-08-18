@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widget/Verify/t_verify_text.dart';
-import 'package:t_store/common/widget/button/add_to_cart_button.dart';
-import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/common/widget/icons/circular_icons.dart';
-import 'package:t_store/common/widget/images/t_round_images.dart';
-import 'package:t_store/common/widget/texts/product_title.dart';
-import 'package:t_store/features/shop/screens/product_details/product_details.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
+import 'package:smartshop/common/widget/button/add_to_cart_button.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/common/widget/icons/circular_icons.dart';
+import 'package:smartshop/common/widget/images/t_round_images.dart';
+import 'package:smartshop/common/widget/texts/product_title.dart';
+import 'package:smartshop/features/shop/screens/product_details/product_details.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key});

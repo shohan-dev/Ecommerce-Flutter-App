@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/features/authentication/controllers/signup/signup_controller.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:smartshop/features/authentication/controllers/signup/signup_controller.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
 
 class CheckboxAndTerms extends StatelessWidget {
   const CheckboxAndTerms({

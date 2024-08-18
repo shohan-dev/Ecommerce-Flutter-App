@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/features/shop/screens/cart/widgets/cart_items.dart';
-import 'package:t_store/features/shop/screens/checkout/checkout.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:smartshop/features/shop/screens/checkout/checkout.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

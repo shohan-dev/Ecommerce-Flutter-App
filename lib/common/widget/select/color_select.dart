@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/custom_shape/containers/circular_container.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/circular_container.dart';
 
 class TColorSelect extends StatefulWidget {
   const TColorSelect({super.key, required this.colors});

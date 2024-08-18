@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/common/widget/brands/brandsCards.dart';
-import 'package:t_store/common/widget/texts/section_heading.dart';
-import 'package:t_store/features/shop/screens/brands_with_products/brands_with_products.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/common/widget/brands/brandsCards.dart';
+import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class AllBrandsScreen extends StatelessWidget {
   const AllBrandsScreen({super.key});

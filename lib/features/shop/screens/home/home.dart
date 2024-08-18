@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
-import 'package:t_store/common/widget/layouts/grid_layout.dart';
-import 'package:t_store/common/widget/products/product_cards/product_card_vertical.dart';
-import 'package:t_store/common/widget/texts/section_heading.dart';
-import 'package:t_store/features/shop/screens/all_products/all_products.dart';
-import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
-import 'package:t_store/features/shop/screens/home/widgets/home_catagories.dart';
-import 'package:t_store/common/widget/slide_bar/promo_slider.dart';
-import 'package:t_store/features/shop/screens/home/widgets/home_searchbar.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/primary_header_container.dart';
+import 'package:smartshop/common/widget/layouts/grid_layout.dart';
+import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
+import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/screens/all_products/all_products.dart';
+import 'package:smartshop/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:smartshop/features/shop/screens/home/widgets/home_catagories.dart';
+import 'package:smartshop/common/widget/slide_bar/promo_slider.dart';
+import 'package:smartshop/features/shop/screens/home/widgets/home_searchbar.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

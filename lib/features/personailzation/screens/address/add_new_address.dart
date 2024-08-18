@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class AddNewAddressScreen extends StatelessWidget {
   const AddNewAddressScreen({super.key});

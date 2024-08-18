@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/features/authentication/controllers/onboading/onboading_controller.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/device/device_utility.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/features/authentication/controllers/onboading/onboading_controller.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/device/device_utility.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class OnBoardBottonNavigationButton extends StatelessWidget {
   const OnBoardBottonNavigationButton({

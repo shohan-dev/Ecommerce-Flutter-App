@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/common/widget/custom_shape/containers/primary_header_container.dart';
-import 'package:t_store/common/widget/list_tile/user_profile_tiles.dart';
-import 'package:t_store/features/personailzation/screens/Profile/profile.dart';
-import 'package:t_store/utils/constants/colors.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/primary_header_container.dart';
+import 'package:smartshop/common/widget/list_tile/user_profile_tiles.dart';
+import 'package:smartshop/features/personailzation/screens/Profile/profile.dart';
+import 'package:smartshop/utils/constants/colors.dart';
 
 class TAppbarProfile extends StatelessWidget {
   const TAppbarProfile({

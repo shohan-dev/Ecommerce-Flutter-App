@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/texts/section_heading.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class TBillingAddressSection extends StatelessWidget {
   const TBillingAddressSection({

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/success_screen.dart';
-import 'package:t_store/features/authentication/screen/login/login.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:smartshop/common/widget/success_screen.dart';
+import 'package:smartshop/features/authentication/screen/login/login.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
 
 class VerifyPageController extends GetxController {
   static VerifyPageController get instance => Get.put(VerifyPageController());

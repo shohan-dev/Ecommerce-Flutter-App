@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/features/shop/screens/cart/widgets/cart.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/features/shop/screens/cart/widgets/cart.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
 
-import 'package:t_store/common/widget/products/cart/cart_menu_icon.dart';
+import 'package:smartshop/common/widget/products/cart/cart_menu_icon.dart';
 
 class THomeAppbar extends StatelessWidget {
   const THomeAppbar({

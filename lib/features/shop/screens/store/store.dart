@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/tabbar.dart';
-import 'package:t_store/common/widget/custom_shape/containers/searchbar_containers.dart';
-import 'package:t_store/common/widget/texts/section_heading.dart';
-import 'package:t_store/common/widget/brands/brandsCards.dart';
-import 'package:t_store/features/shop/screens/brands/all_brands.dart';
-import 'package:t_store/features/shop/screens/brands_with_products/brands_with_products.dart';
-import 'package:t_store/features/shop/screens/store/widgets/catagory_tab.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/appbar/tabbar.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/searchbar_containers.dart';
+import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/common/widget/brands/brandsCards.dart';
+import 'package:smartshop/features/shop/screens/brands/all_brands.dart';
+import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
+import 'package:smartshop/features/shop/screens/store/widgets/catagory_tab.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});

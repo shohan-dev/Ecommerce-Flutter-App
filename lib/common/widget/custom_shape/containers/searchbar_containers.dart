@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/device/device_utility.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/device/device_utility.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TSearchBarContainer extends StatelessWidget {
   const TSearchBarContainer({

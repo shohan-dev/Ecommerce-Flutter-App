@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/products/cart/add_remove_button.dart';
-import 'package:t_store/common/widget/products/cart/cart_item.dart';
-import 'package:t_store/common/widget/texts/product_price_text.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/common/widget/products/cart/add_remove_button.dart';
+import 'package:smartshop/common/widget/products/cart/cart_item.dart';
+import 'package:smartshop/common/widget/texts/product_price_text.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class TCartItemsList extends StatelessWidget {
   const TCartItemsList({

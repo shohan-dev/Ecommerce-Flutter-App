@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TCuponCode extends StatelessWidget {
   const TCuponCode({

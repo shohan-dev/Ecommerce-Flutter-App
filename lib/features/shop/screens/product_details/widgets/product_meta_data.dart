@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/Verify/t_verify_text.dart';
-import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/common/widget/sizebox/t_sizebox_btw_items.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({

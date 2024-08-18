@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/common/widget/appbar/appbar.dart';
-import 'package:t_store/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:t_store/common/widget/products/cart/cupon_section.dart';
-import 'package:t_store/common/widget/success_screen.dart';
-import 'package:t_store/features/shop/screens/cart/widgets/cart_items.dart';
-import 'package:t_store/features/shop/screens/checkout/widgets/billing_address_section.dart';
-import 'package:t_store/features/shop/screens/checkout/widgets/billing_payment_section.dart';
-import 'package:t_store/features/shop/screens/checkout/widgets/billing_amount_section.dart';
-import 'package:t_store/navigation_menu.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/common/widget/products/cart/cupon_section.dart';
+import 'package:smartshop/common/widget/success_screen.dart';
+import 'package:smartshop/features/shop/screens/cart/widgets/cart_items.dart';
+import 'package:smartshop/features/shop/screens/checkout/widgets/billing_address_section.dart';
+import 'package:smartshop/features/shop/screens/checkout/widgets/billing_payment_section.dart';
+import 'package:smartshop/features/shop/screens/checkout/widgets/billing_amount_section.dart';
+import 'package:smartshop/navigation_menu.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});

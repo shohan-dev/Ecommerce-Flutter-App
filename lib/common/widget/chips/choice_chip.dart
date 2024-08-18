@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widget/custom_shape/containers/circular_container.dart';
-import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/circular_container.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TChoiceChip extends StatelessWidget {
   const TChoiceChip(
@@ -35,7 +35,6 @@ class TChoiceChip extends StatelessWidget {
           : null,
       showCheckmark: false,
       selectedColor: THelperFunctions.getColor(text),
-      
       shape:
           THelperFunctions.getColor(text) != null ? const CircleBorder() : null,
     );

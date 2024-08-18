@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
 class TSizeboxBtwItems extends StatelessWidget {
   const TSizeboxBtwItems({

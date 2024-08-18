@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:t_store/features/authentication/screen/login/login.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/device/device_utility.dart';
+import 'package:smartshop/features/authentication/screen/login/login.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
+import 'package:smartshop/utils/device/device_utility.dart';
 
 class OnBoardingSkip extends StatelessWidget {
   const OnBoardingSkip({Key? key}) : super(key: key);

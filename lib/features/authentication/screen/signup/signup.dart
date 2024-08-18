@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/styles/spacing_styles.dart';
-import 'package:t_store/features/authentication/screen/signup/widgets/signup_button.dart';
-import 'package:t_store/features/authentication/screen/signup/widgets/signup_checkbox_terms.dart';
-import 'package:t_store/features/authentication/screen/signup/widgets/signup_footer.dart';
-import 'package:t_store/features/authentication/screen/signup/widgets/signup_form.dart';
-import 'package:t_store/utils/constants/sizes.dart';
-import 'package:t_store/utils/constants/text_strings.dart';
-import 'package:t_store/utils/helpers/helper_functions.dart';
+import 'package:smartshop/common/styles/spacing_styles.dart';
+import 'package:smartshop/features/authentication/screen/signup/widgets/signup_button.dart';
+import 'package:smartshop/features/authentication/screen/signup/widgets/signup_checkbox_terms.dart';
+import 'package:smartshop/features/authentication/screen/signup/widgets/signup_footer.dart';
+import 'package:smartshop/features/authentication/screen/signup/widgets/signup_form.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
+import 'package:smartshop/utils/constants/text_strings.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 // // Controller for SignupPage
 // class SignupController extends GetxController {
