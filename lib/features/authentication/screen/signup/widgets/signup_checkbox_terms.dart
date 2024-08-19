@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
@@ -13,11 +14,17 @@ class CheckboxAndTerms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = SignupController.instance;
     return Column(
       children: [
         Row(
           children: [
-            SizedBox(child: Checkbox(value: true, onChanged: (value) {})),
+            SizedBox(
+                child: Obx(() => Checkbox(
+                    value: controller.privacypolicy.value,
+                    onChanged: (value) {
+                      controller.privacypolicy.value = value!;
+                    }))),
             const Text(TTexts.iAgreeTo),
             const SizedBox(width: 3),
             // privacy policy

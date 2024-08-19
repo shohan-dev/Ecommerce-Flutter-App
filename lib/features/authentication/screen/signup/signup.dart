@@ -8,27 +8,15 @@ import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
-// // Controller for SignupPage
-// class SignupController extends GetxController {
-//   final firstNameController = TextEditingController();
-//   final lastNameController = TextEditingController();
-//   final isDarkMode = false.obs;
 
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     isDarkMode.value = THelperFunctions.isDarkMode(Get.context!);
-//   }
-// }
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the controller
-    // final SignupController controller = Get.put(SignupController());
     final dark = THelperFunctions.isDarkMode(context);
+    
 
     return Scaffold(
       body: SingleChildScrollView(

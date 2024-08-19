@@ -58,5 +58,14 @@ class TValidator {
     return null;
   }
 
-// Add more custom validators as needed for your specific requirements.
+  // Validate empty text fields
+  static String? validateEmptyText(String? fildName, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fildName is required.';
+    }
+    
+
+    return null;
+  }
+
 }

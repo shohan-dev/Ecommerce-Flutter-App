@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartshop/bindings/general_bindings.dart';
 import 'package:smartshop/utils/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -16,6 +17,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Set to false for production
       // initialBinding: GeneralBindings(), // Uncomment if using GetX bindings
       // home: const Scaffold(body: OnBoardingScreen()),
+      initialBinding: GeneralBindings(),
       home: const Scaffold(),
     );
   }
