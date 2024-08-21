@@ -4,7 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:smartshop/app.dart';
-import 'package:smartshop/data/repositories/authentication_repository.dart';
+import 'package:smartshop/data/repositories/autherntication/authentication_repository.dart';
 import 'package:smartshop/firebase_options.dart';
 
 Future<void> main() async {

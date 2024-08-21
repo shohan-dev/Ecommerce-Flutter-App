@@ -96,7 +96,7 @@ class LoginPageForm extends StatelessWidget {
           TextFormField(
               controller: controller.phone,
               validator: (value) => TValidator.validatePhoneNumber(value),
-              maxLength: 10,
+              maxLength: 11,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.call), labelText: TTexts.phoneNo)),

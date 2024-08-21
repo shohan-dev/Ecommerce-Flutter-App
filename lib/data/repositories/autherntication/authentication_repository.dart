@@ -56,6 +56,4 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again.';
     }
   }
-
-  // model data added to firebase firestore code function
 }

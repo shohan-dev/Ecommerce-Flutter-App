@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:smartshop/common/Privacy/privacy_policy.dart';
 import 'package:smartshop/common/Privacy/terms_of_condition.dart';
 import 'package:smartshop/common/widget/snackbar/snackbar.dart';
-import 'package:smartshop/data/repositories/authentication_repository.dart';
+import 'package:smartshop/data/repositories/autherntication/authentication_repository.dart';
+import 'package:smartshop/data/repositories/user/user_repository.dart';
+import 'package:smartshop/features/authentication/models/user_model.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/network/network_manager.dart';
 import 'package:smartshop/utils/popups/full_screen_loader.dart';
@@ -38,18 +40,23 @@ class SignupController extends GetxController {
             title: "Accept Privacy Policy",
             message: "In order to proceed, you must accept the privacy policy");
         return;
-
-        
       }
       // Register user
       await AuthenticationRepository.instance.registerWithEmailAndPassword(
           email.text.trim(), password.text.trim());
 
-
-      
-     
-
-
+      // Save user data
+      final newUser = UserModel(
+        email: email.text.trim(),
+        username: username.text.trim(),
+        phone: phone.text.trim(),
+        firstName: firstName.text.trim(),
+        lastName: lastName.text.trim(),
+      );
+      // send the data so firebase firestore
+      final userRepository = Get.put(UserRepository());
+      await userRepository.saveUserRecord(newUser);
+      print("User data saved to firestore");
     } catch (e) {
       TLoaders.errorSnackBar(title: "oh Snap!", message: e.toString());
     } finally {
