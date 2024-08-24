@@ -39,4 +39,8 @@ class TFullScreenLoader {
   static void stopLoading() {
     Navigator.of(Get.overlayContext!).pop();
   }
+
+  static void closeLoadingDialog() {
+    Navigator.of(Get.overlayContext!).pop();
+  }
 }

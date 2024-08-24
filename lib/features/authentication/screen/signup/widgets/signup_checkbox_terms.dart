@@ -37,6 +37,7 @@ class CheckboxAndTerms extends StatelessWidget {
                 style: TextStyle(
                   color: dark ? Colors.white : Colors.blue,
                   decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -53,6 +54,7 @@ class CheckboxAndTerms extends StatelessWidget {
                 style: TextStyle(
                   color: dark ? Colors.white : Colors.blue,
                   decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

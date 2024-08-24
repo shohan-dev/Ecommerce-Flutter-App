@@ -6,6 +6,7 @@ import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/data/repositories/autherntication/authentication_repository.dart';
 import 'package:smartshop/data/repositories/user/user_repository.dart';
 import 'package:smartshop/features/authentication/models/user_model.dart';
+import 'package:smartshop/features/authentication/screen/signup/verify_email.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/network/network_manager.dart';
 import 'package:smartshop/utils/popups/full_screen_loader.dart';
@@ -32,15 +33,25 @@ class SignupController extends GetxController {
 
       final isConnected = await NetworkManager.instance.isConnected();
 
-      if (!isConnected) return;
-      if (!signupFormKey.currentState!.validate()) return;
+      if (!isConnected) {
+        TFullScreenLoader.closeLoadingDialog(); // Close loader if no network
+        return;
+      }
+      if (!signupFormKey.currentState!.validate()) {
+        TFullScreenLoader
+            .closeLoadingDialog(); // Close loader if form is not valid
+        return;
+      }
 
       if (!privacypolicy.value) {
+        TFullScreenLoader
+            .closeLoadingDialog(); // Close loader if privacy policy is not accepted
         TLoaders.warningSnackBar(
             title: "Accept Privacy Policy",
             message: "In order to proceed, you must accept the privacy policy");
         return;
       }
+
       // Register user
       await AuthenticationRepository.instance.registerWithEmailAndPassword(
           email.text.trim(), password.text.trim());
@@ -53,14 +64,18 @@ class SignupController extends GetxController {
         firstName: firstName.text.trim(),
         lastName: lastName.text.trim(),
       );
-      // send the data so firebase firestore
+      // Send the data to Firebase Firestore
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
-      print("User data saved to firestore");
+
+      // Close loader after saving data
+      TFullScreenLoader.closeLoadingDialog();
+
+      // Navigate to the Verify Email screen
+      Get.to(() => const VerifyEmailScreen());
     } catch (e) {
-      TLoaders.errorSnackBar(title: "oh Snap!", message: e.toString());
-    } finally {
-      TFullScreenLoader.stopLoading();
+      TFullScreenLoader.closeLoadingDialog(); // Close loader in case of error
+      TLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
     }
   }
 
