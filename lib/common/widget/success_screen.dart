@@ -30,8 +30,10 @@ class SuccessScreenPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+
             Text(
               title,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   fontSize: TSizes.defaultSpace, fontWeight: FontWeight.bold),
             ),

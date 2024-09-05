@@ -6,14 +6,18 @@ import 'package:smartshop/features/authentication/screen/login/login.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
+import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class ForgetPageScreen extends StatelessWidget {
   const ForgetPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: dark ? Colors.white : Colors.black),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
