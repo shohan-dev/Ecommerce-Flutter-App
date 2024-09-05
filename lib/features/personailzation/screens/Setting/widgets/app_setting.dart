@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/list_tile/setting_menu_tiles.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/authentication/screen/login/login.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class AppSetting extends StatelessWidget {
@@ -45,7 +48,13 @@ class AppSetting extends StatelessWidget {
         //----Button Logout----------------
         SizedBox(
           width: double.infinity,
-          child: OutlinedButton(onPressed: () {}, child: const Text("Logout")),
+          child: OutlinedButton(
+              onPressed: () {
+                // Logout firebase user and redirect to login screen
+                FirebaseAuth.instance.signOut();
+                Get.offAll(() => const LoginPage());
+              },
+              child: const Text("Logout")),
         ),
 
         const SizedBox(

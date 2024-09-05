@@ -1,24 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smartshop/features/authentication/controllers/signup/verify_controller.dart';
+import 'package:get/get.dart';
+import 'package:smartshop/features/authentication/controllers/signup/verify_email.controller.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({
+    super.key,
+    required this.emailGet,
+  });
+
+  final String emailGet;
 
   @override
   Widget build(BuildContext context) {
-    const emailGet = "Sabbirshohan80@gmail.com";
+    final controller = Get.put(VerifyEmailController());
+
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
                 onPressed: () {
-                  VerifyPageController.instance
-                      .closeActionButton(); // close ActionButton
+                  controller.signOut(); // close ActionButton
                 },
                 icon: const Icon(CupertinoIcons.clear))
           ],
@@ -39,7 +45,11 @@ class VerifyEmailScreen extends StatelessWidget {
                       fontSize: TSizes.defaultSpace,
                       fontWeight: FontWeight.bold),
                 ),
-                const Text(emailGet),
+                Text(
+                  emailGet,
+                  style: const TextStyle(fontSize: 11),
+                  textAlign: TextAlign.center,
+                ),
                 const Padding(
                   padding: EdgeInsets.all(TSizes.defaultSpace),
                   child: Text(
@@ -52,8 +62,8 @@ class VerifyEmailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        VerifyPageController.instance
-                            .continueButton(); // continue button
+                        controller
+                            .checkEmailVerificationStatus(); // continue button
                       },
                       child: const Text("Continue")),
                 ),
@@ -66,8 +76,8 @@ class VerifyEmailScreen extends StatelessWidget {
                     },
                     child: GestureDetector(
                       onTap: () {
-                        VerifyPageController.instance
-                            .resendEmailActionButton(); // resend email action button
+                        controller
+                            .sendEmailVerification(); // resend email action button
                       },
                       child: const Text(
                         TTexts.resendEmail,

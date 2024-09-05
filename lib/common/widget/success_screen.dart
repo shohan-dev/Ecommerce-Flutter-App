@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class SuccessScreenPage extends StatelessWidget {
@@ -24,7 +25,8 @@ class SuccessScreenPage extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            Image(image: AssetImage(image)),
+            // Image(image: AssetImage(image)),
+            Lottie.asset(image),
             const SizedBox(
               height: 20,
             ),

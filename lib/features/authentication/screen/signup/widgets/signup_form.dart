@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/features/authentication/controllers/signup/signup_controller.dart';
@@ -98,6 +99,10 @@ class LoginPageForm extends StatelessWidget {
               validator: (value) => TValidator.validatePhoneNumber(value),
               maxLength: 11,
               keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter
+                    .digitsOnly, // Allows only numeric input
+              ],
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.call), labelText: TTexts.phoneNo)),
 
