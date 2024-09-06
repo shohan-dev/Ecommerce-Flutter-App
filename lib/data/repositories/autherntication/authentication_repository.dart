@@ -22,6 +22,8 @@ class AuthenticationRepository extends GetxController {
   final GetStorage deviceStorage = GetStorage();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+
   @override
   void onReady() {
     FlutterNativeSplash.remove();
@@ -199,20 +201,20 @@ class AuthenticationRepository extends GetxController {
   }
 
   Future<void> checkIfUserExist(String trim) async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
 
     // Get the current user
-    User? user = _auth.currentUser;
+    User? user = auth.currentUser;
 
     if (user != null) {
-      // User is signed in
-      print('User is signed in: ${user.email}');
+
 
       // Check if the user signed in with email or Google
       final List<UserInfo> userInfo = user.providerData;
 
       bool isGoogleSignIn = false;
       bool isEmailSignIn = false;
+      
 
       for (UserInfo info in userInfo) {
         if (info.providerId == 'google.com') {

@@ -17,6 +17,17 @@ class UserModel {
     required this.lastName,
     this.imgUrl = "",
   });
+
+  static Future<UserModel> fromSnapshot(Map<String, dynamic> map) {
+    return Future.value(UserModel(
+      email: map['email'],
+      username: map['username'],
+      phone: map['phone'],
+      firstName: map['firstName'],
+      lastName: map['lastName'],
+      imgUrl: map['imgUrl'],
+    ));
+  }
 }
 
 // Convert the user data to JSON and save it to Firestore

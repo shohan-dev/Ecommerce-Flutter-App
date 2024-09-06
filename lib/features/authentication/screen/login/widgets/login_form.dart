@@ -17,6 +17,7 @@ class FormPageLogin extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwInputFields),
       child: Form(
+        key: controller.loginFormKey,
         child: Column(
           children: [
             // Email field

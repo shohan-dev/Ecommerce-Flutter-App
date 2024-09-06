@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:smartshop/common/widget/success_screen.dart';
-import 'package:smartshop/features/authentication/screen/login/login.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/features/authentication/controllers/forget_password/forget_password_controller.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
+import 'package:smartshop/utils/validators/validation.dart';
 
 class ForgetPageScreen extends StatelessWidget {
   const ForgetPageScreen({super.key});
@@ -37,10 +35,23 @@ class ForgetPageScreen extends StatelessWidget {
               const SizedBox(
                 height: TSizes.appBarHeight,
               ),
-              const TextField(
-                decoration: InputDecoration(
+              Form(
+                key: ForgetPasswordController.instance.forgetPasswordFormKey,
+                child:
+                    // const TextField(
+
+                    //   decoration: InputDecoration(
+                    //       prefixIcon: Icon(Iconsax.direct_right),
+                    //       labelText: TTexts.email),
+                    // ),
+                    TextFormField(
+                  controller: ForgetPasswordController.instance.email,
+                  validator: (value) => TValidator.validateEmail(value),
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(Iconsax.direct_right),
-                    labelText: TTexts.email),
+                    labelText: TTexts.email,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: TSizes.defaultSpace,
@@ -49,15 +60,7 @@ class ForgetPageScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      Get.off(() => SuccessScreenPage(
-                            buttonName: TTexts.done,
-                            title: TTexts.changeYourPasswordTitle,
-                            subtitle: TTexts.changeYourPasswordSubTitle,
-                            image: TImages.deliveredEmailIllustration,
-                            onPressed: () {
-                              Get.offAll(() => const LoginPage());
-                            },
-                          ));
+                      ForgetPasswordController.instance.sendForgetPassword();
                     },
                     child: const Text(
                       TTexts.submit,
