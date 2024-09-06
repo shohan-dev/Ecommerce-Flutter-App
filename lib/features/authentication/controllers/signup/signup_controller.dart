@@ -43,6 +43,10 @@ class SignupController extends GetxController {
         return;
       }
 
+      // // check if user is already register with gmail
+      // await AuthenticationRepository.instance
+      //     .checkIfUserExist(email.text.trim());
+
       if (!privacypolicy.value) {
         TFullScreenLoader
             .closeLoadingDialog(); // Close loader if privacy policy is not accepted

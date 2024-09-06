@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:smartshop/features/authentication/models/user_model.dart';
 import 'package:smartshop/utils/exceptions/firebase_exceptions.dart';
 import 'package:smartshop/utils/exceptions/format_exceptions.dart';
@@ -10,7 +8,7 @@ import 'package:smartshop/utils/exceptions/platform_exceptions.dart';
 
 /// Repository class for user-related operations.
 class UserRepository extends GetxController {
-  static UserRepository get instance => Get.find();
+  static UserRepository get instance => Get.put(UserRepository());
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 

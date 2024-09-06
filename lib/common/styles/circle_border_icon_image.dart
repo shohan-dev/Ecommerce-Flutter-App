@@ -6,9 +6,11 @@ class CircleIconImage extends StatelessWidget {
   const CircleIconImage({
     Key? key, // Corrected super.key to Key? key
     required this.image,
-  }) : super(key: key); // Added super(key: key) to initialize StatelessWidget
+    this.onTap,
+  }) : super(key: key);
 
   final String image;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CircleIconImage extends StatelessWidget {
         shape: BoxShape.circle, // Use shape for circular border
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onTap,
         icon: Image.asset(
           image,
           height: TSizes.iconMd,

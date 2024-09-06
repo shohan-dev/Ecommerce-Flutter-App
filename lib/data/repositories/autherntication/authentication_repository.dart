@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/features/authentication/screen/login/login.dart';
 import 'package:smartshop/features/authentication/screen/onboarding/onboarding.dart';
 import 'package:smartshop/features/authentication/screen/signup/verify_email.dart';
@@ -12,6 +14,7 @@ import 'package:smartshop/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:smartshop/utils/exceptions/firebase_exceptions.dart';
 import 'package:smartshop/utils/exceptions/format_exceptions.dart';
 import 'package:smartshop/utils/exceptions/platform_exceptions.dart';
+import 'package:smartshop/utils/popups/full_screen_loader.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -147,6 +150,88 @@ class AuthenticationRepository extends GetxController {
     } catch (e) {
       // Handle any other exceptions
       throw 'Something went wrong. Please try again.';
+    }
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+
+      // Trigger the Google Authentication flow
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser == null) {
+        // If the user cancels the sign-in process
+        TFullScreenLoader.closeLoadingDialog();
+        TLoaders.errorSnackBar(
+          title: "Sign-In Cancelled",
+          message: "User cancelled the sign-in process.",
+        );
+        return null; // Return null to indicate the sign-in was not completed
+      }
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential using the obtained access and ID tokens
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the obtained credential
+      return await auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      // Handle FirebaseAuthException
+      throw TFirebaseAuthException(e.code);
+    } on FirebaseException catch (e) {
+      // Handle FirebaseException
+      throw TFirebaseException(e.code);
+    } on PlatformException catch (e) {
+      // Handle PlatformException
+      throw TPlatformException(e.code);
+    } catch (e) {
+      // Handle any other exceptions
+      throw Exception('Something went wrong. Please try again.');
+    }
+  }
+
+  Future<void> checkIfUserExist(String trim) async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+    // Get the current user
+    User? user = _auth.currentUser;
+
+    if (user != null) {
+      // User is signed in
+      print('User is signed in: ${user.email}');
+
+      // Check if the user signed in with email or Google
+      final List<UserInfo> userInfo = user.providerData;
+
+      bool isGoogleSignIn = false;
+      bool isEmailSignIn = false;
+
+      for (UserInfo info in userInfo) {
+        if (info.providerId == 'google.com') {
+          isGoogleSignIn = true;
+          break;
+        } else if (info.providerId == 'password') {
+          isEmailSignIn = true;
+        }
+      }
+
+      if (isGoogleSignIn) {
+        print('User signed in with Google');
+      } else if (isEmailSignIn) {
+        print('User signed in with Email');
+      } else {
+        print('User signed in with another method');
+      }
+    } else {
+      print('No user is signed in.');
     }
   }
 }
