@@ -17,7 +17,7 @@ class UserRepository extends GetxController {
   /// Function to save user data to Firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {
-      await _db.collection("Users").doc(user.email).set(user.toJson());
+      await _db.collection("Users").doc(user.uid).set(user.toJson());
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -32,7 +32,7 @@ class UserRepository extends GetxController {
   Future<UserModel> fetchUserDetails() async {
     try {
       final documentSnapshot =
-          await _db.collection("Users").doc(user!.email).get();
+          await _db.collection("Users").doc(user!.uid).get();
 
       if (documentSnapshot.exists) {
         // Assuming UserModel has a fromMap factory constructor
@@ -57,6 +57,20 @@ class UserRepository extends GetxController {
           .collection("Users")
           .doc(updatedUser.email)
           .update(updatedUser.toJson());
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  Future<void> deleteUserAccount() async {
+    try {
+      await _db.collection("Users").doc(user!.uid).delete();
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {

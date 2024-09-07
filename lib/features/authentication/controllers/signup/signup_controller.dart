@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/common/Privacy/privacy_policy.dart';
@@ -23,7 +24,10 @@ class SignupController extends GetxController {
   final phone = TextEditingController();
   final firstName = TextEditingController();
   final lastName = TextEditingController();
+
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+
+  var selectedGender = Rx<String?>(null);
 
   // Methods
   Future<void> signup() async {
@@ -62,11 +66,14 @@ class SignupController extends GetxController {
 
       // Save user data
       final newUser = UserModel(
+        uid: FirebaseAuth.instance.currentUser!.uid,
         email: email.text.trim(),
         username: username.text.trim(),
         phone: phone.text.trim(),
         firstName: firstName.text.trim(),
         lastName: lastName.text.trim(),
+        gender: selectedGender.value!,
+        date_of_birth: 'Add date of birth',
       );
       // Send the data to Firebase Firestore
       final userRepository = Get.put(UserRepository());

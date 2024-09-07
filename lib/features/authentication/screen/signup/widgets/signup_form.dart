@@ -90,6 +90,31 @@ class LoginPageForm extends StatelessWidget {
                             : Iconsax.eye)),
                     labelText: TTexts.password)),
           ),
+          const SizedBox(
+            height: TSizes.spaceBtwInputFields,
+          ),
+
+          // Gender field
+          Obx(
+            () => DropdownButtonFormField<String>(
+              value: controller.selectedGender.value,
+              onChanged: (value) {
+                controller.selectedGender.value = value!;
+              },
+              items: <String>['Male', 'Female'].map((String gender) {
+                return DropdownMenuItem<String>(
+                  value: gender,
+                  child: Text(gender),
+                );
+              }).toList(),
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Iconsax.user),
+                labelText: 'Gender',
+              ),
+              validator: (value) =>
+                  value == null ? 'Please select a gender' : null,
+            ),
+          ),
 
           const SizedBox(
             height: TSizes.spaceBtwInputFields,

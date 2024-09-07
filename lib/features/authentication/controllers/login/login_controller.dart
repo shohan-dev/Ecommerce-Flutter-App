@@ -46,10 +46,6 @@ class LoginPageController extends GetxController {
 
   Future<void> signinbutton() async {
     try {
-      
-
-      
-
       TFullScreenLoader.openLoadingDialog(
           "Loggin you in....", TImages.docerLoadingAnimaiton);
       // check internect connectivity
@@ -137,8 +133,18 @@ class LoginPageController extends GetxController {
       final UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-      // firebase save data
-      await UserControllers.instance.saveUserRecord(userCredential);
+
+      // Check if the user exists in Firebase
+      final isEmailExist =
+          await AuthenticationRepository.instance.checkIfUserExists(
+        userCredential.user!.email!,
+      );
+
+      // If the user does not exist, save the user data
+
+      if (!isEmailExist) {
+        await UserControllers.instance.saveUserRecord(userCredential);
+      }
 
       // Close the loading dialog after successful sign-in
       TFullScreenLoader.closeLoadingDialog();

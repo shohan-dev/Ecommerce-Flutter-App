@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -21,8 +22,6 @@ class AuthenticationRepository extends GetxController {
 
   final GetStorage deviceStorage = GetStorage();
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-
 
   @override
   void onReady() {
@@ -200,40 +199,29 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> checkIfUserExist(String trim) async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
+  Future<bool> checkIfUserExists(String email) async {
+    try {
+      // Normalize the email input to lowercase
+      final normalizedEmail = email.toLowerCase();
 
-    // Get the current user
-    User? user = auth.currentUser;
+      // Query Firestore collection where user emails are stored
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('email', isEqualTo: normalizedEmail)
+          .limit(1)
+          .get();
 
-    if (user != null) {
+      final List<DocumentSnapshot> documents = result.docs;
+   
 
-
-      // Check if the user signed in with email or Google
-      final List<UserInfo> userInfo = user.providerData;
-
-      bool isGoogleSignIn = false;
-      bool isEmailSignIn = false;
-      
-
-      for (UserInfo info in userInfo) {
-        if (info.providerId == 'google.com') {
-          isGoogleSignIn = true;
-          break;
-        } else if (info.providerId == 'password') {
-          isEmailSignIn = true;
-        }
+      // If documents are found, the user exists
+      return documents.isNotEmpty;
+    } catch (e) {
+      // Handle any error that occurs during the query
+      if (kDebugMode) {
+        print("Error checking if user exists: $e");
       }
-
-      if (isGoogleSignIn) {
-        print('User signed in with Google');
-      } else if (isEmailSignIn) {
-        print('User signed in with Email');
-      } else {
-        print('User signed in with another method');
-      }
-    } else {
-      print('No user is signed in.');
+      return false;
     }
   }
 }

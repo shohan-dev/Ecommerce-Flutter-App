@@ -9,6 +9,30 @@ import 'package:smartshop/features/authentication/models/user_model.dart';
 class UserControllers extends GetxController {
   static UserControllers instance = Get.put(UserControllers());
 
+  Rx<UserModel?> user = Rx<UserModel?>(UserModel.empty());
+  final RxBool isLoading = false.obs;
+
+  //oninit
+  @override
+  void onInit() {
+    super.onInit();
+    fetchUserRecord();
+  }
+
+  //fetch user record from firestore
+  Future<void> fetchUserRecord() async {
+    try {
+      isLoading.value = true;
+      final user = await UserRepository.instance.fetchUserDetails();
+      this.user(user);
+    } catch (e) {
+      user(UserModel.empty());
+      isLoading.value = false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   // Save user record
   Future<void> saveUserRecord(UserCredential? userCredential) async {
     try {
@@ -28,16 +52,18 @@ class UserControllers extends GetxController {
 
         // Generate username and phone number
         final username = await generateUsername(email);
-        final phoneNumber = await generatePhoneNo();
 
         // Create a new user model
         final user = UserModel(
+          uid: userCredential.user!.uid,
           email: email,
           username: username,
-          phone: phoneNumber,
+          phone: 'Phone number not provided',
           firstName: firstName ?? '',
           lastName: lastName ?? '',
           imgUrl: imgUrl ?? '',
+          gender: 'Add gender',
+          date_of_birth: 'Add date of birth',
         );
 
         // Save the user record to Firestore
@@ -58,12 +84,4 @@ Future<String> generateUsername(String email) async {
   Random random = Random();
   baseUsername += random.nextInt(900).toString();
   return baseUsername;
-}
-
-// Generate a valid 11-digit phone number starting with '01'
-Future<String> generatePhoneNo() async {
-  Random random = Random();
-  String phoneNumber =
-      '01${random.nextInt(900000000).toString().padLeft(9, '0')}';
-  return phoneNumber;
 }
