@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/images/t_circular_image.dart';
+import 'package:smartshop/features/personailzation/screens/profile_update/date_of_birth._update.dart';
+import 'package:smartshop/features/personailzation/screens/profile_update/name_update.dart';
+import 'package:smartshop/features/personailzation/screens/profile_update/gender_update.dart';
+import 'package:smartshop/features/personailzation/screens/profile_update/phone_number_update.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
@@ -55,11 +59,17 @@ class ProfileScreen extends StatelessWidget {
                 TProfileMenu(
                   title: 'Name',
                   value: controller.user.value!.fullName,
+                  ontap: () {
+                    Get.to(() => TNameUpdateScreen(
+                          firstName: controller.user.value!.firstName,
+                          lastName: controller.user.value!.lastName,
+                        ));
+                  },
                 ),
                 TProfileMenu(
                   title: 'Username',
                   value: controller.user.value!.username,
-                  showActionButton: false,
+                  iconvisable: false,
                 ),
                 const TSizeboxBtwItems(),
                 const Divider(),
@@ -77,18 +87,35 @@ class ProfileScreen extends StatelessWidget {
                 TProfileMenu(
                   title: 'E-mail',
                   value: controller.user.value!.email,
+                  iconvisable: false,
                 ),
                 TProfileMenu(
                   title: 'Phone Number',
                   value: controller.user.value!.phone,
+                  ontap: () {
+                    Get.to(() => TPhoneNumberUpdateScreen(
+                          numbervalue: controller.user.value!.phone,
+                        ));
+                  },
                 ),
+
                 TProfileMenu(
                   title: 'Gender',
                   value: controller.user.value!.gender,
+                  ontap: () {
+                    Get.to(() => TGenderUpdateScreen(
+                          fieldValue: controller.user.value!.gender,
+                        ));
+                  },
                 ),
                 TProfileMenu(
                   title: 'Date of Birth',
                   value: controller.user.value!.date_of_birth,
+                  ontap: () {
+                    Get.to(() => TDateOfBirthUpdate(
+                          date_of_birth: controller.user.value!.date_of_birth,
+                        ));
+                  },
                 ),
               ],
             ),

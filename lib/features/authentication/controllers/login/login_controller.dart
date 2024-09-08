@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/data/repositories/autherntication/authentication_repository.dart';
-import 'package:smartshop/features/authentication/screen/forget_password/forget_email.dart';
+import 'package:smartshop/features/authentication/screen/forget_password/forget_password.dart';
 import 'package:smartshop/features/authentication/screen/signup/signup.dart';
 import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
 import 'package:smartshop/navigation_menu.dart';

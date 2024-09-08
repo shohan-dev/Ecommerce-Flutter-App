@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:smartshop/features/authentication/controllers/forget_password/forget_password_controller.dart';
+import 'package:flutter/services.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
-import 'package:smartshop/utils/constants/text_strings.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 import 'package:smartshop/utils/validators/validation.dart';
 
-class ForgetPageScreen extends StatelessWidget {
-  const ForgetPageScreen({super.key});
+class TPhoneNumberUpdateScreen extends StatelessWidget {
+  const TPhoneNumberUpdateScreen({
+    super.key,
+    required this.numbervalue,
+  });
+
+  final String numbervalue;
 
   @override
   Widget build(BuildContext context) {
@@ -22,34 +25,32 @@ class ForgetPageScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                TTexts.forgetPasswordTitle,
+                "Phone Number",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(
                 height: TSizes.defaultSpace,
               ),
               Text(
-                TTexts.forgetPasswordSubTitle,
+                "Enter your new phone number to keep your contact details up to date.",
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(
                 height: TSizes.appBarHeight,
               ),
               Form(
-                key: ForgetPasswordController.instance.forgetPasswordFormKey,
-                child:
-                    // const TextField(
-
-                    //   decoration: InputDecoration(
-                    //       prefixIcon: Icon(Iconsax.direct_right),
-                    //       labelText: TTexts.email),
-                    // ),
-                    TextFormField(
-                  controller: ForgetPasswordController.instance.email,
-                  validator: (value) => TValidator.validateEmail(value),
+                child: TextFormField(
+                  controller: TextEditingController(text: numbervalue),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(11),
+                  ],
+                  validator: (value) =>
+                      TValidator.validateEmptyText(value, "Phone Number"),
                   decoration: const InputDecoration(
-                    prefixIcon: Icon(Iconsax.direct_right),
-                    labelText: TTexts.email,
+                    prefixIcon: Icon(Icons.phone),
+                    labelText: "Phone",
                   ),
                 ),
               ),
@@ -58,13 +59,8 @@ class ForgetPageScreen extends StatelessWidget {
               ),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () {
-                      ForgetPasswordController.instance.sendForgetPassword();
-                    },
-                    child: const Text(
-                      TTexts.submit,
-                    )),
+                child:
+                    ElevatedButton(onPressed: () {}, child: const Text("Save")),
               )
             ],
           ),

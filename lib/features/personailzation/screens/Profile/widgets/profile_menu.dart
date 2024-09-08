@@ -14,13 +14,14 @@ class TProfileMenu extends StatelessWidget {
     this.icon = Iconsax.arrow_right_34,
     this.ontap,
     this.showActionButton = true,
+    this.iconvisable = true,
   });
 
   final String title;
   final String value;
   final IconData icon;
   final Callback? ontap;
-  final bool showActionButton;
+  final bool showActionButton, iconvisable;
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +60,12 @@ class TProfileMenu extends StatelessWidget {
               }),
             ),
             if (showActionButton)
-              Icon(
-                icon,
-                color: Theme.of(context).colorScheme.secondary,
+              Opacity(
+                opacity: iconvisable ? 1 : 0,
+                child: Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
           ],
         ),
