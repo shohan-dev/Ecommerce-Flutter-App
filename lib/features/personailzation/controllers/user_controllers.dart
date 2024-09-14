@@ -6,32 +6,54 @@ import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/data/repositories/user/user_repository.dart';
 import 'package:smartshop/features/authentication/models/user_model.dart';
 
-class UserControllers extends GetxController {
-  static UserControllers instance = Get.put(UserControllers());
+class UserController extends GetxController {
+  static UserController get instance => Get.put(UserController());
 
-  Rx<UserModel?> user = Rx<UserModel?>(UserModel.empty());
+  // Rx<UserModel?> user = Rx<UserModel?>(UserModel.empty());
+  // Rx<Map<String, dynamic>?> user = Rx<Map<String, dynamic>?>(null);
+  Rx<UserModel?> user = Rx<UserModel?>(null); // Update type to hold UserModel
+
   final RxBool isLoading = false.obs;
 
-  //oninit
+  // Called when the controller is initialized
   @override
   void onInit() {
     super.onInit();
-    fetchUserRecord();
+    print(
+        "Fetch Data First suere maybe.................................................................... Start");
+
+    // fetchUserRecord(); // old ways of fetching data
+    fetchUserData(); // Realtime new ways of fetching data
+    print(
+        "End Fetch Data suere maybe.................................................................... End");
   }
 
-  //fetch user record from firestore
-  Future<void> fetchUserRecord() async {
-    try {
-      isLoading.value = true;
-      final user = await UserRepository.instance.fetchUserDetails();
-      this.user(user);
-    } catch (e) {
-      user(UserModel.empty());
-      isLoading.value = false;
-    } finally {
-      isLoading.value = false;
-    }
+  void fetchUserData() {
+    
+    UserRepository.instance.fetchUserDetailsStream().listen((userData) {
+      user.value = userData; // Store UserModel in observable
+    }, onError: (error) {
+      print('Error fetching user details: $error');
+      user.value = null; // Set to null on error
+    });
   }
+
+  // // Fetch user record from Firestore
+  // Future<void> fetchUserRecord() async {
+  //   try {
+  //     isLoading.value = true; // Set loading state to true
+  //     final fetchedUser = await UserRepository.instance.fetchUserDetails();
+  //     user.value = fetchedUser; // Update user using .value
+  //     user.refresh(); // Refresh the user state
+  //   } catch (e) {
+  //     user.value = UserModel.empty(); // Reset user model on error
+  //     TLoaders.warningSnackBar(
+  //         title: "Fetch Error",
+  //         message: "Failed to fetch user details. Error: ${e.toString()}");
+  //   } finally {
+  //     isLoading.value = false; // Reset loading state
+  //   }
+  // }
 
   // Save user record
   Future<void> saveUserRecord(UserCredential? userCredential) async {

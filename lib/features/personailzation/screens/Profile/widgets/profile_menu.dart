@@ -25,7 +25,7 @@ class TProfileMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserControllers.instance;
+    final controller = UserController.instance;
 
     // This will rebuild when 'isLoading' changes
     return GestureDetector(

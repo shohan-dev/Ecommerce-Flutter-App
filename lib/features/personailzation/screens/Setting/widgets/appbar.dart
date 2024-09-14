@@ -14,7 +14,8 @@ class TAppbarProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserControllers.instance;
+    final controller = UserController.instance;
+
     return TPrimaryHeaderContainer(
         height: 230,
         child: Column(
@@ -29,15 +30,16 @@ class TAppbarProfile extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Obx(
-                () => TUserProfileTiles(
-                  name: controller.user.value!.fullName,
-                  email: controller.user.value!.email,
-                  onPressed: () => Get.to(() => const ProfileScreen()),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: Obx(
+                  () {
+                    return TUserProfileTiles(
+                      name: controller.user.value!.fullName,
+                      email: controller.user.value!.email,
+                      onPressed: () => Get.to(() => const ProfileScreen()),
+                    );
+                  },
+                )),
           ],
         ));
   }

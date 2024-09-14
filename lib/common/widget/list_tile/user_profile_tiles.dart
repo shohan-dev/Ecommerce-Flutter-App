@@ -21,7 +21,7 @@ class TUserProfileTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserControllers.instance;
+    final controller = UserController.instance;
     return ListTile(
       leading: const TCircularImage(image: TImages.user),
       title: Obx(() {

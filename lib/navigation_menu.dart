@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
 import 'package:smartshop/features/shop/screens/home/home.dart';
 import 'package:smartshop/features/personailzation/screens/Setting/Setting.dart';
 import 'package:smartshop/features/shop/screens/store/store.dart';
@@ -15,6 +17,14 @@ class NavigationMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationMenuConroller());
     final darkMode = THelperFunctions.isDarkMode(context);
+    // use this line for realtime update of user data from firebase
+    final dataFetch = UserController.instance;
+    if (dataFetch.user.value == null) {
+      if (kDebugMode) {
+        print(
+            "this is for data Fetech...............................................................................");
+      }
+    }
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('Navigation Menu'),

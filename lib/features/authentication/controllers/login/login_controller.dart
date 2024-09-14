@@ -143,7 +143,7 @@ class LoginPageController extends GetxController {
       // If the user does not exist, save the user data
 
       if (!isEmailExist) {
-        await UserControllers.instance.saveUserRecord(userCredential);
+        await UserController.instance.saveUserRecord(userCredential);
       }
 
       // Close the loading dialog after successful sign-in

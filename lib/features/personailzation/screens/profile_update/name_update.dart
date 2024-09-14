@@ -19,8 +19,8 @@ class TNameUpdateScreen extends StatelessWidget {
     final dark = THelperFunctions.isDarkMode(context);
 
     // Initialize controllers with passed initial values
-    NameUpdateCotroller.instance.firstName.text = firstName;
-    NameUpdateCotroller.instance.lastName.text = lastName;
+    NameUpdateController.instance.firstName.text = firstName;
+    NameUpdateController.instance.lastName.text = lastName;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,14 +46,14 @@ class TNameUpdateScreen extends StatelessWidget {
               height: TSizes.appBarHeight,
             ),
             Form(
-              key: NameUpdateCotroller.instance.nameUpdateFormKey,
+              key: NameUpdateController.instance.nameUpdateFormKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 children: [
                   TextFormField(
-                    controller: NameUpdateCotroller.instance.firstName,
+                    controller: NameUpdateController.instance.firstName,
                     validator: (value) =>
-                        TValidator.validateEmptyText(value, "First Name"),
+                        TValidator.validateEmptyText("First Name", value),
                     decoration: InputDecoration(
                       prefixIcon: Icon(icon),
                       labelText: "First Name",
@@ -63,9 +63,9 @@ class TNameUpdateScreen extends StatelessWidget {
                     height: TSizes.defaultSpace,
                   ),
                   TextFormField(
-                    controller: NameUpdateCotroller.instance.lastName,
+                    controller: NameUpdateController.instance.lastName,
                     validator: (value) =>
-                        TValidator.validateEmptyText(value, "Last Name"),
+                        TValidator.validateEmptyText("Last Name", value),
                     decoration: InputDecoration(
                       prefixIcon: Icon(icon),
                       labelText: "Last Name",
@@ -81,7 +81,7 @@ class TNameUpdateScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  NameUpdateCotroller.instance.updateName();
+                  NameUpdateController.instance.updateName();
                 },
                 child: const Text("Save"),
               ),

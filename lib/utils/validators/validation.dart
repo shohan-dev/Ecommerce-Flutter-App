@@ -1,4 +1,3 @@
-
 class TValidator {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -59,13 +58,13 @@ class TValidator {
   }
 
   // Validate empty text fields
-  static String? validateEmptyText(String? fildName, String? value) {
-    if (value == null || value.isEmpty) {
-      return '$fildName is required.';
+  static String? validateEmptyText(String? fieldName, String? value) {
+    print('Field: $fieldName, Value: $value');
+    if (value == null || value.trim().isEmpty) {
+      print(
+          "Empty field detected and working fine here............................");
+      return '$fieldName is required.';
     }
-    
-
     return null;
   }
-
 }

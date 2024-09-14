@@ -14,6 +14,17 @@ class UserRepository extends GetxController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final User? user = FirebaseAuth.instance.currentUser;
 
+  // Realtime Fetch user details from Firestore as a stream
+  Stream<UserModel> fetchUserDetailsStream() {
+    return _db.collection("Users").doc(user!.uid).snapshots().map((snapshot) {
+      if (snapshot.exists) {
+        return UserModel.fromMap(snapshot.data()!); // Convert Map to UserModel
+      } else {
+        throw 'User not found';
+      }
+    });
+  }
+
   /// Function to save user data to Firestore.
   Future<void> saveUserRecord(UserModel user) async {
     try {
@@ -51,12 +62,13 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updateUserDetails(UserModel updatedUser) async {
+  Future<void> updateUserDetails(String firstName, String lastName) async {
+    final user = FirebaseAuth.instance.currentUser;
     try {
       await _db
           .collection("Users")
-          .doc(updatedUser.email)
-          .update(updatedUser.toJson());
+          .doc(user?.uid)
+          .update({"firstName": firstName, "lastName": lastName});
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {

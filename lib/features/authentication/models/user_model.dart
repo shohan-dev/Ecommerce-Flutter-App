@@ -54,6 +54,22 @@ class UserModel {
       date_of_birth: '',
     );
   }
+  // Factory constructor to create an instance from a map
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
+      uid: map['uid'] ?? '',
+      email: map['email'] ?? '',
+      username: map['username'] ?? '',
+      phone: map['phone'] ?? '',
+      firstName: map['firstName'] ?? '',
+      lastName: map['lastName'] ?? '',
+      imgUrl: map['imgUrl'] ?? '',
+      gender: map['gender'] ?? '',
+      date_of_birth: map['date_of_birth'] ?? '',
+    );
+  }
+
+ 
 }
 
 // Convert the user data to JSON and save it to Firestore

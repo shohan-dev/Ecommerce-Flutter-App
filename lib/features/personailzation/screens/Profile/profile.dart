@@ -17,9 +17,12 @@ import 'package:smartshop/utils/constants/sizes.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
+
+  
+
   @override
   Widget build(BuildContext context) {
-    final controller = UserControllers.instance;
+    final controller = UserController.instance;
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -56,15 +59,17 @@ class ProfileScreen extends StatelessWidget {
                   showActionButton: false,
                 ),
 
-                TProfileMenu(
-                  title: 'Name',
-                  value: controller.user.value!.fullName,
-                  ontap: () {
-                    Get.to(() => TNameUpdateScreen(
-                          firstName: controller.user.value!.firstName,
-                          lastName: controller.user.value!.lastName,
-                        ));
-                  },
+                Obx(
+                  () => TProfileMenu(
+                    title: 'Name',
+                    value: controller.user.value!.fullName,
+                    ontap: () {
+                      Get.to(() => TNameUpdateScreen(
+                            firstName: controller.user.value!.firstName,
+                            lastName: controller.user.value!.lastName,
+                          ));
+                    },
+                  ),
                 ),
                 TProfileMenu(
                   title: 'Username',
