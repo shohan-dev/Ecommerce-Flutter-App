@@ -17,9 +17,6 @@ import 'package:smartshop/utils/constants/sizes.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-
-  
-
   @override
   Widget build(BuildContext context) {
     final controller = UserController.instance;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/features/personailzation/controllers/profile_update/date_of_birth_update_cotroller.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class TDateOfBirthUpdate extends StatefulWidget {
@@ -70,6 +71,7 @@ class _TDateOfBirthUpdateState extends State<TDateOfBirthUpdate> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = DateOfBirthUpdateCotroller.instance;
     return Scaffold(
       appBar: const TAppBar(
         showBackArrow: true,
@@ -109,8 +111,11 @@ class _TDateOfBirthUpdateState extends State<TDateOfBirthUpdate> {
             ),
             SizedBox(
               width: double.infinity,
-              child:
-                  ElevatedButton(onPressed: () {}, child: const Text("Save")),
+              child: ElevatedButton(
+                  onPressed: () {
+                    controller.updateDateOfBirth(_dateController.text);
+                  },
+                  child: const Text("Save")),
             )
           ],
         ),

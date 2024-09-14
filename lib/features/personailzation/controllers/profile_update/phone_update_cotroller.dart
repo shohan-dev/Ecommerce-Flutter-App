@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smartshop/common/widget/snackbar/snackbar.dart';
+import 'package:smartshop/data/repositories/user/user_repository.dart';
+import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/utils/network/network_manager.dart';
+import 'package:smartshop/utils/popups/full_screen_loader.dart';
 
 class PhoneUpdateCotroller extends GetxController {
   // static PhoneUpdateCotroller get instance => Get.put(PhoneUpdateCotroller());
@@ -10,18 +15,44 @@ class PhoneUpdateCotroller extends GetxController {
 
   Future<void> updatePhoneNumber() async {
     try {
-      // Validate form
-      print(phoneUpdateFormKey);
-      if (phoneUpdateFormKey.currentState!.validate()) {
-        // Form is valid, handle the update logic here
-        print("Phone number is valid and ready for update");
-      } else {
-        // Form is not valid
-        print("not validated");
+      TFullScreenLoader.openLoadingDialog("Updating your Phone....",
+          TImages.docerLoadingAnimaiton
+          );
+
+      // Check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.closeLoadingDialog();
+        TLoaders.errorSnackBar(
+          title: "No Internet Connection",
+          message: "Please check your internet connection and try again.",
+        );
+        return;
       }
+
+      // Validate form
+      if (!phoneUpdateFormKey.currentState!.validate()) {
+        TFullScreenLoader.closeLoadingDialog();
+        return;
+      }
+
+      phoneNumber.text = phoneNumber.text.trim();
+
+      // Update to firestore
+      await UserRepository.instance.singleUpdateUserDetails(
+        "phone",
+        phoneNumber.text,
+      );
+      TFullScreenLoader.closeLoadingDialog();
+      // after complete remove this screen annd go to profile screen
+      Get.back();
     } catch (e) {
-      // Show error message
-      print("Error occurred: $e");
+      TLoaders.errorSnackBar(
+        title: "Unable to update phone number",
+        message: e.toString(),
+      );
+    } finally {
+      TFullScreenLoader.closeLoadingDialog();
     }
   }
 }

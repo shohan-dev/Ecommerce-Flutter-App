@@ -40,7 +40,7 @@ class NameUpdateController extends GetxController {
       lastName.text = lastName.text.trim();
 
       // Update to firestore
-      await UserRepository.instance.updateUserDetails(
+      await UserRepository.instance.updateUserDetailsName(
         firstName.text,
         lastName.text,
       );

@@ -62,13 +62,30 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<void> updateUserDetails(String firstName, String lastName) async {
+  Future<void> updateUserDetailsName(String firstName, String lastName) async {
     final user = FirebaseAuth.instance.currentUser;
     try {
       await _db
           .collection("Users")
           .doc(user?.uid)
           .update({"firstName": firstName, "lastName": lastName});
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+  Future<void> singleUpdateUserDetails(String fieldName, String value) async {
+    final user = FirebaseAuth.instance.currentUser;
+    try {
+      await _db
+          .collection("Users")
+          .doc(user?.uid)
+          .update({fieldName: value});
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -93,4 +110,5 @@ class UserRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
 }
