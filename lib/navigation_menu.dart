@@ -17,8 +17,8 @@ class NavigationMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationMenuConroller());
     final darkMode = THelperFunctions.isDarkMode(context);
-    // use this line for realtime update of user data from firebase
     final dataFetch = UserController.instance;
+    // dataFetch.fetchUserData();
     if (dataFetch.user.value == null) {
       if (kDebugMode) {
         print(

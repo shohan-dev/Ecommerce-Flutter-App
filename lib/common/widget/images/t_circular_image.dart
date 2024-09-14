@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:smartshop/common/widget/effect/shimmer_effect.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
@@ -35,15 +38,35 @@ class TCircularImage extends StatelessWidget {
                 ? TColors.black
                 : TColors.white),
         borderRadius: BorderRadius.circular(100),
-        image: DecorationImage(
-          image: isNetworkImage
-              ? NetworkImage(image)
-              : AssetImage(image) as ImageProvider,
-          fit: fit,
-          colorFilter: overlayColor != null
-              ? ColorFilter.mode(overlayColor!, BlendMode.srcOver)
-              : null,
-        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: isNetworkImage
+            ? CachedNetworkImage(
+                imageUrl: image,
+                fit: fit,
+                placeholder: (context, url) => const Center(
+                  child: TShimmerEffect(
+                    height: 100,
+                    width: 100,
+                    borderRadius: 100,
+                  ),
+                ),
+                errorWidget: (context, url, error) {
+                  // Print error to debug
+                  if (kDebugMode) {
+                    print('Error loading image: $error');
+                  }
+                  return const Center(
+                    child: Icon(Icons.error),
+                  );
+                },
+                fadeInDuration: const Duration(milliseconds: 300),
+              )
+            : Image.asset(
+                image,
+                fit: fit,
+              ),
       ),
     );
   }

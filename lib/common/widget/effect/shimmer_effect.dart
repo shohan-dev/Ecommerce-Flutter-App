@@ -9,6 +9,7 @@ class TShimmerEffect extends StatelessWidget {
     this.height = 20,
     this.radius = 15,
     this.color,
+    int borderRadius = 15,
   }) : super(key: key);
 
   final double width, height, radius;

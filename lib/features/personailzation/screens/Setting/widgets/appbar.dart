@@ -14,33 +14,42 @@ class TAppbarProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserController.instance;
-
     return TPrimaryHeaderContainer(
-        height: 230,
-        child: Column(
-          children: [
-            TAppBar(
-              title: Text(
-                "Account",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .apply(color: TColors.white),
-              ),
+      height: 230,
+      child: Column(
+        children: [
+          TAppBar(
+            title: Text(
+              "Account",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .apply(color: TColors.white),
             ),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Obx(
-                  () {
-                    return TUserProfileTiles(
-                      name: controller.user.value!.fullName,
-                      email: controller.user.value!.email,
-                      onPressed: () => Get.to(() => const ProfileScreen()),
-                    );
-                  },
-                )),
-          ],
-        ));
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Obx(() {
+              final isLoading = UserController.instance.isLoading
+                  .value; // Adjust this based on your actual state
+              if (isLoading) {
+                return const TUserProfileTiles(
+                  name: "Name",
+                  email: "Email",
+                );
+              }
+              final user = UserController.instance.user.value;
+              return TUserProfileTiles(
+                name: user?.fullName ?? '',
+                email: user?.email ?? '',
+                onPressed: () {
+                  Get.to(() => const ProfileScreen());
+                },
+              );
+            }),
+          ),
+        ],
+      ),
+    );
   }
 }
