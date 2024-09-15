@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
@@ -32,7 +33,10 @@ class TVerticalImageText extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Center(
-              child: Image(image: AssetImage(image)),
+              // cached netwrok image use
+              child: CachedNetworkImage(
+                imageUrl: image,
+              ),
             ),
           ),
           const SizedBox(
