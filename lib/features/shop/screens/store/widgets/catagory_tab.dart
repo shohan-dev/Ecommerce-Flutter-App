@@ -4,7 +4,7 @@ import 'package:smartshop/common/widget/brands/brandscardswithimage.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
-import 'package:smartshop/features/shop/models/catagory_model.dart';
+import 'package:smartshop/features/shop/models/catagory_models.dart';
 import 'package:smartshop/features/shop/screens/all_products/all_products.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';

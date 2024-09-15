@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/data/repositories/categories/categories_repository.dart';
-import 'package:smartshop/features/shop/models/catagory_model.dart';
+import 'package:smartshop/features/shop/models/catagory_models.dart';
 
 class CategoryController extends GetxController {
   static CategoryController get instance => Get.find();

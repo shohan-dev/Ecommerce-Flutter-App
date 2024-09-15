@@ -1,67 +1,87 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:get/get.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smartshop/common/widget/custom_shape/containers/circular_container.dart';
+import 'package:smartshop/common/widget/effect/catagories_shimmer_effect.dart';
 import 'package:smartshop/common/widget/images/t_round_images.dart';
+import 'package:smartshop/features/shop/controllers/banners_controller.dart';
+import 'package:smartshop/utils/constants/colors.dart';
+import 'package:smartshop/utils/constants/sizes.dart';
 
-class TPromoSlider extends StatefulWidget {
-  const TPromoSlider({super.key, required this.banner});
-
-  final List<String> banner;
-
-  @override
-  TPromoSliderState createState() => TPromoSliderState();
-}
-
-class TPromoSliderState extends State<TPromoSlider> {
-  int _currentIndex = 0;
-  final CarouselController _carouselController = CarouselController();
+class TPromoSlider extends StatelessWidget {
+  const TPromoSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Column(
-        children: [
-          CarouselSlider(
-            items: widget.banner
-                .map((url) => Padding(
-                      padding:
-                          const EdgeInsets.all(8.0), // Adjust padding as needed
-                      child: TRoundImage(imageUrl: url),
-                    ))
-                .toList(),
-            carouselController: _carouselController,
-            options: CarouselOptions(
-              viewportFraction: 1,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
+    final BannersController controller =
+        Get.find(); // Fetch the controller instance
+
+    return Obx(() {
+      // Show shimmer effect while loading
+      if (controller.isLoading.value) {
+        return const TCategoryShimmer();
+      }
+
+      // Display a message if no banners are found
+      if (controller.banners.isEmpty) {
+        return Center(
+          child: Text(
+            'No Banners Found',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: TColors.white),
+          ),
+        );
+      }
+
+      // Display carousel slider with banners
+      return Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            CarouselSlider(
+              options: CarouselOptions(
+                viewportFraction: 1,
+                onPageChanged: (index, _) => controller.updatePageIndex(index),
+              ),
+              items: controller.banners.map((banner) {
+                return TRoundImage(
+                  imageUrl: banner.imageUrl,
+                  isNetworkImage: true,
+                  onPressed: () => Get.toNamed(banner.targetScreen),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: TSizes.spaceBtwItems),
+            _buildIndicator(controller),
+          ],
+        ),
+      );
+    });
+  }
+
+  // Build the indicator dots for the carousel
+  Widget _buildIndicator(BannersController controller) {
+    return Obx(() {
+      return Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(
+            controller.banners.length,
+            (index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: TCircularContainer(
+                width: 8,
+                height: 8,
+                backgroundColor: controller.carousalCurrentIndex.value == index
+                    ? TColors.primary
+                    : TColors.grey,
+              ),
             ),
           ),
-          const SizedBox(
-              height:
-                  10), // Add some space between the slider and the indicator
-          AnimatedSmoothIndicator(
-            activeIndex: _currentIndex,
-            count: widget.banner.length,
-            effect: WormEffect(
-              dotWidth: 8.0,
-              dotHeight: 8.0,
-              activeDotColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black,
-              dotColor: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white.withOpacity(0.4)
-                  : Colors.black.withOpacity(0.4),
-            ),
-            onDotClicked: (index) {
-              _carouselController.animateToPage(index);
-            },
-          ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 }
