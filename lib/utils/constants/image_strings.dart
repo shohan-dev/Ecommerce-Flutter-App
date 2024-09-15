@@ -296,4 +296,28 @@ class TImages {
 
 // Extra
   static const String mahadi = "assets/images/user/mahadi.jpg";
+
+  static var samsungGalaxyS91;
+
+  static var samsungGalaxyS92;
+
+  static var samsungGalaxyS93;
+
+  static var iphone13ProMax1;
+
+  static var iphone13ProMax2;
+
+  static var iphone13ProMax3;
+
+  static var googlePixel6_1;
+
+  static var googlePixel6_2;
+
+  static var googlePixel6_3;
+
+  static var onePlus9Pro_1;
+
+  static var onePlus9Pro_2;
+
+  static var onePlus9Pro_3;
 }

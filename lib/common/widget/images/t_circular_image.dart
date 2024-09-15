@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:smartshop/common/widget/effect/shimmer_effect.dart';
 import 'package:smartshop/utils/constants/colors.dart';
-import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TCircularImage extends StatelessWidget {
@@ -16,7 +15,7 @@ class TCircularImage extends StatelessWidget {
     this.backgroundColor,
     this.height = 56,
     this.width = 56,
-    this.padding = TSizes.sm,
+    this.padding = 0,
   });
 
   final BoxFit? fit;

@@ -5,7 +5,6 @@ import 'package:smartshop/common/widget/effect/shimmer_effect.dart';
 import 'package:smartshop/common/widget/images/t_circular_image.dart';
 import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
 import 'package:smartshop/utils/constants/colors.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
 
 class TUserProfileTiles extends StatelessWidget {
   const TUserProfileTiles({
@@ -23,7 +22,13 @@ class TUserProfileTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-      leading: const TCircularImage(image: TImages.user),
+      leading: Obx(() {
+        final networkImage = controller.user.value!.imgUrl;
+        return TCircularImage(
+          image: networkImage,
+          isNetworkImage: true,
+        );
+      }),
       title: Obx(() {
         if (controller.isLoading.value) {
           return const TShimmerEffect(
