@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
@@ -27,53 +28,63 @@ class TBrandShowCase extends StatelessWidget {
       padding: const EdgeInsets.all(TSizes.sm),
       backgroundColor: Colors.transparent,
       showBorder: true,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Image(
-                height: 56,
-                width: 56,
-                image: AssetImage(image),
-                color: dark ? TColors.white : TColors.dark,
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TVerifyText(
-                      text: brandName,
-                      textsize: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+      child: Padding(
+        padding:
+            const EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CachedNetworkImage(
+                    height: 56,
+                    width: 56,
+                    color: dark ? TColors.white : TColors.black,
+                    imageUrl: image,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TVerifyText(
+                        text: brandName,
+                        textsize: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      totalProduct,
-                      style: const TextStyle(
-                        overflow: TextOverflow.ellipsis,
+                      Text(
+                        totalProduct,
+                        style: const TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // Horizontal layout for images
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 120, // Adjust the height to fit images
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: productImages
+                      .map(
+                        (image) => BrandImages(image, context),
+                      )
+                      .toList(),
                 ),
               ),
-            ],
-          ),
-          // Horizontal layout for images
-          Container(
-            height: 120, // Adjust the height to fit images
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: productImages
-                  .map(
-                    (image) => BrandImages(image, context),
-                  )
-                  .toList(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -83,8 +94,8 @@ Widget BrandImages(String image, context) {
   return Expanded(
     child: TRoundedContainer(
       height: 100,
-      padding: EdgeInsets.all(TSizes.md),
-      margin: EdgeInsets.only(right: TSizes.sm),
+      padding: const EdgeInsets.all(TSizes.md),
+      margin: const EdgeInsets.only(right: TSizes.sm),
       backgroundColor: THelperFunctions.isDarkMode(context)
           ? TColors.darkGrey
           : TColors.light,

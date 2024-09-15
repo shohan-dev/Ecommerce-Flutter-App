@@ -4,13 +4,17 @@ import 'package:smartshop/common/widget/brands/brandscardswithimage.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/models/catagory_model.dart';
 import 'package:smartshop/features/shop/screens/all_products/all_products.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class TCatagoryTab extends StatelessWidget {
+  final CategoryModel category;
+
   const TCatagoryTab({
     super.key,
+    required this.category,
   });
 
   @override
@@ -21,13 +25,14 @@ class TCatagoryTab extends StatelessWidget {
       children: [
         Column(
           children: [
-            const TBrandShowCase(
-              brandName: "Nike",
-              image: TImages.nikeLogo,
-              productImages: [
-                TImages.productImage1,
-                TImages.productImage2,
-                TImages.productImage3
+            TBrandShowCase(
+              brandName: category.name,
+              image: category.image,
+              productImages: const [
+                TImages.productImage11,
+                TImages.productImage12,
+                TImages.productImage13,
+                TImages.productImage14,
               ],
             ),
             const SizedBox(

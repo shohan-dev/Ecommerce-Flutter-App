@@ -4,6 +4,7 @@ import 'package:smartshop/common/widget/appbar/tabbar.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/common/widget/brands/brandsCards.dart';
+import 'package:smartshop/features/shop/controllers/category_controller.dart';
 import 'package:smartshop/features/shop/screens/brands/all_brands.dart';
 import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
 import 'package:smartshop/features/shop/screens/store/widgets/catagory_tab.dart';
@@ -17,9 +18,11 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
+
     return Scaffold(
       body: DefaultTabController(
-        length: 5,
+        length: categories.length,
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
@@ -36,13 +39,9 @@ class StoreScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: TSizes.spaceBtwItems * 3,
-                        ),
+                        const SizedBox(height: TSizes.spaceBtwItems * 3),
                         const TSearchBarContainer(text: "Search in Store"),
-                        const SizedBox(
-                          height: TSizes.spaceBtwSections,
-                        ),
+                        const SizedBox(height: TSizes.spaceBtwSections),
                         TSectionHeading(
                           title: "Featured Brands",
                           showActionButton: true,
@@ -59,32 +58,21 @@ class StoreScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(48.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: TTabBar(
-                      tabs: [
-                        Tab(child: Text("Sports")),
-                        Tab(child: Text("Furniture")),
-                        Tab(child: Text("Electronics")),
-                        Tab(child: Text("Clothes")),
-                        Tab(child: Text("Cosmetics")),
-                      ],
-                    ),
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(48.0),
+                  child: TTabBar(
+                    tabs: categories
+                        .map((category) => Tab(text: category.name))
+                        .toList(),
                   ),
                 ),
               ),
             ];
           },
-          body: const TabBarView(
-            children: [
-              TCatagoryTab(),
-              TCatagoryTab(),
-              TCatagoryTab(),
-              TCatagoryTab(),
-              TCatagoryTab(),
-            ],
+          body: TabBarView(
+            children: categories
+                .map((category) => TCatagoryTab(category: category))
+                .toList(),
           ),
         ),
       ),

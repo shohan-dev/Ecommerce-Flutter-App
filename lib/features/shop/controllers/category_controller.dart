@@ -4,7 +4,7 @@ import 'package:smartshop/data/repositories/categories/categories_repository.dar
 import 'package:smartshop/features/shop/models/catagory_model.dart';
 
 class CategoryController extends GetxController {
-  static CategoryController get to => Get.find();
+  static CategoryController get instance => Get.find();
 
   final _categoryRepository = Get.put(CategoriesRepository());
   RxList<CategoryModel> allCategories = <CategoryModel>[].obs;
@@ -25,7 +25,7 @@ class CategoryController extends GetxController {
       allCategories.value = categories;
       featuredCategories.value = categories
           .where((element) => element.isFeatured && element.parentId.isEmpty)
-          .take(8)
+          .take(categories.length) // shwoing all categories
           .toList();
     } catch (e) {
       debugPrint('Error: $e');
