@@ -80,7 +80,7 @@ class TProductCardVertical extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
                     // Nikey verify
                     const TVerifyText(
-                      text: 'Nike',
+                      text: "Nike",
                     ),
                     const Spacer(), // Pushes the last row to the bottom
                     Row(

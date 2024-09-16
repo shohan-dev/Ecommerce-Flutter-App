@@ -16,7 +16,7 @@ class BannersRepositories extends GetxController {
           .where('active', isEqualTo: true)
           .get();
       final list =
-          snapshot.docs.map((doc) => BannerModels.fromSnapshot(doc)).toList();
+          snapshot.docs.map((doc) => BannerModels.fromMap(doc)).toList();
       return list;
     } on FirebaseException catch (e) {
       // Handle Firebase-specific errors

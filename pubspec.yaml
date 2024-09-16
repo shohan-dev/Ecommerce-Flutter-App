@@ -81,6 +81,7 @@ flutter:
     - assets/images/animations/
     - assets/icons/payment_methods/
     - assets/images/on_boarding_images/
+    - assets/raw/Dummy_Data/products.json
 
   #--------------- LOCAL FONTS ------------------#
   fonts:

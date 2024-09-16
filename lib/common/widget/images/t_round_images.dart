@@ -32,7 +32,7 @@ class TRoundImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final Widget imageWidget = Container(
       width: width,
       height: height,
       padding: padding,
@@ -48,8 +48,15 @@ class TRoundImage extends StatelessWidget {
                 imageUrl: imageUrl,
                 fit: fit,
               )
-            : Image(image: AssetImage(imageUrl), fit: fit),
+            : Image.asset(imageUrl, fit: fit),
       ),
     );
+
+    return onPressed != null
+        ? GestureDetector(
+            onTap: onPressed,
+            child: imageWidget,
+          )
+        : imageWidget;
   }
 }

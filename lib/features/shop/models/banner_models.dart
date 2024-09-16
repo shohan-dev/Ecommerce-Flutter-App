@@ -28,7 +28,7 @@ class BannerModels {
   }
 
   // Convert JSON object to model
-  factory BannerModels.fromSnapshot(
+  factory BannerModels.fromMap(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data();
     if (data != null) {

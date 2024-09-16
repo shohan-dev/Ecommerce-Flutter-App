@@ -49,7 +49,11 @@ class TPromoSlider extends StatelessWidget {
                 return TRoundImage(
                   imageUrl: banner.imageUrl,
                   isNetworkImage: true,
-                  onPressed: () => Get.toNamed(banner.targetScreen),
+                  onPressed: () {
+                    // Add the banner on tap action here
+                    print('Banner tapped ${banner.targetScreen}');
+                    Get.toNamed(banner.targetScreen);
+                  },
                 );
               }).toList(),
             ),
