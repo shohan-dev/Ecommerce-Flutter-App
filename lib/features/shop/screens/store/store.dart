@@ -4,8 +4,8 @@ import 'package:smartshop/common/widget/appbar/tabbar.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/searchbar_containers.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/common/widget/brands/brandsCards.dart';
+import 'package:smartshop/features/shop/controllers/brand_controller.dart';
 import 'package:smartshop/features/shop/controllers/category_controller.dart';
-import 'package:smartshop/features/shop/controllers/product_controller.dart';
 import 'package:smartshop/features/shop/screens/brands/all_brands.dart';
 import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
 import 'package:smartshop/features/shop/screens/store/widgets/catagory_tab.dart';
@@ -20,6 +20,7 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = CategoryController.instance.allCategories;
+    final brandController = Get.put(BrandController());
 
     return Scaffold(
       body: DefaultTabController(
