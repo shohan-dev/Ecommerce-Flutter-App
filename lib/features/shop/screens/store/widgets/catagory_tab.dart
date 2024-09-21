@@ -4,6 +4,7 @@ import 'package:smartshop/common/widget/brands/brandscardswithimage.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/controllers/product_controller.dart';
 import 'package:smartshop/features/shop/models/catagory_models.dart';
 import 'package:smartshop/features/shop/screens/all_products/all_products.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
@@ -19,6 +20,7 @@ class TCatagoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = ProductController.instance.featuredProducts;
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -48,7 +50,9 @@ class TCatagoryTab extends StatelessWidget {
             ),
             TGridLayout(
                 itemcount: 4,
-                itemBuilder: (_, index) => const TProductCardVertical())
+                itemBuilder: (_, index) => TProductCardVertical(
+                      product: product[index],
+                    ))
           ],
         ),
       ],

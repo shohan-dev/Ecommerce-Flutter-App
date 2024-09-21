@@ -10,14 +10,17 @@ class ProductRepositories extends GetxController {
 
   Future<List<ProductModels>> getFeaturedProducts() async {
     try {
-      final snapshot =
-          await _db.collection("Shop_Products").where('id', isEqualTo: 5).get();
+      final snapshot = await _db
+          .collection("Shop_Products")
+          .where("isPopularProducts", isEqualTo: true)
+          .limit(20)
+          .get();
 
       return snapshot.docs.map((doc) {
         final data = doc.data(); // Correct way to get document data
-        print("-----------------------------------------------  ");
-        print(data);
-        print("-----------------------------------------------  ");
+
+        // lengeth of the data
+        // print("data length : ${data.length}");
 
         return ProductModels.fromJson(data);
       }).toList();
@@ -31,5 +34,53 @@ class ProductRepositories extends GetxController {
       // Handle all other errors
       throw 'An unexpected error occurred: ${e.toString()}';
     }
+  }
+
+  // unique brands
+  Future<List<String>> getUniqueBrands() async {
+    final uniqueBrands = <String>{}; // Using a Set to store unique brand names
+
+    try {
+      // Limit the number of documents to fetch
+      final snapshot = await _db.collection("Shop_Products").get();
+
+      // Iterate through the documents and add unique brands to the set
+      for (var doc in snapshot.docs) {
+        final brand =
+            doc.data()['brand'] as String?; // Access the brand field directly
+        if (brand != null && brand.isNotEmpty) {
+          uniqueBrands.add(brand);
+        }
+      }
+    } catch (e) {
+      print("Error fetching brands: $e");
+    }
+
+    return uniqueBrands.toList(); // Convert Set to List before returning
+  }
+
+  // unique category
+  Future<List<String>> getUniqueCategory() async {
+    final uniqueCategory =
+        <String>{}; // Using a Set to store unique brand names
+
+    try {
+      // Limit the number of documents to fetch
+      final snapshot = await _db.collection("Shop_Products").get();
+
+      // Iterate through the documents and add unique brands to the set
+      for (var doc in snapshot.docs) {
+        final category = doc.data()['category']
+            as String?; // Access the brand field directly
+        if (category != null && category.isNotEmpty) {
+          uniqueCategory.add(category);
+        }
+      }
+      print("uniqueCategory : $uniqueCategory");
+    } catch (e) {
+      print("Error fetching category: $e");
+    }
+
+    return uniqueCategory.toList(); // Convert Set to List before returning
   }
 }

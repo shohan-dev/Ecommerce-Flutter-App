@@ -4,6 +4,7 @@ import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/brands/brandsCards.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
+import 'package:smartshop/features/shop/controllers/product_controller.dart';
 import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
@@ -12,6 +13,7 @@ class BrandsWithProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = ProductController.instance.featuredProducts;
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -61,7 +63,7 @@ class BrandsWithProducts extends StatelessWidget {
               // Product List
               TGridLayout(
                   itemcount: 10,
-                  itemBuilder: (_, index) => const TProductCardVertical())
+                  itemBuilder: (_, index) =>  TProductCardVertical(product: product[index],))
             ],
           ),
         ),

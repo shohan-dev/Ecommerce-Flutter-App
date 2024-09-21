@@ -15,16 +15,16 @@ class CategoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchCategories();
+    fetchCategoriesPopular();
   }
 
-  Future<void> fetchCategories() async {
+  Future<void> fetchCategoriesPopular() async {
     try {
       isloading.value = true;
       final categories = await _categoryRepository.getAllCategories();
       allCategories.value = categories;
       featuredCategories.value = categories
-          .where((element) => element.isFeatured && element.parentId.isEmpty)
+          .where((element) => element.isFeatured)
           .take(categories.length) // shwoing all categories
           .toList();
     } catch (e) {
@@ -33,4 +33,5 @@ class CategoryController extends GetxController {
       isloading.value = false;
     }
   }
+  
 }

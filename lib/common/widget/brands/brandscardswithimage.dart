@@ -22,7 +22,6 @@ class TBrandShowCase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
 
     return TRoundedContainer(
       padding: const EdgeInsets.all(TSizes.sm),
@@ -40,7 +39,6 @@ class TBrandShowCase extends StatelessWidget {
                   child: CachedNetworkImage(
                     height: 56,
                     width: 56,
-                    color: dark ? TColors.white : TColors.black,
                     imageUrl: image,
                   ),
                 ),

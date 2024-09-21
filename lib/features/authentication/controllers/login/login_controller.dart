@@ -77,6 +77,7 @@ class LoginPageController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       Get.snackbar('Error', e.toString());
+      TFullScreenLoader.closeLoadingDialog();
     }
   }
 
@@ -132,7 +133,6 @@ class LoginPageController extends GetxController {
       // Sign in to Firebase with the obtained credential
       final UserCredential userCredential =
           await _auth.signInWithCredential(credential);
-
 
       // Check if the user exists in Firebase
       final isEmailExist =

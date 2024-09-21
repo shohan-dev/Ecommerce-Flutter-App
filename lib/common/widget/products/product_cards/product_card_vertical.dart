@@ -7,14 +7,16 @@ import 'package:smartshop/common/widget/custom_shape/containers/rounded_containe
 import 'package:smartshop/common/widget/icons/circular_icons.dart';
 import 'package:smartshop/common/widget/images/t_round_images.dart';
 import 'package:smartshop/common/widget/texts/product_title.dart';
+import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_details/product_details.dart';
 import 'package:smartshop/utils/constants/colors.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TProductCardVertical extends StatelessWidget {
-  const TProductCardVertical({super.key});
+  final ProductModels product;
+
+  const TProductCardVertical({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,10 @@ class TProductCardVertical extends StatelessWidget {
                   : TColors.light,
               child: Stack(
                 children: [
-                  const TRoundImage(imageUrl: TImages.productImage1), // Image
+                  TRoundImage(
+                    imageUrl: product.thumbnail,
+                    isNetworkImage: true,
+                  ), // Image
                   Positioned(
                     top: 8,
                     left: 5,
@@ -47,9 +52,9 @@ class TProductCardVertical extends StatelessWidget {
                       backgroundColor: TColors.secondary.withOpacity(0.8),
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
-                      child: const Text(
-                        "25%",
-                        style: TextStyle(color: TColors.black),
+                      child: Text(
+                        "${product.discountPercentage}%",
+                        style: const TextStyle(color: TColors.black),
                       ), // Discount
                     ),
                   ),
@@ -73,21 +78,22 @@ class TProductCardVertical extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TProductTitle(
-                      title: "Green Nike Air Shoes",
+                    TProductTitle(
+                      title: product.title,
                       smallSize: true,
+                      maxLines: 1,
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
                     // Nikey verify
-                    const TVerifyText(
-                      text: "Nike",
+                    TVerifyText(
+                      text: product.brand,
                     ),
                     const Spacer(), // Pushes the last row to the bottom
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "\$35.6",
+                          product.price.toString(),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headlineSmall,
