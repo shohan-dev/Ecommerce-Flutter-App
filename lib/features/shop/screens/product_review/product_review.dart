@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/products/rating/rating_indicator.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_review/widgets/rating_progress_indicator.dart';
 import 'package:smartshop/features/shop/screens/product_review/widgets/user_review_card.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class ProductReviewScreen extends StatelessWidget {
-  const ProductReviewScreen({super.key});
+  const ProductReviewScreen({super.key, required this.product});
+
+  final ProductModels product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +29,17 @@ class ProductReviewScreen extends StatelessWidget {
                   "Rating and reviews are verified and are from prople who use the same type of device that you use."),
               const TSizeboxBtwItems(),
               // Overall Product Rating
-              const TOverallProductRating(),
-              const TRatingBarIndicator(
-                rating: 3.5,
+              TOverallProductRating( product: product),
+              TRatingBarIndicator(
+                rating: product.rating!.toDouble(),
               ),
               Text(
-                "12,611",
+                "${product.reviews!.length} Reviews",
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const TSizeboxBtwItems(),
               // User Reviews List
-              const UserReviewCard(),
+              UserReviewCard(product: product),
             ],
           ),
         ),

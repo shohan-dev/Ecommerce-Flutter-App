@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:smartshop/features/shop/controllers/product_details.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 
 class TSizeSelect extends StatefulWidget {
@@ -15,6 +18,7 @@ class _TSizeSelectState extends State<TSizeSelect> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedSizeobs = Get.put(ProductDetailsController()).selectedSize;
     return SizedBox(
       height: 40, // Adjust height as needed
       child: ListView.builder(
@@ -32,6 +36,7 @@ class _TSizeSelectState extends State<TSizeSelect> {
                 setState(() {
                   _selectedSize = sizeOption;
                 });
+                selectedSizeobs.value = sizeOption;
               },
               child: Container(
                 height: 30,

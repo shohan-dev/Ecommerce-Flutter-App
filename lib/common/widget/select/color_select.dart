@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/circular_container.dart';
+import 'package:smartshop/features/shop/controllers/product_details.dart';
 
 class TColorSelect extends StatefulWidget {
   const TColorSelect({super.key, required this.colors});
@@ -15,6 +17,7 @@ class _TColorSelectState extends State<TColorSelect> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedColorobs = Get.put(ProductDetailsController()).selectedColor;
     return SizedBox(
       height: 40, // Adjust height as needed
       child: ListView.builder(
@@ -31,6 +34,7 @@ class _TColorSelectState extends State<TColorSelect> {
                 setState(() {
                   _selectedColor = color;
                 });
+                selectedColorobs.value = color.toString();
               },
               child: TCircularContainer(
                 height: 30,

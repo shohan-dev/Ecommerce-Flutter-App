@@ -7,10 +7,12 @@ class TRatingProgressIndicator extends StatelessWidget {
     super.key,
     required this.text,
     required this.value,
+    required this.totalCount,
   });
 
   final String text;
   final double value;
+  final int totalCount;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,9 @@ class TRatingProgressIndicator extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(width: 8), // Add spacing
+        Text('($totalCount)',
+            style: Theme.of(context).textTheme.bodySmall), // Display totalCount
       ],
     );
   }

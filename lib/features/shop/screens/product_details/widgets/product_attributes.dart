@@ -6,6 +6,7 @@ import 'package:smartshop/common/widget/select/color_select.dart';
 import 'package:smartshop/common/widget/select/size_select.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/controllers/product_details.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/attributes/discription.dart';
 import 'package:smartshop/features/shop/screens/product_review/product_review.dart';
@@ -13,12 +14,16 @@ import 'package:smartshop/features/shop/screens/product_review/product_review.da
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({
     super.key,
-    required this.dark, required this.product,
+    required this.dark,
+    required this.product,
   });
   final bool dark;
   final ProductModels product;
   @override
   Widget build(BuildContext context) {
+    final selectedColorobs = Get.put(ProductDetailsController()).selectedColor;
+    final selectedSizeobs = Get.put(ProductDetailsController()).selectedSize;
+
     return Column(
       children: [
         // Product Discription
@@ -46,20 +51,24 @@ class TProductAttributes extends StatelessWidget {
         SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {}, child: const Text("Checkout"))),
+                onPressed: () {
+                  print(selectedColorobs);
+                  print(selectedSizeobs);
+                },
+                child: const Text("Checkout"))),
         const TSizeboxBtwItems(),
         const TSizeboxBtwItems(),
         // Description
         const TSectionHeading(title: "Description", showActionButton: false),
         const TSizeboxBtwItems(),
-        const ReadMoreText(
-          "This is the description of this Product and details about it.This is the description of this Product and details about it.This is the description of this Product and details about it.",
+        ReadMoreText(
+          product.description,
           trimLines: 2,
           trimMode: TrimMode.Line,
           trimCollapsedText: "  Show more",
           trimExpandedText: "  Less",
-          moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-          lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+          moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+          lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
         ),
         const TSizeboxBtwItems(),
         const Divider(),
@@ -68,13 +77,13 @@ class TProductAttributes extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const TSectionHeading(
-              title: "Reviews(199)",
+            TSectionHeading(
+              title: "Reviews(${product.reviews?.length.toString()})",
               showActionButton: false,
             ),
             IconButton(
                 onPressed: () {
-                  Get.to(() => const ProductReviewScreen());
+                  Get.to(() =>  ProductReviewScreen(product: product));
                 },
                 icon: const Icon(Iconsax.arrow_right_3))
           ],
