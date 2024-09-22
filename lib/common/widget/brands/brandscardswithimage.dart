@@ -2,9 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
-import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
-import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TBrandShowCase extends StatelessWidget {
   const TBrandShowCase({
@@ -12,17 +10,14 @@ class TBrandShowCase extends StatelessWidget {
     required this.image,
     required this.brandName,
     this.totalProduct = "256 Product",
-    required this.productImages,
   });
 
   final String image;
-  final List<String> productImages;
   final String brandName;
   final String totalProduct;
 
   @override
   Widget build(BuildContext context) {
-
     return TRoundedContainer(
       padding: const EdgeInsets.all(TSizes.sm),
       backgroundColor: Colors.transparent,
@@ -67,20 +62,20 @@ class TBrandShowCase extends StatelessWidget {
               ],
             ),
             // Horizontal layout for images
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 120, // Adjust the height to fit images
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: productImages
-                      .map(
-                        (image) => BrandImages(image, context),
-                      )
-                      .toList(),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: SizedBox(
+            //     height: 120, // Adjust the height to fit images
+            //     child: ListView(
+            //       scrollDirection: Axis.horizontal,
+            //       children: productImages
+            //           .map(
+            //             (image) => BrandImages(image, context),
+            //           )
+            //           .toList(),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -88,19 +83,19 @@ class TBrandShowCase extends StatelessWidget {
   }
 }
 
-Widget BrandImages(String image, context) {
-  return Expanded(
-    child: TRoundedContainer(
-      height: 100,
-      padding: const EdgeInsets.all(TSizes.md),
-      margin: const EdgeInsets.only(right: TSizes.sm),
-      backgroundColor: THelperFunctions.isDarkMode(context)
-          ? TColors.darkGrey
-          : TColors.light,
-      child: Image(
-        image: AssetImage(image),
-        fit: BoxFit.cover,
-      ),
-    ),
-  );
-}
+// Widget BrandImages(String image, context) {
+//   return Expanded(
+//     child: TRoundedContainer(
+//       height: 100,
+//       padding: const EdgeInsets.all(TSizes.md),
+//       margin: const EdgeInsets.only(right: TSizes.sm),
+//       backgroundColor: THelperFunctions.isDarkMode(context)
+//           ? TColors.darkGrey
+//           : TColors.light,
+//       child: Image(
+//         image: AssetImage(image),
+//         fit: BoxFit.cover,
+//       ),
+//     ),
+//   );
+// }

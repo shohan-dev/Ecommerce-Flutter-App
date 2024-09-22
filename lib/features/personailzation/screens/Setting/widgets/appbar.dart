@@ -15,9 +15,12 @@ class TAppbarProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TPrimaryHeaderContainer(
-      height: 230,
+      height: 220,
       child: Column(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           TAppBar(
             title: Text(
               "Account",

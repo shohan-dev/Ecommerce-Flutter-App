@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
-import 'package:smartshop/common/widget/brands/brandsCards.dart';
+import 'package:smartshop/common/widget/brands/brandscardswithimage.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
 import 'package:smartshop/features/shop/controllers/product_controller.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/features/shop/models/brand_models.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class BrandsWithProducts extends StatelessWidget {
-  const BrandsWithProducts({super.key});
+  final BrandModels brand;
+  const BrandsWithProducts({super.key, required this.brand});
 
   @override
   Widget build(BuildContext context) {
     final product = ProductController.instance.featuredProducts;
+
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -25,11 +27,12 @@ class BrandsWithProducts extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              const Center(
-                child: TBrandCards(
-                  image: TImages.nikeLogo,
-                  brandName: "Nike",
-                  itemcount: 1,
+              Center(
+                child: TBrandShowCase(
+                  image: brand.image,
+                  brandName: brand.name,
+                  
+                  
                 ),
               ),
               const SizedBox(
@@ -63,7 +66,9 @@ class BrandsWithProducts extends StatelessWidget {
               // Product List
               TGridLayout(
                   itemcount: 10,
-                  itemBuilder: (_, index) =>  TProductCardVertical(product: product[index],))
+                  itemBuilder: (_, index) => TProductCardVertical(
+                        product: product[index],
+                      ))
             ],
           ),
         ),

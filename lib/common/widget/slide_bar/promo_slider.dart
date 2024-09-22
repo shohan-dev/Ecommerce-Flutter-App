@@ -19,7 +19,10 @@ class TPromoSlider extends StatelessWidget {
     return Obx(() {
       // Show shimmer effect while loading
       if (controller.isLoading.value) {
-        return const TCategoryShimmer();
+        return const TShimmerEffect(
+          width: 365,
+          height: 250,
+        );
       }
 
       // Display a message if no banners are found

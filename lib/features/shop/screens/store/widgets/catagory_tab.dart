@@ -7,7 +7,6 @@ import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/shop/controllers/product_controller.dart';
 import 'package:smartshop/features/shop/models/catagory_models.dart';
 import 'package:smartshop/features/shop/screens/all_products/all_products.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class TCatagoryTab extends StatelessWidget {
@@ -30,12 +29,6 @@ class TCatagoryTab extends StatelessWidget {
             TBrandShowCase(
               brandName: category.name,
               image: category.image,
-              productImages: const [
-                TImages.productImage11,
-                TImages.productImage12,
-                TImages.productImage13,
-                TImages.productImage14,
-              ],
             ),
             const SizedBox(
               height: TSizes.spaceBtwItems,

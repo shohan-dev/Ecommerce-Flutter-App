@@ -1,35 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
 import 'package:smartshop/common/widget/images/t_circular_image.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
+import 'package:smartshop/features/shop/models/brand_models.dart';
+import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
-class TBrandCards extends StatelessWidget {
-  const TBrandCards({
-    super.key,
-    required this.image,
-    required this.brandName,
-    this.totalProduct = "256 Product",
-    this.itemcount = 4,
-    this.onPressed,
-  });
+class TAllBrandCards extends StatelessWidget {
+  final RxList<BrandModels> allBrands;
 
-  final String image;
-  final String brandName;
-  final String totalProduct;
-  final int itemcount;
-  final VoidCallback? onPressed;
+  const TAllBrandCards({
+    super.key,
+    required this.allBrands,
+  });
 
   @override
   Widget build(BuildContext context) {
     THelperFunctions.isDarkMode(context);
     return TGridLayout(
       mainAxisExtent: 80,
-      itemcount: itemcount,
+      itemcount: allBrands.length,
       itemBuilder: (_, index) {
         return GestureDetector(
-          onTap: onPressed,
+          onTap: () {
+            Get.to(() => BrandsWithProducts(
+                  brand: allBrands[index],
+                ));
+          },
           child: TRoundedContainer(
             padding: const EdgeInsets.all(TSizes.sm),
             backgroundColor: Colors.transparent,
@@ -37,7 +36,7 @@ class TBrandCards extends StatelessWidget {
             child: Row(
               children: [
                 TCircularImage(
-                  image: image,
+                  image: allBrands[index].image,
                   isNetworkImage: true,
                 ),
                 const SizedBox(width: 8),
@@ -47,9 +46,8 @@ class TBrandCards extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
-                        
                         child: Text(
-                          brandName,
+                          allBrands[index].name,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

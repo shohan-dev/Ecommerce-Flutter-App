@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
-import 'package:smartshop/common/widget/brands/brandsCards.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
-import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
+import 'package:smartshop/features/shop/controllers/brand_controller.dart';
+import 'package:smartshop/features/shop/screens/brands/widgets/card.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class AllBrandsScreen extends StatelessWidget {
@@ -12,6 +10,7 @@ class AllBrandsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allBrands = BrandController.instance.brands;
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
@@ -25,18 +24,15 @@ class AllBrandsScreen extends StatelessWidget {
             children: [
               // Heading
               const TSectionHeading(
-                title: "Brands",
+                title: "All Brands",
                 showActionButton: false,
               ),
               // Brands List
               const SizedBox(
                 height: TSizes.spaceBtwItems,
               ),
-              TBrandCards(
-                itemcount: 10,
-                image: TImages.nikeLogo,
-                brandName: "Nike",
-                onPressed: () => Get.to(() => const BrandsWithProducts()),
+              TAllBrandCards(
+                allBrands: allBrands,
               )
             ],
           ),

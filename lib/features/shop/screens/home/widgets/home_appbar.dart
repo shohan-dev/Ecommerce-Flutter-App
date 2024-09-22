@@ -22,6 +22,9 @@ class THomeAppbar extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 5,
+          ),
           Text(
             TTexts.homeAppbarTitle,
             style: Theme.of(context)
