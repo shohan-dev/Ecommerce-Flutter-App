@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 
 class TProductDiscriptions extends StatelessWidget {
   const TProductDiscriptions({
     super.key,
     required this.dark,
+    required this.product,
   });
 
   final bool dark;
+  final ProductModels product;
 
   @override
   Widget build(BuildContext context) {
+    final double finalPrice = (double.parse(product.price.toString()) -
+            (double.parse(product.price.toString()) *
+                (double.parse(product.discountPercentage.toString()) / 100)))
+        .toPrecision(2);
     return TRoundedContainer(
       backgroundColor: dark ? TColors.darkGrey : TColors.grey,
       child: Padding(
@@ -43,7 +51,7 @@ class TProductDiscriptions extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "\$25",
+                          product.price.toString(),
                           style:
                               Theme.of(context).textTheme.bodyLarge?.copyWith(
                                     decoration: TextDecoration.lineThrough,
@@ -52,7 +60,7 @@ class TProductDiscriptions extends StatelessWidget {
                         const SizedBox(
                           width: 8,
                         ),
-                        Text("\$20",
+                        Text("\$$finalPrice",
                             style: Theme.of(context).textTheme.headlineSmall),
                       ],
                     ),
@@ -66,7 +74,7 @@ class TProductDiscriptions extends StatelessWidget {
                           width: 5,
                         ),
                         Text(
-                          "In Stock",
+                          product.stock.toString(),
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
@@ -76,7 +84,7 @@ class TProductDiscriptions extends StatelessWidget {
               ],
             ),
             Text(
-              "This is the Description of the Product and it can go up to max 4 lines",
+              product.description,
               style: Theme.of(context).textTheme.labelSmall,
             ),
           ],

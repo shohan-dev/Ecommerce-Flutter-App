@@ -8,6 +8,7 @@ class BrandController extends GetxController {
   final isLoading = false.obs;
   final RxList<BrandModels> brands = <BrandModels>[].obs;
   final RxList<BrandModels> popularBrands = <BrandModels>[].obs;
+  var brandImageget = <BrandModels>[].obs;
 
   @override
   void onInit() {
@@ -21,8 +22,12 @@ class BrandController extends GetxController {
       final brandRepo = Get.put(BrandsRepository());
       final brandList = await brandRepo.getAllCBrands();
       final popularBrandList = await brandRepo.popularBrands();
+      var brandImage = await brandRepo.getBrandByName();
+
       brands.value = brandList;
       popularBrands.value = popularBrandList;
+      brandImageget.value = brandImage;
+      print(brandImage[0].image);
     } catch (e) {
       TLoaders.errorSnackBar(title: "oh Snap!", message: e.toString());
     } finally {

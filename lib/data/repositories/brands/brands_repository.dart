@@ -44,4 +44,47 @@ class BrandsRepository extends GetxController {
       throw 'An unexpected error occurred: ${e.toString()}';
     }
   }
+
+  Future<List<BrandModels>> getBrandByName() async {
+    try {
+      final snapshot = await _db.collection('Brands').where(
+            'name',
+            isEqualTo: "Fashion Fun",
+      ).get();
+      final list =
+          snapshot.docs.map((doc) => BrandModels.fromMap(doc)).toList();
+      return list;
+    } on FirebaseException catch (e) {
+      // Handle Firebase-specific errors
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      // Handle platform-specific errors
+      throw TFirebaseException(e.code).message;
+    } catch (e) {
+      // Handle all other errors
+      throw 'An unexpected error occurred: ${e.toString()}';
+    }
+  }
+
+  // get only one brand search by name
+  // Future<List<BrandModels>> getBrandByName() async {
+  //   try {
+  //     final snapshot = await _db
+  //         .collection('Brands')
+  //         .where('name', isEqualTo: "Fashion Fun")
+  //         .get();
+  //     final list =
+  //         snapshot.docs.map((doc) => BrandModels.fromMap(doc)).toList();
+  //     return list;
+  //   } on FirebaseException catch (e) {
+  //     // Handle Firebase-specific errors
+  //     throw TFirebaseException(e.code).message;
+  //   } on PlatformException catch (e) {
+  //     // Handle platform-specific errors
+  //     throw TFirebaseException(e.code).message;
+  //   } catch (e) {
+  //     // Handle all other errors
+  //     throw 'An unexpected error occurred: ${e.toString()}';
+  //   }
+  // }
 }

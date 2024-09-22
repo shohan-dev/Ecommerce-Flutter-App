@@ -6,21 +6,23 @@ import 'package:smartshop/common/widget/select/color_select.dart';
 import 'package:smartshop/common/widget/select/size_select.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
+import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/attributes/discription.dart';
 import 'package:smartshop/features/shop/screens/product_review/product_review.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({
     super.key,
-    required this.dark,
+    required this.dark, required this.product,
   });
   final bool dark;
+  final ProductModels product;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         // Product Discription
-        TProductDiscriptions(dark: dark),
+        TProductDiscriptions(dark: dark, product: product),
 
         const TSizeboxBtwItems(),
 

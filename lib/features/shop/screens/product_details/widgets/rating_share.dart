@@ -3,7 +3,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class TRatingShare extends StatelessWidget {
-  const TRatingShare({
+  final double? rating; // Define the rating variable
+  final int length; // Define the length variable
+
+  const TRatingShare(
+    this.rating,
+    this.length, {
     super.key,
   });
 
@@ -12,21 +17,28 @@ class TRatingShare extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Iconsax.star5,
               color: Colors.amber,
               size: 24,
             ),
-            SizedBox(
+            const SizedBox(
               width: TSizes.spaceBtwItems / 2,
             ),
-            Text("5.0"),
-            Text("(199)"),
+            // Ensure that rating is displayed properly
+            Text(rating != null ? rating!.toStringAsFixed(1) : 'N/A'),
+            const SizedBox(width: TSizes.spaceBtwItems / 2),
+            Text("($length)"),
           ],
         ),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.share))
+        IconButton(
+          onPressed: () {
+            // Implement your share functionality here
+          },
+          icon: const Icon(Icons.share),
+        ),
       ],
     );
   }

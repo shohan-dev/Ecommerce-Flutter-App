@@ -33,6 +33,7 @@ class BrandsWithProducts extends StatelessWidget {
                   brandName: brand.name,
                   
                   
+                  
                 ),
               ),
               const SizedBox(

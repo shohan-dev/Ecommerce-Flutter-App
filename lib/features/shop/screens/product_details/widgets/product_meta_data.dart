@@ -1,20 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/common/widget/images/t_circular_image.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/features/shop/models/brand_models.dart';
 import 'package:smartshop/utils/constants/colors.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
+
+var brandimage = ''.obs;
 
 class TProductMetaData extends StatelessWidget {
   const TProductMetaData({
     super.key,
+    required this.discount,
+    required this.price,
+    required this.title,
+    required this.brand,
+    required this.availabilityStatus,
   });
+
+  final String discount, price, title, brand, availabilityStatus;
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    THelperFunctions.isDarkMode(context);
+    brandImageFetchOnline();
+    final double finalPrice = (double.parse(price) -
+            (double.parse(price) * (double.parse(discount) / 100)))
+        .toPrecision(2);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,9 +42,9 @@ class TProductMetaData extends StatelessWidget {
               backgroundColor: TColors.secondary.withOpacity(0.8),
               padding: const EdgeInsets.symmetric(
                   horizontal: TSizes.sm, vertical: TSizes.xs - 2),
-              child: const Text(
-                "25%",
-                style: TextStyle(color: TColors.black),
+              child: Text(
+                "$discount%",
+                style: const TextStyle(color: TColors.black),
               ), // Discount
             ),
             const SizedBox(
@@ -36,7 +53,7 @@ class TProductMetaData extends StatelessWidget {
             Opacity(
               opacity: 0.8,
               child: Text(
-                "\$250",
+                "\$$price",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       decoration: TextDecoration.lineThrough,
                     ),
@@ -46,7 +63,7 @@ class TProductMetaData extends StatelessWidget {
               width: 10,
             ),
             Text(
-              "\$175",
+              "\$${finalPrice.toString()}",
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
@@ -56,7 +73,7 @@ class TProductMetaData extends StatelessWidget {
         ),
         // details
         Text(
-          "Green Nike Sports Shirt",
+          title,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(
@@ -72,7 +89,7 @@ class TProductMetaData extends StatelessWidget {
               width: 7,
             ),
             Text(
-              "in Stock",
+              availabilityStatus,
               style: Theme.of(context).textTheme.titleSmall,
             ),
           ],
@@ -83,21 +100,37 @@ class TProductMetaData extends StatelessWidget {
         const TSizeboxBtwItems(),
         Row(
           children: [
-            Image(
-                height: 27,
-                width: 27,
-                color: dark ? TColors.white : TColors.black,
-                image: const AssetImage(TImages.nikeLogo)),
+            Obx(() => TCircularImage(
+                  image: brandimage.value,
+                  isNetworkImage: true,
+                  height: 20,
+                  width: 20,
+                )),
             const SizedBox(
               width: 3,
             ),
-            const TVerifyText(
-              textsize: TextStyle(fontSize: 15),
-              text: 'Nike',
+            TVerifyText(
+              textsize: const TextStyle(fontSize: 15),
+              text: brand,
             ),
           ],
         ),
       ],
     );
+  }
+
+  // Brand Image Fetch by Name
+
+  Future<void> brandImageFetchOnline() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('Brands')
+        .where(
+          'name',
+          isEqualTo: brand,
+        )
+        .get();
+    final list = snapshot.docs.map((doc) => BrandModels.fromMap(doc)).toList();
+
+    brandimage.value = list[0].image;
   }
 }
