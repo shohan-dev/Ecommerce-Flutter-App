@@ -20,7 +20,8 @@ class ForgetPasswordController extends GetxController {
   Future<void> sendForgetPassword() async {
     try {
       TFullScreenLoader.openLoadingDialog(
-          "Loggin you in....", TImages.docerLoadingAnimaiton);
+        "Reseting Password....", TImages.docerLoadingAnimaiton);
+          
       // check internect connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {

@@ -10,6 +10,7 @@ class ProductRepositories extends GetxController {
 
   Future<List<ProductModels>> getFeaturedProducts() async {
     try {
+      // randrom data fetch
       final snapshot = await _db
           .collection("Shop_Products")
           .where("isPopularProducts", isEqualTo: true)
@@ -39,13 +40,11 @@ class ProductRepositories extends GetxController {
       final snapshot = await _db
           .collection("Shop_Products")
           .where("category", isEqualTo: categoryName)
-          .limit(20)
+          .limit(8)
           .get();
 
       return snapshot.docs.map((doc) {
         final data = doc.data();
-
-        
 
         return ProductModels.fromJson(data);
       }).toList();

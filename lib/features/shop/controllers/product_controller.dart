@@ -8,42 +8,61 @@ class ProductController extends GetxController {
   late final ProductRepositories productRepo;
   final isLoading = false.obs;
   final RxList<ProductModels> featuredProducts = <ProductModels>[].obs;
-  final RxList<ProductModels> categoryProducts = <ProductModels>[].obs;
+  final RxMap<String, List<ProductModels>> categoryProductsCache =
+      <String, List<ProductModels>>{}.obs;
 
   @override
   void onInit() {
     super.onInit();
-    // Initialize the repository instance
     productRepo = Get.put(ProductRepositories());
     fetchFeaturedProducts();
   }
 
+  // Fetch featured products
   Future<void> fetchFeaturedProducts() async {
     try {
       isLoading.value = true;
       final products = await productRepo.getFeaturedProducts();
-      // Update the observable list with fetched data
       featuredProducts.value = products;
     } catch (e) {
-      // Handle errors and display appropriate messages
       TLoaders.errorSnackBar(title: "Error", message: e.toString());
     } finally {
       isLoading.value = false;
     }
   }
-  // Category Product
-  Future<void> fetchCategoryProduct(categoryName) async {
+  // Fetch all category products
+  Future<void> fetchAllCatagoryProduct() async {
     try {
       isLoading.value = true;
-      final products = await productRepo.getCategoryProduct(categoryName);
-      // Update the observable list with fetched data
-      categoryProducts.value = products;
+      final products = await productRepo.getFeaturedProducts();
+      featuredProducts.value = products;
     } catch (e) {
-      // Handle errors and display appropriate messages
       TLoaders.errorSnackBar(title: "Error", message: e.toString());
     } finally {
       isLoading.value = false;
     }
   }
 
+  // Fetch category products
+  Future<void> fetchCategoryProduct(String categoryName) async {
+    // Check if the products are already cached
+    if (categoryProductsCache.containsKey(categoryName)) {
+      return; // Data already fetched, no need to fetch again
+    }
+
+    try {
+      isLoading.value = true;
+      final products = await productRepo.getCategoryProduct(categoryName);
+      categoryProductsCache[categoryName] = products; // Cache the products
+    } catch (e) {
+      TLoaders.errorSnackBar(title: "Error", message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Get products for a specific category
+  List<ProductModels> getCategoryProducts(String categoryName) {
+    return categoryProductsCache[categoryName] ?? [];
+  }
 }
