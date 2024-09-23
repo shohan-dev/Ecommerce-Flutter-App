@@ -5,9 +5,10 @@ import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
+  late final ProductRepositories productRepo;
   final isLoading = false.obs;
   final RxList<ProductModels> featuredProducts = <ProductModels>[].obs;
-  late final ProductRepositories productRepo;
+  final RxList<ProductModels> categoryProducts = <ProductModels>[].obs;
 
   @override
   void onInit() {
@@ -30,4 +31,19 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
+  // Category Product
+  Future<void> fetchCategoryProduct(categoryName) async {
+    try {
+      isLoading.value = true;
+      final products = await productRepo.getCategoryProduct(categoryName);
+      // Update the observable list with fetched data
+      categoryProducts.value = products;
+    } catch (e) {
+      // Handle errors and display appropriate messages
+      TLoaders.errorSnackBar(title: "Error", message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
 }

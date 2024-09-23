@@ -86,6 +86,7 @@ class _TProductImageSliderState extends State<TProductImageSlider> {
                         padding: const EdgeInsets.all(TSizes.sm),
                         imageUrl: _images[index],
                         isNetworkImage: true, // Use only network images
+                        
                       ),
                     );
                   },

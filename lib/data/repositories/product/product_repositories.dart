@@ -17,10 +17,35 @@ class ProductRepositories extends GetxController {
           .get();
 
       return snapshot.docs.map((doc) {
-        final data = doc.data(); // Correct way to get document data
+        final data = doc.data();
 
-        // lengeth of the data
-        // print("data length : ${data.length}");
+        return ProductModels.fromJson(data);
+      }).toList();
+    } on FirebaseException catch (e) {
+      // Handle Firebase-specific errors
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      // Handle platform-specific errors
+      throw TFirebaseException(e.code).message;
+    } catch (e) {
+      // Handle all other errors
+      throw 'An unexpected error occurred: ${e.toString()}';
+    }
+  }
+
+  // Category Product
+  Future<List<ProductModels>> getCategoryProduct(String categoryName) async {
+    try {
+      final snapshot = await _db
+          .collection("Shop_Products")
+          .where("category", isEqualTo: categoryName)
+          .limit(20)
+          .get();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+
+        
 
         return ProductModels.fromJson(data);
       }).toList();

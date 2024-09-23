@@ -19,36 +19,52 @@ class TCatagoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = ProductController.instance.featuredProducts;
-    return ListView(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: [
-        Column(
-          children: [
-            TBrandShowCase(
-              brandName: category.name,
-              image: category.image,
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwItems,
-            ),
-            TSectionHeading(
-              title: "You might like",
-              showActionButton: true,
-              onPressed: () => Get.to(() => const AllProductsScreen()),
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwItems,
-            ),
-            TGridLayout(
-                itemcount: 4,
-                itemBuilder: (_, index) => TProductCardVertical(
-                      product: product[index],
-                    ))
-          ],
-        ),
-      ],
-    );
+    // Fetch products for the given category when the widget is built
+    final ProductController productController = Get.find();
+    productController.fetchCategoryProduct(category.name);
+
+    return Obx(() {
+      final products = productController.categoryProducts;
+
+      print("this is the product $products");
+
+      return ListView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          Column(
+            children: [
+              TBrandShowCase(
+                brandName: category.name,
+                image: category.image,
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              TSectionHeading(
+                title: "You might like",
+                showActionButton: true,
+                onPressed: () => Get.to(() => const AllProductsScreen()),
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              // Check if products are available
+              if (products.isEmpty)
+                const Center(child: Text("No products found."))
+              else
+                TGridLayout(
+                  itemcount: products.length,
+                  itemBuilder: (_, index) {
+                    return TProductCardVertical(
+                      product: products[index],
+                    );
+                  },
+                ),
+            ],
+          ),
+        ],
+      );
+    });
   }
 }
