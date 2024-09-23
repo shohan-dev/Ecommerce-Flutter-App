@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:smartshop/features/shop/controllers/product_details.dart';
+import 'package:smartshop/features/shop/controllers/product_details/product_details.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 
 class TSizeSelect extends StatefulWidget {

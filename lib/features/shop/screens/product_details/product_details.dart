@@ -26,7 +26,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             // Product image Slider
-            const TProductImageSlider(),
+             TProductImageSlider(product: product),
 
             Padding(
               padding: const EdgeInsets.only(

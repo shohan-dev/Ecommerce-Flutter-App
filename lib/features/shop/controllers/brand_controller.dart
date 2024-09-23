@@ -27,7 +27,6 @@ class BrandController extends GetxController {
       brands.value = brandList;
       popularBrands.value = popularBrandList;
       brandImageget.value = brandImage;
-      print(brandImage[0].image);
     } catch (e) {
       TLoaders.errorSnackBar(title: "oh Snap!", message: e.toString());
     } finally {

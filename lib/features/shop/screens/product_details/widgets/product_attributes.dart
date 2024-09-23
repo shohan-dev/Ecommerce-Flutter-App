@@ -6,7 +6,7 @@ import 'package:smartshop/common/widget/select/color_select.dart';
 import 'package:smartshop/common/widget/select/size_select.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
-import 'package:smartshop/features/shop/controllers/product_details.dart';
+import 'package:smartshop/features/shop/controllers/product_details/product_details.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/attributes/discription.dart';
 import 'package:smartshop/features/shop/screens/product_review/product_review.dart';
