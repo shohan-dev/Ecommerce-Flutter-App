@@ -43,7 +43,8 @@ class TCatagoryTab extends StatelessWidget {
               TSectionHeading(
                 title: "You might like",
                 showActionButton: true,
-                onPressed: () => Get.to(() => const CatagoryAllProduct()),
+                onPressed: () =>
+                    Get.to(() => CatagoryAllProduct(category: category)),
               ),
               const SizedBox(
                 height: TSizes.spaceBtwItems,

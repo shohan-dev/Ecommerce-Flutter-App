@@ -131,6 +131,9 @@ class TProductMetaData extends StatelessWidget {
         .get();
     final list = snapshot.docs.map((doc) => BrandModels.fromMap(doc)).toList();
 
-    brandimage.value = list[0].image;
+    //image nullable
+    if (list.isNotEmpty) {
+      brandimage.value = list[0].image;
+    }
   }
 }

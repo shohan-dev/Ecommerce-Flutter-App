@@ -22,16 +22,20 @@ class CategoryController extends GetxController {
     try {
       isloading.value = true;
       final categories = await _categoryRepository.getAllCategories();
+
+      // Sort categories to ensure 'kitchen-accessories' is last
+      categories.sort((a, b) {
+        if (a.name == 'kitchen-accessories') return 1; // Move kitchen-accessories to the end
+        if (b.name == 'kitchen-accessories') return -1; // Move kitchen-accessories to the end
+        return 0; // Keep original order for others
+      });
+
       allCategories.value = categories;
-      featuredCategories.value = categories
-          .where((element) => element.isFeatured)
-          .take(categories.length) // shwoing all categories
-          .toList();
+      featuredCategories.value = categories.toList();
     } catch (e) {
       debugPrint('Error: $e');
     } finally {
       isloading.value = false;
     }
   }
-  
 }

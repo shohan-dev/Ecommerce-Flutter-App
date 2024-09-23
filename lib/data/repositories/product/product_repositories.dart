@@ -33,14 +33,39 @@ class ProductRepositories extends GetxController {
       throw 'An unexpected error occurred: ${e.toString()}';
     }
   }
+  
+    // Category Product all product
+  Future<List<ProductModels>> getCategoryAllProduct(String categoryName) async {
+    try {
+      final snapshot = await _db
+          .collection("Shop_Products")
+          .where("category", isEqualTo: categoryName)
+          .get();
 
-  // Category Product
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+
+        return ProductModels.fromJson(data);
+      }).toList();
+    } on FirebaseException catch (e) {
+      // Handle Firebase-specific errors
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      // Handle platform-specific errors
+      throw TFirebaseException(e.code).message;
+    } catch (e) {
+      // Handle all other errors
+      throw 'An unexpected error occurred: ${e.toString()}';
+    }
+  }
+
+  // Category Product limit 6
   Future<List<ProductModels>> getCategoryProduct(String categoryName) async {
     try {
       final snapshot = await _db
           .collection("Shop_Products")
           .where("category", isEqualTo: categoryName)
-          .limit(8)
+          .limit(6)
           .get();
 
       return snapshot.docs.map((doc) {

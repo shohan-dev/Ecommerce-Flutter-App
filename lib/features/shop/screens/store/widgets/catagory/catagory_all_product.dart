@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/common/widget/products/product_cards/product_card_vertical.dart';
-import 'package:smartshop/features/shop/controllers/product_controller.dart';
+import 'package:smartshop/features/shop/controllers/catagory/catagory_controller.dart';
+import 'package:smartshop/features/shop/models/catagory_models.dart';
+import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
 class CatagoryAllProduct extends StatefulWidget {
-  const CatagoryAllProduct({super.key});
+  const CatagoryAllProduct({super.key, required this.category});
+  final CategoryModel category;
 
   @override
   _CatagoryAllProductState createState() => _CatagoryAllProductState();
@@ -17,26 +21,110 @@ class _CatagoryAllProductState extends State<CatagoryAllProduct> {
   final TextEditingController _searchController = TextEditingController();
   String _searchText = '';
   String? _selectedSortingOption;
-  bool _isDropdownVisible = false; // Control dropdown visibility
+  bool _isDropdownVisible = false;
+  bool _isLoading = true; // Track loading state
+  int _currentLimit = 10; // Track the number of products to show
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    Get.put(CatagoryController());
+    _fetchCategoryProducts();
+
+    // Listen for scroll events
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _loadMoreProducts();
+      }
+    });
+  }
+
+  Future<void> _fetchCategoryProducts() async {
+    await CatagoryController.instance
+        .fetchSingleCatagoryProduct(widget.category.name);
+
+    setState(() {
+      _isLoading = false; // Set loading to false after fetching
+    });
+  }
+
+  List<ProductModels> _getFilteredProducts() {
+    final filteredProducts = CatagoryController.instance.singleCatagoriesProduct
+        .where((p) => p.title.toLowerCase().contains(_searchText.toLowerCase()))
+        .toList();
+
+
+    // Sort products based on the selected sorting option
+    if (_selectedSortingOption != null) {
+      switch (_selectedSortingOption) {
+        case "Name":
+          filteredProducts.sort((a, b) => a.title.compareTo(b.title));
+          break;
+        case "Higher Price":
+          filteredProducts.sort((a, b) {
+            final aPrice = double.tryParse(a.price.toString()) ?? 0.0;
+            final bPrice = double.tryParse(b.price.toString()) ?? 0.0;
+            return bPrice.compareTo(aPrice);
+          });
+          break;
+        case "Lower Price":
+          filteredProducts.sort((a, b) {
+            final aPrice = double.tryParse(a.price.toString()) ?? 0.0;
+            final bPrice = double.tryParse(b.price.toString()) ?? 0.0;
+            return aPrice.compareTo(bPrice);
+          });
+          break;
+        case "Popularity":
+          filteredProducts.sort((a, b) {
+            final aRating = double.tryParse(a.rating.toString()) ?? 0.0;
+            final bRating = double.tryParse(b.rating.toString()) ?? 0.0;
+            return bRating.compareTo(aRating);
+          });
+          break;
+      }
+    }
+
+    return filteredProducts;
+  }
+
+  Future<void> _loadMoreProducts() async {
+    if (_isLoading) return; // Prevent loading if already loading
+    final products = _getFilteredProducts();
+    if (_currentLimit < products.length) {
+      setState(() {
+        _isLoading = true; // Start loading
+      });
+
+      await Future.delayed(
+          const Duration(seconds: 1)); // Simulate loading delay
+
+      setState(() {
+        _currentLimit += 10; // Increase limit by 10
+        _isLoading = false; // Stop loading
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final product = ProductController.instance.featuredProducts
-        .where((p) => p.title.contains(_searchText))
-        .toList();
+    final products = _getFilteredProducts();
 
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text("Catagory All Products",
-            style: Theme.of(context).textTheme.headlineSmall),
+        title: Text(
+          widget.category.name,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
       body: SingleChildScrollView(
+        controller: _scrollController, // Attach scroll controller
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              // Search Bar with Sort Icon Button
               Row(
                 children: [
                   Expanded(
@@ -47,7 +135,7 @@ class _CatagoryAllProductState extends State<CatagoryAllProduct> {
                         hintText: 'Search products...',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(color: Colors.grey),
+                          borderSide: const BorderSide(color: Colors.grey),
                         ),
                       ),
                       onChanged: (value) {
@@ -74,7 +162,7 @@ class _CatagoryAllProductState extends State<CatagoryAllProduct> {
               // Dropdown for sorting
               if (_isDropdownVisible)
                 SizedBox(
-                  width: double.infinity, // Adjust width as needed
+                  width: double.infinity,
                   child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -83,14 +171,8 @@ class _CatagoryAllProductState extends State<CatagoryAllProduct> {
                       ),
                     ),
                     value: _selectedSortingOption,
-                    items: [
-                      "Name",
-                      "Higher Price",
-                      "Lower Price",
-                      "Sale",
-                      "Newest",
-                      "Popularity"
-                    ].map((String value) {
+                    items: ["Name", "Higher Price", "Lower Price", "Popularity"]
+                        .map((String value) {
                       return DropdownMenuItem(
                         value: value,
                         child: Text(value),
@@ -106,16 +188,33 @@ class _CatagoryAllProductState extends State<CatagoryAllProduct> {
               const SizedBox(height: TSizes.spaceBtwSections),
 
               // Product List
+
               TGridLayout(
-                itemcount: product.length,
+                itemcount: _currentLimit > products.length
+                    ? products.length
+                    : _currentLimit,
                 itemBuilder: (_, index) => TProductCardVertical(
-                  product: product[index],
+                  product: products[index],
                 ),
               ),
+
+              // Loading Indicator at the bottom
+              if (_isLoading)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: TSizes.defaultSpace),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              if (products.isNotEmpty) const SizedBox(height: 30),
             ],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose(); // Dispose the scroll controller
+    super.dispose();
   }
 }

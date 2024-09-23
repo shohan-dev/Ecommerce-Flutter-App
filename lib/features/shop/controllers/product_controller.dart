@@ -30,6 +30,7 @@ class ProductController extends GetxController {
       isLoading.value = false;
     }
   }
+
   // Fetch all category products
   Future<void> fetchAllCatagoryProduct() async {
     try {

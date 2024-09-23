@@ -19,12 +19,7 @@ class NavigationMenuPage extends StatelessWidget {
     final darkMode = THelperFunctions.isDarkMode(context);
     final dataFetch = UserController.instance;
     // dataFetch.fetchUserData();
-    if (dataFetch.user.value == null) {
-      if (kDebugMode) {
-        print(
-            "this is for data Fetech...............................................................................");
-      }
-    }
+   
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('Navigation Menu'),

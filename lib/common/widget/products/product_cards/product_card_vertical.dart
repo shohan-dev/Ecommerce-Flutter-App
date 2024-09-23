@@ -93,7 +93,7 @@ class TProductCardVertical extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          product.price.toString(),
+                          "\$${product.price.toString()}",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headlineSmall,

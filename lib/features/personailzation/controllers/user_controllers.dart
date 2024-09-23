@@ -20,8 +20,6 @@ class UserController extends GetxController {
   }
 
   void fetchUserData() {
-    print(
-        "fetchUserData called ................................................................");
     isLoading.value = true; // Set loading to true
     UserRepository.instance.fetchUserDetailsStream().listen((userData) {
       user.value = userData; // Update user data
