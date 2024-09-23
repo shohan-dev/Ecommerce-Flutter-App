@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -17,7 +16,7 @@ class NavigationMenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationMenuConroller());
     final darkMode = THelperFunctions.isDarkMode(context);
-    final dataFetch = UserController.instance;
+    // final dataFetch = UserController.instance;
     // dataFetch.fetchUserData();
    
     return Scaffold(

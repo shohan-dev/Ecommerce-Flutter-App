@@ -85,6 +85,35 @@ class ProductRepositories extends GetxController {
     }
   }
 
+  
+  // Brand Product all product
+      // Category Product all product
+  Future<List<ProductModels>> getBrandAllProduct(String brandName) async {
+    try {
+      final snapshot = await _db
+          .collection("Shop_Products")
+          .where("brand", isEqualTo: brandName)
+          .get();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+
+        return ProductModels.fromJson(data);
+      }).toList();
+    } on FirebaseException catch (e) {
+      // Handle Firebase-specific errors
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      // Handle platform-specific errors
+      throw TFirebaseException(e.code).message;
+    } catch (e) {
+      // Handle all other errors
+      throw 'An unexpected error occurred: ${e.toString()}';
+    }
+  }
+  
+  
+  
   // unique brands
   Future<List<String>> getUniqueBrands() async {
     final uniqueBrands = <String>{}; // Using a Set to store unique brand names

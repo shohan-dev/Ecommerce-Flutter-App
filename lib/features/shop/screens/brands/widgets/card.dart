@@ -4,7 +4,7 @@ import 'package:smartshop/common/widget/custom_shape/containers/rounded_containe
 import 'package:smartshop/common/widget/images/t_circular_image.dart';
 import 'package:smartshop/common/widget/layouts/grid_layout.dart';
 import 'package:smartshop/features/shop/models/brand_models.dart';
-import 'package:smartshop/features/shop/screens/brands_with_products/brands_with_products.dart';
+import 'package:smartshop/features/shop/screens/brands/widgets/brands_with_products/brands_with_products.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
@@ -25,8 +25,8 @@ class TAllBrandCards extends StatelessWidget {
       itemBuilder: (_, index) {
         return GestureDetector(
           onTap: () {
-            Get.to(() => BrandsWithProducts(
-                  brand: allBrands[index],
+            Get.to(() => BrandsWithProducts(brandsData: allBrands[index],
+                 
                 ));
           },
           child: TRoundedContainer(
