@@ -37,22 +37,27 @@ class THomeSearchBar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      text,
+                      style: const TextStyle(
+                        color: TColors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
                 Icon(
                   icon,
                   color: TColors.white,
                 ),
-                const SizedBox(
-                  width: TSizes.spaceBtwItems,
-                ),
-                Text(
-                  text,
-                  style: const TextStyle(
-                    color: TColors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
               ],
             ),
           ),

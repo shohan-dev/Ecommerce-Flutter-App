@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
 import 'package:smartshop/features/shop/screens/home/home.dart';
 import 'package:smartshop/features/personailzation/screens/Setting/Setting.dart';
 import 'package:smartshop/features/shop/screens/store/store.dart';

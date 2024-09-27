@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/data/repositories/banners/banners_repositories.dart';
@@ -9,7 +8,6 @@ class BannersController extends GetxController {
   final isLoading = false.obs;
   final carousalCurrentIndex = 0.obs;
   final RxList<BannerModels> banners = <BannerModels>[].obs;
-  final CarouselController carouselController = CarouselController();
 
   @override
   void onInit() {

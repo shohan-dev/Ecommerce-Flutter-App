@@ -130,6 +130,7 @@ class _BrandsAllProductState extends State<BrandsWithProducts> {
                 image: widget.brandsData.image,
                 brandName: widget.brandsData.name,
               ),
+              const SizedBox(height: TSizes.spaceBtwSections / 2),
               Row(
                 children: [
                   Expanded(
@@ -162,33 +163,41 @@ class _BrandsAllProductState extends State<BrandsWithProducts> {
                   ),
                 ],
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
 
               // Dropdown for sorting
               if (_isDropdownVisible)
-                SizedBox(
-                  width: double.infinity,
-                  child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        borderSide: const BorderSide(color: Colors.grey),
+                Column(
+                  children: [
+                    const SizedBox(height: TSizes.spaceBtwSections / 2),
+                    SizedBox(
+                      width: double.infinity,
+                      child: DropdownButtonFormField<String>(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: const BorderSide(color: Colors.grey),
+                          ),
+                        ),
+                        value: _selectedSortingOption,
+                        items: [
+                          "Name",
+                          "Higher Price",
+                          "Lower Price",
+                          "Popularity"
+                        ].map((String value) {
+                          return DropdownMenuItem(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedSortingOption = value;
+                          });
+                        },
                       ),
                     ),
-                    value: _selectedSortingOption,
-                    items: ["Name", "Higher Price", "Lower Price", "Popularity"]
-                        .map((String value) {
-                      return DropdownMenuItem(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {
-                      setState(() {
-                        _selectedSortingOption = value;
-                      });
-                    },
-                  ),
+                  ],
                 ),
               const SizedBox(height: TSizes.spaceBtwSections),
 

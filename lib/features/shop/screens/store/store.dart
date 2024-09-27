@@ -6,6 +6,7 @@ import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/shop/controllers/brand_controller.dart';
 import 'package:smartshop/features/shop/controllers/category_controller.dart';
 import 'package:smartshop/features/shop/screens/brands/all_brands.dart';
+import 'package:smartshop/features/shop/screens/search/search.dart';
 import 'package:smartshop/features/shop/screens/store/widgets/catagory_tab.dart';
 import 'package:smartshop/features/shop/screens/store/widgets/popularBrands.dart';
 import 'package:smartshop/utils/constants/colors.dart';
@@ -40,7 +41,10 @@ class StoreScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: TSizes.spaceBtwItems * 3),
-                        const TSearchBarContainer(text: "Search in Store"),
+                        GestureDetector(
+                            onTap: () => Get.to(() => SearchProductScreen()),
+                            child: const TSearchBarContainer(
+                                text: "Search in Store")),
                         const SizedBox(height: TSizes.spaceBtwSections),
                         TSectionHeading(
                           title: "Featured Brands",

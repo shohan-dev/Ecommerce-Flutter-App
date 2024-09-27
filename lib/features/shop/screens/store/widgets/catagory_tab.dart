@@ -33,9 +33,12 @@ class TCatagoryTab extends StatelessWidget {
         children: [
           Column(
             children: [
-              TBrandShowCase(
-                brandName: category.name,
-                image: category.image,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TBrandShowCase(
+                  brandName: category.name,
+                  image: category.image,
+                ),
               ),
               const SizedBox(
                 height: TSizes.spaceBtwItems,
