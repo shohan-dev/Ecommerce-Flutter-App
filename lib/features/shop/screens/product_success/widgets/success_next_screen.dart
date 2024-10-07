@@ -18,29 +18,35 @@ class succesNextScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TAnimationLoaderWidget(
-              text: "Successfully Checkout",
-              animation: TImages.paymentSuccessfulAnimation),
-          const SizedBox(height: 20),
-          // button sizebox
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Get.offAll(() => const NavigationMenuPage());
-                  ProductSuccessController.instance.updateProductOrder(selectedColor, selectedSize,product);
-                },
-                child: const Text("Continue Shopping"),
+    return WillPopScope(
+      onWillPop: () async {
+        // Returning false to prevent back navigation
+        return false;
+      },
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TAnimationLoaderWidget(
+                text: "Successfully Checkout",
+                animation: TImages.paymentSuccessfulAnimation),
+            const SizedBox(height: 20),
+            // button sizebox
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Get.offAll(() => const NavigationMenuPage());
+                    ProductSuccessController.instance.updateProductOrder(selectedColor, selectedSize,product);
+                  },
+                  child: const Text("Continue Shopping"),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

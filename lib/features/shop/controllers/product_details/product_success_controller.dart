@@ -23,6 +23,10 @@ class ProductSuccessController extends GetxController {
             'User is not authenticated.'); // Handle user not being authenticated
         return;
       }
+      var orderQuantity = 1;
+      
+
+      final totalPrice =  product.price!.toInt() *orderQuantity;
 
       // Define the order info
       final orderInfo = {
@@ -38,7 +42,8 @@ class ProductSuccessController extends GetxController {
         "orderQuantity": 1,
         "orderAddress": "123 Main St, New York, NY 10001",
         "orderId": DateTime.now().millisecondsSinceEpoch.toString(),
-        "orderPaymentMethod": "Credit Card"
+        "orderPaymentMethod": "Stripe",
+        "totalPrice": totalPrice,
 
       };
 

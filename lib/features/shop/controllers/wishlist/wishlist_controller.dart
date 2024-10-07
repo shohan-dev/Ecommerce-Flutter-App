@@ -34,7 +34,7 @@ class WishlistController extends GetxController {
         .listen((documentSnapshot) {
       if (documentSnapshot.exists) {
         final List<String> wishlistIds =
-            List<String>.from(documentSnapshot['wishlist']);
+            List<String>.from(documentSnapshot['wishlist'] ?? []);
         updateWishlist(wishlistIds);
       } else {
         print("User document does not exist.");
@@ -46,9 +46,29 @@ class WishlistController extends GetxController {
     try {
       final productList =
           await WishlistRepositories.instance.getAllWishlist(wishlistIds);
-      wishlistProducts.assignAll(productList);
+      wishlistProducts.value = productList;
     } catch (e) {
       print("Error fetching wishlist products: $e");
+    }
+  }
+
+  void clearWishlist() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+    if (user == null) {
+      print("No user is currently logged in.");
+      return;
+    }
+
+    try {
+      await _db.collection("Users").doc(user.uid).update({
+        "wishlist": [], // Clear the wishlist by setting it to an empty array
+      });
+      wishlistProducts.clear(); // Clear the local list as well
+      print("Wishlist cleared successfully.");
+    } catch (error) {
+      print("Failed to clear wishlist: $error");
     }
   }
 }
