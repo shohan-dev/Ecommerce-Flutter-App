@@ -5,9 +5,11 @@ import 'package:readmore/readmore.dart';
 import 'package:smartshop/common/widget/select/color_select.dart';
 import 'package:smartshop/common/widget/select/size_select.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/shop/controllers/product_details/product_details.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
+import 'package:smartshop/features/shop/screens/product_success/product_successfully.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/attributes/discription.dart';
 import 'package:smartshop/features/shop/screens/product_review/product_review.dart';
 
@@ -23,6 +25,7 @@ class TProductAttributes extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedColorobs = Get.put(ProductDetailsController()).selectedColor;
     final selectedSizeobs = Get.put(ProductDetailsController()).selectedSize;
+    var selectedColorName = "";
 
     return Column(
       children: [
@@ -52,8 +55,30 @@ class TProductAttributes extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  print(selectedColorobs);
-                  print(selectedSizeobs);
+                  // selectct color and size if empty add Tsnackbar
+                  if (selectedColorobs.value == "") {
+                    TLoaders.warningSnackBar(
+                        title: "Select Color for the product");
+                    return;
+                  }
+                  if (selectedSizeobs.value == "") {
+                    TLoaders.warningSnackBar(
+                        title: "Select Size for the product");
+                    return;
+                  }
+                  // get the selected color name
+                  if (selectedColorobs.hashCode == 265523868) {
+                    selectedColorName = "Red";
+                  } else if (selectedColorobs.hashCode == 213129631) {
+                    selectedColorName = "Green";
+                  } else if (selectedColorobs.hashCode == 397551850) {
+                    selectedColorName = "Blue";
+                  }
+
+                  Get.to(() => ProductSuccessfully(
+                      product: product,
+                      selectedColor: selectedColorName,
+                      selectedSize: selectedSizeobs.value));
                 },
                 child: const Text("Checkout"))),
         const TSizeboxBtwItems(),
@@ -83,7 +108,7 @@ class TProductAttributes extends StatelessWidget {
             ),
             IconButton(
                 onPressed: () {
-                  Get.to(() =>  ProductReviewScreen(product: product));
+                  Get.to(() => ProductReviewScreen(product: product));
                 },
                 icon: const Icon(Iconsax.arrow_right_3))
           ],

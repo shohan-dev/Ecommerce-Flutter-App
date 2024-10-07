@@ -10,6 +10,8 @@ class UserModel {
   // ignore: non_constant_identifier_names
   final String date_of_birth;
   // gender and date of birth
+  // add Wishlist map
+  final List<String> Wishlist;
 
   // Full name is computed based on firstName and lastName
   String get fullName => "$firstName $lastName";
@@ -25,6 +27,7 @@ class UserModel {
     required this.gender,
     // ignore: non_constant_identifier_names
     required this.date_of_birth,
+    this.Wishlist = const [],
   });
 
   static Future<UserModel> fromSnapshot(Map<String, dynamic> map) {
@@ -38,6 +41,7 @@ class UserModel {
       firstName: map['firstName'],
       lastName: map['lastName'],
       imgUrl: map['imgUrl'],
+      Wishlist: List<String>.from(map['Wishlist'] ?? []),
     ));
   }
 
@@ -52,8 +56,10 @@ class UserModel {
       imgUrl: '',
       gender: '',
       date_of_birth: '',
+      Wishlist: [],
     );
   }
+
   // Factory constructor to create an instance from a map
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
@@ -66,10 +72,9 @@ class UserModel {
       imgUrl: map['imgUrl'] ?? '',
       gender: map['gender'] ?? '',
       date_of_birth: map['date_of_birth'] ?? '',
+      Wishlist: List<String>.from(map['Wishlist'] ?? []),
     );
   }
-
- 
 }
 
 // Convert the user data to JSON and save it to Firestore
@@ -86,6 +91,7 @@ extension UserModelX on UserModel {
       'imgUrl': imgUrl,
       'gender': gender,
       'date_of_birth': date_of_birth,
+      'Wishlist': Wishlist,
     };
   }
 }

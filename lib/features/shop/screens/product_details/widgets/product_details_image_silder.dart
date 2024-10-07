@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/custom_shape/curved_edges/curved_edges_widgets.dart';
@@ -8,6 +9,8 @@ import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TProductImageSlider extends StatefulWidget {
   const TProductImageSlider({
@@ -23,13 +26,55 @@ class TProductImageSlider extends StatefulWidget {
 
 class _TProductImageSliderState extends State<TProductImageSlider> {
   late List<String> _images;
-  int _selectedIndex = 0; // Track the selected image index
+  int _selectedIndex = 0;
+  bool iswishlist = false;
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
-    _images =
-        List.from(widget.product.images!); // Initialize with product images
+    _images = List.from(widget.product.images!);
+    _checkWishlistStatus();
+  }
+
+  Future<void> _checkWishlistStatus() async {
+    String userId = _auth.currentUser?.uid ?? '';
+
+    if (userId.isNotEmpty) {
+      DocumentSnapshot doc =
+          await _firestore.collection('Users').doc(userId).get();
+
+      if (doc.exists) {
+        List<dynamic> wishlist = doc['wishlist'] ?? [];
+        setState(() {
+          iswishlist = wishlist.contains(widget.product.sku);
+        });
+      }
+    }
+  }
+
+  Future<void> _toggleWishlist() async {
+    String userId = _auth.currentUser?.uid ?? '';
+
+    if (userId.isNotEmpty) {
+      DocumentReference docRef = _firestore.collection('Users').doc(userId);
+
+      if (iswishlist) {
+        await docRef.update({
+          'wishlist': FieldValue.arrayRemove([widget.product.sku])
+        });
+      } else {
+        await docRef.set({
+          'wishlist': FieldValue.arrayUnion([widget.product.sku])
+        }, SetOptions(merge: true));
+      }
+
+      setState(() {
+        iswishlist = !iswishlist;
+      });
+    }
   }
 
   @override
@@ -71,7 +116,7 @@ class _TProductImageSliderState extends State<TProductImageSlider> {
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          _selectedIndex = index; // Update the selected index
+                          _selectedIndex = index;
                         });
                       },
                       child: TRoundImage(
@@ -81,21 +126,28 @@ class _TProductImageSliderState extends State<TProductImageSlider> {
                           color: _selectedIndex == index
                               ? TColors.primary
                               : Colors.transparent,
-                          width: 2, // Adjust the width as necessary
+                          width: 2,
                         ),
                         padding: const EdgeInsets.all(TSizes.sm),
                         imageUrl: _images[index],
-                        isNetworkImage: true, // Use only network images
-                        
+                        isNetworkImage: true,
                       ),
                     );
                   },
                 ),
               ),
             ),
-            const TAppBar(
+            TAppBar(
               showBackArrow: true,
-              actions: [Icon(Iconsax.heart5)],
+              actions: [
+                GestureDetector(
+                  child: Icon(
+                    Iconsax.heart5,
+                    color: iswishlist ? Colors.red : TColors.grey,
+                  ),
+                  onTap: _toggleWishlist,
+                )
+              ],
             ),
           ],
         ),

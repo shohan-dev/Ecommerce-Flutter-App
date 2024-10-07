@@ -18,7 +18,6 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     double avgRating = AvgRating();
-    
 
     return Scaffold(
       bottomNavigationBar: const TBottomAdToCart(),
@@ -26,7 +25,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             // Product image Slider
-             TProductImageSlider(product: product),
+            TProductImageSlider(product: product),
 
             Padding(
               padding: const EdgeInsets.only(
@@ -48,7 +47,6 @@ class ProductDetailScreen extends StatelessWidget {
                   TProductAttributes(
                     dark: dark,
                     product: product,
-                    
                   ),
                 ],
               ),

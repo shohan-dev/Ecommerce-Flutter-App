@@ -11,14 +11,15 @@ import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
-class TProductCardVertical extends StatelessWidget {
+class CardWishlist extends StatelessWidget {
   final ProductModels product;
 
-  const TProductCardVertical({super.key, required this.product});
+  const CardWishlist({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    // const iswishlist = false;
 
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),

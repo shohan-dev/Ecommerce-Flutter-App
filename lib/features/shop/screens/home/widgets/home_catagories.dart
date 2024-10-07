@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartshop/common/widget/effect/catagories_shimmer_effect.dart';
 import 'package:smartshop/common/widget/image_text_widgets/vertical_image_text.dart';
 import 'package:smartshop/features/shop/controllers/category_controller.dart';
-import 'package:smartshop/features/shop/screens/sub_category/sub_categories.dart';
+import 'package:smartshop/features/shop/screens/store/widgets/catagory/catagory_all_product.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({
@@ -45,7 +45,9 @@ class THomeCategories extends StatelessWidget {
                 image: category.image,
                 title: category.name,
                 onTap: () {
-                  Get.to(() => const SubCategoriesScreen());
+                  Get.to(() => CatagoryAllProduct(
+                        category: category,
+                      ));
                 },
               ),
             );
