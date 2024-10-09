@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/data/repositories/wishlist/wishlist_repositories.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
@@ -33,8 +34,9 @@ class WishlistController extends GetxController {
         .snapshots()
         .listen((documentSnapshot) {
       if (documentSnapshot.exists) {
+        // Ensure wishlistIds defaults to an empty list if not found
         final List<String> wishlistIds =
-            List<String>.from(documentSnapshot['wishlist'] ?? []);
+            List<String>.from(documentSnapshot.data()?['wishlist'] ?? []);
         updateWishlist(wishlistIds);
       } else {
         print("User document does not exist.");
@@ -43,12 +45,20 @@ class WishlistController extends GetxController {
   }
 
   void updateWishlist(List<String> wishlistIds) async {
+    if (wishlistIds.isEmpty) {
+      // If the wishlistIds are empty, clear the local list and return
+      wishlistProducts.clear();
+      return;
+    }
+
     try {
       final productList =
           await WishlistRepositories.instance.getAllWishlist(wishlistIds);
       wishlistProducts.value = productList;
     } catch (e) {
-      print("Error fetching wishlist products: $e");
+      if (kDebugMode) {
+        print("Error fetching wishlist products: $e");
+      }
     }
   }
 
@@ -57,7 +67,9 @@ class WishlistController extends GetxController {
     final FirebaseFirestore _db = FirebaseFirestore.instance;
 
     if (user == null) {
-      print("No user is currently logged in.");
+      if (kDebugMode) {
+        print("No user is currently logged in.");
+      }
       return;
     }
 
@@ -66,9 +78,10 @@ class WishlistController extends GetxController {
         "wishlist": [], // Clear the wishlist by setting it to an empty array
       });
       wishlistProducts.clear(); // Clear the local list as well
-      print("Wishlist cleared successfully.");
     } catch (error) {
-      print("Failed to clear wishlist: $error");
+      if (kDebugMode) {
+        print("Failed to clear wishlist: $error");
+      }
     }
   }
 }

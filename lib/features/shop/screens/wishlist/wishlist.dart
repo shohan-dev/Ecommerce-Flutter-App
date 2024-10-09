@@ -16,7 +16,7 @@ class WishListScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: const Text("Wishlist",
-            style: TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
         actions: [
           Obx(() {
             // Reactive check for wishlist items
