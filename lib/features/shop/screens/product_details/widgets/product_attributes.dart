@@ -9,9 +9,9 @@ import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/shop/controllers/product_details/product_details.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
-import 'package:smartshop/features/shop/screens/product_success/product_successfully.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/attributes/discription.dart';
 import 'package:smartshop/features/shop/screens/product_review/product_review.dart';
+import 'package:smartshop/features/shop/screens/single_checkout/single_checkout.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({
@@ -75,7 +75,7 @@ class TProductAttributes extends StatelessWidget {
                     selectedColorName = "Blue";
                   }
 
-                  Get.to(() => ProductSuccessfully(
+                  Get.to(() => SingleCheckoutScreen(
                       product: product,
                       selectedColor: selectedColorName,
                       selectedSize: selectedSizeobs.value));

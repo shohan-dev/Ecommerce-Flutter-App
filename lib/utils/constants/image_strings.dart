@@ -288,6 +288,7 @@ class TImages {
   static const String masterCard =
       "assets/icons/payment_methods/master-card.png";
   static const String paypal = "assets/icons/payment_methods/paypal.png";
+  static const String razorpay = "assets/icons/payment_methods/razorpay.png";
   static const String visa = "assets/icons/payment_methods/visa.png";
   static const String paystack = "assets/icons/payment_methods/paystack.png";
   static const String paytm = "assets/icons/payment_methods/paytm.png";
@@ -297,27 +298,5 @@ class TImages {
 // Extra
   static const String mahadi = "assets/images/user/mahadi.jpg";
 
-  static var samsungGalaxyS91;
-
-  static var samsungGalaxyS92;
-
-  static var samsungGalaxyS93;
-
-  static var iphone13ProMax1;
-
-  static var iphone13ProMax2;
-
-  static var iphone13ProMax3;
-
-  static var googlePixel6_1;
-
-  static var googlePixel6_2;
-
-  static var googlePixel6_3;
-
-  static var onePlus9Pro_1;
-
-  static var onePlus9Pro_2;
-
-  static var onePlus9Pro_3;
+ 
 }
