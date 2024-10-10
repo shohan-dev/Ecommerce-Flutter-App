@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:smartshop/features/personailzation/controllers/address/address_controller.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
-import 'package:smartshop/navigation_menu.dart';
 
 class ProductSuccessController extends GetxController {
   static ProductSuccessController get instance => Get.find();
@@ -24,27 +24,29 @@ class ProductSuccessController extends GetxController {
         return;
       }
       var orderQuantity = 1;
-      
+      var totalOrder = 1;
 
-      final totalPrice =  product.price!.toInt() *orderQuantity;
+      var address = AddressController.instance.addressList[0]['address'];
+
+      final totalPrice = product.price!.toInt() * orderQuantity;
 
       // Define the order info
       final orderInfo = {
         "productName": product.title,
-        "productPrice": product.price,
+        "productPrice": "\$${product.price}",
         "productImage": product.images![0],
         "productSku": product.sku,
         "productColor": selectedColor,
         "productSize": selectedSize,
+        "category": product.category,
         "orderDate": DateTime.now(),
         "orderStatus": "Processing",
-        "orderTotal": product.price,
+        "orderTotal": totalOrder,
         "orderQuantity": 1,
-        "orderAddress": "123 Main St, New York, NY 10001",
+        "orderAddress": address,
         "orderId": DateTime.now().millisecondsSinceEpoch.toString(),
-        "orderPaymentMethod": "Stripe",
-        "totalPrice": totalPrice,
-
+        "orderPaymentMethod": "Razorpay",
+        "totalPrice": "\$$totalPrice",
       };
 
       // Update or create the user's document in Firestore
@@ -52,15 +54,11 @@ class ProductSuccessController extends GetxController {
         "orderInfo": FieldValue.arrayUnion(
             [orderInfo]) // Use arrayUnion to add to the orderInfo array
       }, SetOptions(merge: true)); // Merge the fields
-
-      Get.snackbar('Success', 'Order updated successfully!'); // Confirm success
-      Get.offAll(
-          () => const NavigationMenuPage()); // Navigate to the home screen
     } catch (e) {
       print("Error updating order data: $e");
       Get.snackbar('Error',
           'Failed to update order data.'); // Inform the user of the failure
-      throw e;
+      rethrow;
     }
   }
 }

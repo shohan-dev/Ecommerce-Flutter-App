@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
+import 'package:smartshop/common/widget/snackbar/snackbar.dart';
 import 'package:smartshop/common/widget/success_screen.dart';
+import 'package:smartshop/features/shop/controllers/product_details/product_success_controller.dart';
+import 'package:smartshop/features/shop/controllers/single_checkout/single_checkout_controller.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/single_checkout/widgets/billing_address_section.dart';
 import 'package:smartshop/features/shop/screens/single_checkout/widgets/billing_amount_section.dart';
@@ -28,6 +31,8 @@ class SingleCheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final address = SingleCheckoutController.instance.addressList;
+
     final dark = THelperFunctions.isDarkMode(context);
     double taxFee = 6.0;
     double shoppingFeePercentage = 0.05;
@@ -63,6 +68,7 @@ class SingleCheckoutScreen extends StatelessWidget {
                   backgroundColor: dark ? TColors.dark : TColors.white,
                   child: const Padding(
                     padding: EdgeInsets.all(TSizes.defaultSpace),
+                    // child: TAddressSectionSingle(),
                     child: TAddressSectionSingle(),
                   )),
               const SizedBox(height: TSizes.spaceBtwSections),
@@ -94,6 +100,18 @@ class SingleCheckoutScreen extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
+              // if address is empty, show a message to add an address
+              if (address.isEmpty) {
+                TLoaders.warningSnackBar(
+                    title: "Error", message: "Please add address");
+                return;
+              }
+
+              // Update the order
+              Get.put(ProductSuccessController());
+              ProductSuccessController.instance
+                  .updateProductOrder(selectedColor, selectedSize, product);
+
               Get.offAll(() => SuccessScreenPage(
                     title: "Order Placed",
                     subtitle: "Your order has been placed successfully",

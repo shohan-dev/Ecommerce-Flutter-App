@@ -6,67 +6,108 @@ import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TSingleAddress extends StatelessWidget {
-  const TSingleAddress({super.key, required this.selectedAddress});
+  const TSingleAddress(
+      {super.key,
+      required this.selectedAddress,
+      required this.name,
+      required this.phoneNumber,
+      required this.address});
 
   final bool selectedAddress;
+  final String name, phoneNumber, address;
 
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    return TRoundedContainer(
-      padding: const EdgeInsets.all(TSizes.md),
-      width: double.infinity,
-      showBorder: true,
-      backgroundColor: selectedAddress
-          ? TColors.primary.withOpacity(0.5)
-          : Colors.transparent,
-      borderColor: selectedAddress
-          ? Colors.transparent
-          : dark
-              ? TColors.darkGrey
-              : TColors.grey,
-      margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
-      child: Stack(
-        children: [
-          Positioned(
-            right: 5,
-            top: 0,
-            child: Icon(
-              selectedAddress ? Iconsax.tick_circle5 : null,
-              color: selectedAddress
-                  ? dark
-                      ? TColors.light
-                      : TColors.dark
-                  : null,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+
+    return SingleChildScrollView(
+      child: GestureDetector(
+        onForcePressPeak: (details) {
+          print('Force press peak: $details');
+        },
+        child: TRoundedContainer(
+          padding: const EdgeInsets.all(TSizes.md),
+          width: double.infinity,
+          showBorder: true,
+          backgroundColor: selectedAddress
+              ? TColors.primary.withOpacity(0.5)
+              : Colors.transparent,
+          borderColor: selectedAddress
+              ? Colors.transparent
+              : dark
+                  ? TColors.darkGrey
+                  : TColors.grey,
+          margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
+          child: Stack(
             children: [
-              Text(
-                "John Doe",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(
-                height: TSizes.sm / 2,
-              ),
-              const Text(
-                "+8801758496771",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(
-                height: TSizes.sm / 2,
-              ),
-              const Text(
-                "Shalgaria Talbagan,Pabna",
-                softWrap: true,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Iconsax.user,
+                        color: Colors.grey,
+                        size: 16,
+                      ),
+                      const SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      Text(
+                        name,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems / 2,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Iconsax.call,
+                        color: Colors.grey,
+                        size: 16,
+                      ),
+                      const SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      Text(
+                        phoneNumber,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwItems / 2,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Iconsax.location,
+                        color: Colors.grey,
+                        size: 16,
+                      ),
+                      const SizedBox(
+                        width: TSizes.spaceBtwItems,
+                      ),
+                      Expanded(
+                        child: Wrap(
+                          children: [
+                            Text(
+                              address,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

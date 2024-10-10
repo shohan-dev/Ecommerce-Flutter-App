@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
+import 'package:smartshop/features/personailzation/controllers/address/address_controller.dart';
 import 'package:smartshop/features/personailzation/screens/address/add_new_address.dart';
 import 'package:smartshop/features/personailzation/screens/address/widgets/single_address.dart';
 import 'package:smartshop/utils/constants/colors.dart';
@@ -12,6 +13,9 @@ class UserAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addressController = Get.put(AddressController());
+    final address = addressController.addressList;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: TColors.primary,
@@ -20,7 +24,7 @@ class UserAddressScreen extends StatelessWidget {
             color: TColors.white,
           ),
           onPressed: () {
-            Get.to(const AddNewAddressScreen());
+            Get.to(() => const AddNewAddressScreen());
           }),
       appBar: TAppBar(
         showBackArrow: true,
@@ -29,16 +33,31 @@ class UserAddressScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TSingleAddress(
-                selectedAddress: false,
-              ),
-              TSingleAddress(
-                selectedAddress: true,
+              Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: address.length,
+                  itemBuilder: (context, index) {
+                    final isActive = address[index]['isActive'];
+                    return GestureDetector(
+                      onTap: () {
+                        
+                        addressController.toggleAddressStatus(index);
+                      },
+                      child: TSingleAddress(
+                        name: address[index]['name'],
+                        phoneNumber: address[index]['phoneNumber'],
+                        address: address[index]['address'],
+                        selectedAddress: isActive,
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

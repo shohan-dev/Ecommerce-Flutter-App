@@ -12,7 +12,7 @@ class SuccessScreenPage extends StatelessWidget {
     required this.onPressed,
     this.isLotti = true,
     this.isSecondButton = false,
-    this.onSecondButtonPressed = _emptybutton,
+    this.onSecondButtonPressed = _emptyButton,
   });
 
   final String title;
@@ -24,7 +24,7 @@ class SuccessScreenPage extends StatelessWidget {
   final bool isLotti;
   final bool isSecondButton;
 
-  static void _emptybutton() {
+  static void _emptyButton() {
     // Default empty callback
   }
 
@@ -35,7 +35,7 @@ class SuccessScreenPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
-            
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 100),
               if (isLotti)
@@ -66,7 +66,10 @@ class SuccessScreenPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: onPressed,
+                  onPressed: () {
+                    // Ensure navigation only occurs when this button is pressed
+                    onPressed();
+                  },
                   child: Text(buttonName),
                 ),
               ),
