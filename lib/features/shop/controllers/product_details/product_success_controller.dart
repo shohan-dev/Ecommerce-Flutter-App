@@ -26,6 +26,9 @@ class ProductSuccessController extends GetxController {
       var orderQuantity = 1;
       var totalOrder = 1;
 
+      // orderDate convert to string and make it only date
+      var orderDate = DateTime.now().toString().substring(0, 10);
+
       var address = AddressController.instance.addressList[0]['address'];
 
       final totalPrice = product.price!.toInt() * orderQuantity;
@@ -39,7 +42,7 @@ class ProductSuccessController extends GetxController {
         "productColor": selectedColor,
         "productSize": selectedSize,
         "category": product.category,
-        "orderDate": DateTime.now(),
+        "orderDate": orderDate,
         "orderStatus": "Processing",
         "orderTotal": totalOrder,
         "orderQuantity": 1,

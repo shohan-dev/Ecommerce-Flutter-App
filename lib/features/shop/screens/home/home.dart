@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     setupController();
     final controller = ProductController.instance;
+
     // ignore: prefer_const_constructors
     return Scaffold(
       body: SingleChildScrollView(
@@ -73,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                 title: "Popular Products",
                 showActionButton: true,
                 onPressed: () {
-                  Get.to(() =>  SearchProductScreen());
+                  Get.to(() => SearchProductScreen());
                 },
               ),
             ),

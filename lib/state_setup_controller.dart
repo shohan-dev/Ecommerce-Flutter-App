@@ -9,4 +9,5 @@ void setupController() {
   Get.put(ProductController());
   Get.put(SingleCheckoutController());
   Get.put(AddressController());
+
 }
