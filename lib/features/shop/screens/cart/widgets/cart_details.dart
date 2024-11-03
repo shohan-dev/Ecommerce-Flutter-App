@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:smartshop/common/widget/products/cart/add_remove_button.dart';
 import 'package:smartshop/common/widget/products/cart/cart_item.dart';
 import 'package:smartshop/common/widget/texts/product_price_text.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
-class TCartItemsList extends StatelessWidget {
-  const TCartItemsList({
+class TCartItemsListDetails extends StatelessWidget {
+  TCartItemsListDetails({
     super.key,
     this.showAddRemoveButton = true,
+    required this.cartList,
   });
 
   final bool showAddRemoveButton;
+  final RxList<Map<String, dynamic>> cartList;
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: cartList.length,
         separatorBuilder: (_, __) => const SizedBox(
               height: TSizes.spaceBtwSections,
             ),
-        itemBuilder: (_, __) => Column(
+        itemBuilder: (_, index) => Column(
               children: [
-                const TCartItems(),
+                TCartItems(
+                  cartList: [cartList[index]],
+                ),
 
                 // under if condition to show add remove button--------------------------------------------------------
                 if (showAddRemoveButton)
@@ -30,19 +36,23 @@ class TCartItemsList extends StatelessWidget {
                     height: TSizes.spaceBtwItems,
                   ),
                 if (showAddRemoveButton)
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             width: 70,
                           ),
-                          TProductQuantityWithAddRemoveButton(), // both buttons add and remove
+                          TProductQuantityWithAddRemoveButton(
+                            cartIndex: index,
+                          ), // both buttons add and remove
                         ],
                       ),
-                      TProductPriceText(
-                        price: '250',
+                      Obx(
+                        () => TProductPriceText(
+                          price: cartList[index]['totalPrice'].toString(),
+                        ),
                       ),
                     ],
                   ),

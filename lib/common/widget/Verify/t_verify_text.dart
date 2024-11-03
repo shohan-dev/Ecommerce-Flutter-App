@@ -27,7 +27,7 @@ class TVerifyText extends StatelessWidget {
         TextStyle(
           fontSize: 11,
           color: THelperFunctions.isDarkMode(context)
-              ? Colors.white70
+              ? Colors.white38
               : Colors.black26,
         );
 

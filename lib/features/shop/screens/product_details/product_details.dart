@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smartshop/common/widget/sizebox/t_sizebox_btw_items.dart';
+import 'package:smartshop/features/shop/controllers/cart/add_to_cart_controller.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/bottom_add_to_card.dart';
 import 'package:smartshop/features/shop/screens/product_details/widgets/product_attributes.dart';
@@ -17,10 +19,11 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    Get.put(AddToCartController());
     double avgRating = AvgRating();
 
     return Scaffold(
-      bottomNavigationBar:  TBottomAdToCart(product: product),
+      bottomNavigationBar: TBottomAdToCart(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -7,7 +7,7 @@ import 'package:smartshop/features/authentication/screen/signup/signup.dart';
 import 'package:smartshop/features/personailzation/screens/Profile/profile.dart';
 import 'package:smartshop/features/personailzation/screens/Setting/Setting.dart';
 import 'package:smartshop/features/personailzation/screens/address/address.dart';
-import 'package:smartshop/features/shop/screens/cart/widgets/cart.dart';
+import 'package:smartshop/features/shop/screens/cart/cart.dart';
 import 'package:smartshop/features/shop/screens/checkout/checkout.dart';
 import 'package:smartshop/features/shop/screens/home/home.dart';
 import 'package:smartshop/features/shop/screens/order/order.dart';

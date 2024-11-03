@@ -3,14 +3,16 @@ import 'package:smartshop/common/widget/Verify/t_verify_text.dart';
 import 'package:smartshop/common/widget/images/t_round_images.dart';
 import 'package:smartshop/common/widget/texts/product_title.dart';
 import 'package:smartshop/utils/constants/colors.dart';
-import 'package:smartshop/utils/constants/image_strings.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
 class TCartItems extends StatelessWidget {
   const TCartItems({
     super.key,
+    required this.cartList,
   });
+
+  final List<Map<String, dynamic>> cartList;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,8 @@ class TCartItems extends StatelessWidget {
       children: [
         // images
         TRoundImage(
-          imageUrl: TImages.productImage1,
+          isNetworkImage: true,
+          imageUrl: cartList[0]['image'][0],
           width: 60,
           height: 60,
           padding: const EdgeInsets.all(TSizes.sm),
@@ -34,10 +37,10 @@ class TCartItems extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TVerifyText(text: "Nike"),
-              const Flexible(
+              TVerifyText(text: cartList[0]['brand']),
+              Flexible(
                 child: TProductTitle(
-                  title: "Black Sports shoes",
+                  title: cartList[0]['name'],
                   maxLines: 1,
                 ),
               ),
@@ -50,7 +53,7 @@ class TCartItems extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextSpan(
-                      text: "Green",
+                      text: cartList[0]['color'],
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     TextSpan(
@@ -58,7 +61,7 @@ class TCartItems extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                     TextSpan(
-                      text: "UK 08",
+                      text: cartList[0]['size'],
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],

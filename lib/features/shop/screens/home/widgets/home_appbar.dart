@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/effect/shimmer_effect.dart';
 import 'package:smartshop/features/personailzation/controllers/user_controllers.dart';
-import 'package:smartshop/features/shop/screens/cart/widgets/cart.dart';
+import 'package:smartshop/features/shop/screens/cart/cart.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/text_strings.dart';
 

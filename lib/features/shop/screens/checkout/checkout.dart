@@ -4,7 +4,6 @@ import 'package:smartshop/common/widget/appbar/appbar.dart';
 import 'package:smartshop/common/widget/custom_shape/containers/rounded_container.dart';
 import 'package:smartshop/common/widget/products/cart/cupon_section.dart';
 import 'package:smartshop/common/widget/success_screen.dart';
-import 'package:smartshop/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:smartshop/features/shop/screens/checkout/widgets/billing_address_section.dart';
 import 'package:smartshop/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:smartshop/features/shop/screens/checkout/widgets/billing_amount_section.dart';
@@ -31,9 +30,9 @@ class CheckoutScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              const TCartItemsList(
-                showAddRemoveButton: false,
-              ),
+              // const TCartItemsList(
+              //   showAddRemoveButton: false,
+              // ),
               const SizedBox(height: TSizes.spaceBtwSections),
 
               // Cuppon code section

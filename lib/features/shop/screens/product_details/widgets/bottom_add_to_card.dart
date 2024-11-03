@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/icons/circular_icons.dart';
 import 'package:smartshop/common/widget/snackbar/snackbar.dart';
-import 'package:smartshop/features/shop/controllers/cart/cart_controller.dart';
+import 'package:smartshop/features/shop/controllers/cart/add_to_cart_controller.dart';
 import 'package:smartshop/features/shop/controllers/product_details/product_details.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 import 'package:smartshop/utils/constants/colors.dart';
@@ -21,7 +21,7 @@ class TBottomAdToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    final cartController = CartController.instance;
+    final cartController = AddToCartController.instance;
     final selectedColorObs = Get.put(ProductDetailsController()).selectedColor;
     final selectedSizeObs = Get.put(ProductDetailsController()).selectedSize;
 
@@ -77,11 +77,21 @@ class TBottomAdToCart extends StatelessWidget {
                 TLoaders.warningSnackBar(title: "Select Size for the product");
                 return;
               }
+              var selectedColorName = "";
+
+              // get the selected color name
+              if (selectedColorObs.hashCode == 265523868) {
+                selectedColorName = "Red";
+              } else if (selectedColorObs.hashCode == 213129631) {
+                selectedColorName = "Green";
+              } else if (selectedColorObs.hashCode == 397551850) {
+                selectedColorName = "Blue";
+              }
 
               // Add to cart
               cartController.addToCart(
                 product.toJson(),
-                selectedColorObs.value,
+                selectedColorName,
                 selectedSizeObs.value,
                 cartController.quantity.value,
               );

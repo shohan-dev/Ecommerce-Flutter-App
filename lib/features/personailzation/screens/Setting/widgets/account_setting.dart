@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:smartshop/common/widget/list_tile/setting_menu_tiles.dart';
 import 'package:smartshop/common/widget/texts/section_heading.dart';
 import 'package:smartshop/features/personailzation/screens/address/address.dart';
-import 'package:smartshop/features/shop/screens/cart/widgets/cart.dart';
+import 'package:smartshop/features/shop/screens/cart/cart.dart';
 import 'package:smartshop/features/shop/screens/order/order.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 
