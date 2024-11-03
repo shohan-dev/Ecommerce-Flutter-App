@@ -20,7 +20,6 @@ class UserReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Obx(() {
       if (controller.reviews.isEmpty) {
         return const Center(child: Text('No reviews available.'));

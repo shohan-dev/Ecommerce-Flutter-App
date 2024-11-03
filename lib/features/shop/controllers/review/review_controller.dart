@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:smartshop/navigation_menu.dart';
 
 class WriteReviewController extends GetxController {
   static WriteReviewController get instance => Get.find();
@@ -25,23 +26,54 @@ class WriteReviewController extends GetxController {
       if (reviewText.value.isNotEmpty) {
         FirebaseFirestore.instance
             .collection('Shop_Products')
-            .doc(docid
-                .toString()) // No need to convert to string, already a string
-            .update({
-          'reviews': FieldValue.arrayUnion([
-            {
-              'reviewerName': fullName.value,
-              'reviewerEmail': email.value,
-              'rating': rating.value.toDouble(),
-              'comment': reviewText.value,
-              'date': DateTime.now().toString(),
+            .doc(docid.toString())
+            .get()
+            .then((doc) {
+          if (doc.exists) {
+            List<dynamic> reviews = doc.data()?['reviews'] ?? [];
+            String userEmail = email.value;
+
+            // Check if the reviewer's email exists
+            int existingReviewIndex = reviews
+                .indexWhere((review) => review['reviewerEmail'] == userEmail);
+
+            if (existingReviewIndex != -1) {
+              // Email exists, replace the existing review
+              reviews[existingReviewIndex] = {
+                'reviewerName': fullName.value,
+                'reviewerEmail': userEmail,
+                'rating': rating.value.toDouble(),
+                'comment': reviewText.value,
+                'date': DateTime.now().toString(),
+              };
+            } else {
+              // Email not found, add a new review
+              reviews.add({
+                'reviewerName': fullName.value,
+                'reviewerEmail': userEmail,
+                'rating': rating.value.toDouble(),
+                'comment': reviewText.value,
+                'date': DateTime.now().toString(),
+              });
             }
-          ]),
-        }).then((_) {
-          Get.snackbar('Success', 'Review submitted successfully',
-              snackPosition: SnackPosition.BOTTOM);
+
+            // Update the reviews in Firestore
+            FirebaseFirestore.instance
+                .collection('Shop_Products')
+                .doc(docid.toString())
+                .update({'reviews': reviews}).then((_) {
+              Get.snackbar('Success', 'Review submitted successfully',
+                  snackPosition: SnackPosition.BOTTOM);
+            }).catchError((error) {
+              Get.snackbar('Error', 'Failed to submit review: $error',
+                  snackPosition: SnackPosition.BOTTOM);
+            });
+          } else {
+            Get.snackbar('Error', 'Document does not exist',
+                snackPosition: SnackPosition.BOTTOM);
+          }
         }).catchError((error) {
-          Get.snackbar('Error', 'Failed to submit review: $error',
+          Get.snackbar('Error', 'Failed to retrieve reviews: $error',
               snackPosition: SnackPosition.BOTTOM);
         });
       } else {
@@ -53,7 +85,7 @@ class WriteReviewController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     });
 
-    Get.back();
+    Get.offAll(() => const NavigationMenuPage());
   }
 
   Future<void> getUserInfo(String uid) async {
@@ -96,6 +128,7 @@ class WriteReviewController extends GetxController {
           // Ensure reviews is a List
           reviewList.value = List<Map<String, dynamic>>.from(reviews);
           // print("Review list: $reviewList");
+          // ignore: invalid_use_of_protected_member
           return reviewList.value; // Return the review list
         } else {
           Get.snackbar('Info', 'No reviews available',
