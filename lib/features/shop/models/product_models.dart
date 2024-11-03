@@ -62,11 +62,11 @@ class ProductModels {
       price: (json['price'] as num?)?.toDouble(),
       discountPercentage: (json['discountPercentage'] as num?)?.toDouble(),
       rating: (json['rating'] as num?)?.toDouble(),
-      stock: json['stock'],
+      stock: (json['stock'] as num?)?.toInt(),
       tags: json['tags'] != null ? List<String>.from(json['tags']) : null,
       brand: json['brand'] ?? '',
       sku: json['sku'] ?? '',
-      weight: json['weight'],
+      weight: (json['weight'] as num?)?.toInt(),
       dimensions: json['dimensions'] != null
           ? Dimensions.fromJson(json['dimensions'])
           : null,
@@ -79,7 +79,7 @@ class ProductModels {
               .toList()
           : null,
       returnPolicy: json['returnPolicy'] ?? '',
-      minimumOrderQuantity: json['minimumOrderQuantity'],
+      minimumOrderQuantity: (json['minimumOrderQuantity'] as num?)?.toInt(),
       meta: json['meta'] != null ? Meta.fromJson(json['meta']) : null,
       images: json['images'] != null ? List<String>.from(json['images']) : null,
       thumbnail: json['thumbnail'] ?? '',
@@ -143,9 +143,9 @@ class Dimensions {
 }
 
 class Review {
-  final int? rating;
+  final int? rating; // Expecting an int
   final String comment;
-  final DateTime? date;
+  final String? date;
   final String reviewerName;
   final String reviewerEmail;
 
@@ -159,9 +159,9 @@ class Review {
 
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
-      rating: json['rating'],
+      rating: (json['rating'] as num?)?.toInt(), // Convert to int
       comment: json['comment'] ?? '',
-      date: json['date'] != null ? DateTime.parse(json['date']) : null,
+      date: json['date'] ?? '',
       reviewerName: json['reviewerName'] ?? '',
       reviewerEmail: json['reviewerEmail'] ?? '',
     );
@@ -171,7 +171,7 @@ class Review {
     return {
       'rating': rating,
       'comment': comment,
-      'date': date?.toIso8601String(),
+      'date': date,
       'reviewerName': reviewerName,
       'reviewerEmail': reviewerEmail,
     };
@@ -193,10 +193,12 @@ class Meta {
 
   factory Meta.fromJson(Map<String, dynamic> json) {
     return Meta(
-      createdAt:
-          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
-      updatedAt:
-          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'])
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.tryParse(json['updatedAt'])
+          : null,
       barcode: json['barcode'] ?? '',
       qrCode: json['qrCode'] ?? '',
     );
