@@ -4,7 +4,13 @@ import 'package:smartshop/utils/constants/sizes.dart';
 class TBillingAmountSection extends StatelessWidget {
   const TBillingAmountSection({
     super.key,
+    required this.taxFee,
+    required this.shoppingFee,
+    required this.totalPrices,
+    required this.price,
   });
+
+  final double taxFee, shoppingFee, totalPrices, price;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              "\$250.0",
+              "\$${price.toString()}",
               style: Theme.of(context).textTheme.bodyLarge,
             )
           ],
@@ -34,7 +40,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              "\$6.0",
+              "\$${shoppingFee.toString()}",
               style: Theme.of(context).textTheme.bodyLarge,
             )
           ],
@@ -50,7 +56,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              "\$6.0",
+              "\$${taxFee.toString()}",
               style: Theme.of(context).textTheme.bodyLarge,
             )
           ],
@@ -67,7 +73,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              "\$262.0",
+              "\$${totalPrices.toString()}",
               style: Theme.of(context).textTheme.titleSmall,
             )
           ],

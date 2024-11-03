@@ -65,6 +65,78 @@ class ProductSuccessController extends GetxController {
     }
   }
 
+  Future<void> updateProductOrderMultiple(String selectedColor,
+      String selectedSize, RxList<Map<String, dynamic>> cartList) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        Get.snackbar('Error', 'User is not authenticated.');
+        return;
+      }
+
+      // Convert orderDate to a simple date string
+      var orderDate = DateTime.now().toString().substring(0, 10);
+      // Fetch the user's address
+      var address = await fetchAddress_active();
+
+      // Loop through each item in the cartList
+      for (var item in cartList) {
+        var title = item['name'] ?? 'Unknown Product';
+        var price = item['price'] ?? 0.0;
+        var images = item['image'][0] ?? [];
+        var sku = item['productSku'] ?? 'Unknown SKU';
+        var color = item['color'] ?? selectedColor;
+        var size = item['size'] ?? selectedSize;
+        var category = item['category'] ?? 'General';
+        var orderQuantity = item['quantity'] ?? 1;
+
+        // Ensure `images` is a non-empty list with at least one image URL
+        var productImage = images.isNotEmpty ? images : 'default_image_url';
+
+        var totalPrice = price * orderQuantity;
+
+        // Print to debug
+        print("Processing item: $item");
+
+        // Define the order info for each item
+        final orderInfo = {
+          "productName": title,
+          "productPrice": "\$$price",
+          "productImage": productImage,
+          "productSku": sku,
+          "productColor": color,
+          "productSize": size,
+          "category": category,
+          "orderDate": orderDate,
+          "orderStatus": "Processing",
+          "orderQuantity": orderQuantity,
+          "orderAddress": address,
+          "orderId": DateTime.now().millisecondsSinceEpoch.toString(),
+          "orderPaymentMethod": "Razorpay",
+          "totalPrice": "\$$totalPrice",
+        };
+
+        // Print to confirm order info
+        print("Order Info: $orderInfo");
+
+        // Add each order info to the user's order collection
+        await FirebaseFirestore.instance.collection("Users").doc(user.uid).set({
+          "orderInfo": FieldValue.arrayUnion([orderInfo])
+        }, SetOptions(merge: true));
+      }
+      // remove all cart data in the user's document
+      await FirebaseFirestore.instance
+          .collection("Users")
+          .doc(user.uid)
+          .set({"cart": FieldValue.delete()}, SetOptions(merge: true));
+
+    } catch (e) {
+      print("Error updating order data: $e");
+      Get.snackbar('Error', 'Failed to update order data.');
+      rethrow;
+    }
+  }
+
   Future<String?> fetchAddress_active() async {
     final FirebaseFirestore _db = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser;

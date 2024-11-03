@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:smartshop/features/shop/controllers/cart/cart_controller.dart';
 import 'package:smartshop/utils/constants/colors.dart';
 
 class TCartCounterIcon extends StatelessWidget {
@@ -14,6 +16,7 @@ class TCartCounterIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CartController());
     return Stack(
       children: [
         IconButton(
@@ -31,12 +34,14 @@ class TCartCounterIcon extends StatelessWidget {
                   color: Colors.black54,
                   borderRadius: BorderRadius.circular(100)),
               child: Center(
-                child: Text(
-                  "2",
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .apply(color: TColors.white, fontSizeFactor: 0.8),
+                child: Obx(
+                  () => Text(
+                    controller.cartList.length.toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .apply(color: TColors.white, fontSizeFactor: 0.8),
+                  ),
                 ),
               ),
             )),

@@ -62,6 +62,8 @@ class AddToCartController extends GetxController {
         'name': product['title'],
         'image': product['images'],
         'color': selectedColor,
+        "category": product['category'],
+        "productSku": product['sku'],
         'size': selectedSize,
         'quantity': quantity,
         'price': price,

@@ -8,7 +8,6 @@ import 'package:smartshop/features/personailzation/screens/Profile/profile.dart'
 import 'package:smartshop/features/personailzation/screens/Setting/Setting.dart';
 import 'package:smartshop/features/personailzation/screens/address/address.dart';
 import 'package:smartshop/features/shop/screens/cart/cart.dart';
-import 'package:smartshop/features/shop/screens/checkout/checkout.dart';
 import 'package:smartshop/features/shop/screens/home/home.dart';
 import 'package:smartshop/features/shop/screens/order/order.dart';
 import 'package:smartshop/features/shop/screens/store/store.dart';
@@ -22,7 +21,7 @@ class AppRoutes {
     // GetPage(
     //     name: TRoutes.productReviews, page: () => const ProductReviewScreen(product: Pro,)),
     GetPage(name: TRoutes.order, page: () => const OrderScreen()),
-    GetPage(name: TRoutes.checkout, page: () => const CheckoutScreen()),
+    // GetPage(name: TRoutes.checkout, page: () => const CheckoutScreenPage()),
     GetPage(name: TRoutes.cart, page: () => const CartScreen()),
     GetPage(name: TRoutes.userProfile, page: () => const ProfileScreen()),
     GetPage(name: TRoutes.userAddress, page: () => const UserAddressScreen()),

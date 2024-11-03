@@ -23,7 +23,9 @@ class ProductController extends GetxController {
     try {
       isLoading.value = true;
       final products = await productRepo.getFeaturedProducts();
-      featuredProducts.value = products;
+      // featuredProducts.value = products;
+      // make it random products
+      featuredProducts.value = products..shuffle();
     } catch (e) {
       TLoaders.errorSnackBar(title: "Error", message: e.toString());
     } finally {
