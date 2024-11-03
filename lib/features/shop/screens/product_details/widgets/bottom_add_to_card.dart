@@ -10,43 +10,20 @@ import 'package:smartshop/utils/constants/colors.dart';
 import 'package:smartshop/utils/constants/sizes.dart';
 import 'package:smartshop/utils/helpers/helper_functions.dart';
 
-class TBottomAdToCart extends StatefulWidget {
+class TBottomAdToCart extends StatelessWidget {
   const TBottomAdToCart({
-    super.key,
+    Key? key,
     required this.product,
-  });
+  }) : super(key: key);
 
   final ProductModels product;
 
   @override
-  _TBottomAdToCartState createState() => _TBottomAdToCartState();
-}
-
-class _TBottomAdToCartState extends State<TBottomAdToCart> {
-  int quantity = 1;
-
-  void _incrementQuantity() {
-    setState(() {
-      quantity++;
-    });
-  }
-
-  void _decrementQuantity() {
-    setState(() {
-      if (quantity > 1) {
-        quantity--;
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
-    final cartcontroller = CartController.instance;
-    final selectedColorobs = Get.put(ProductDetailsController()).selectedColor;
-    final selectedSizeobs = Get.put(ProductDetailsController()).selectedSize;
-
-    var selectedColorName = "";
+    final cartController = CartController.instance;
+    final selectedColorObs = Get.put(ProductDetailsController()).selectedColor;
+    final selectedSizeObs = Get.put(ProductDetailsController()).selectedSize;
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -62,7 +39,7 @@ class _TBottomAdToCartState extends State<TBottomAdToCart> {
           Row(
             children: [
               GestureDetector(
-                onTap: _decrementQuantity,
+                onTap: cartController.decrementQuantity,
                 child: const TCircularIcon(
                   icon: Iconsax.minus,
                   backgroundColor: Color.fromARGB(255, 170, 170, 170),
@@ -71,18 +48,14 @@ class _TBottomAdToCartState extends State<TBottomAdToCart> {
                   color: TColors.white,
                 ),
               ),
-              const SizedBox(
-                width: TSizes.spaceBtwItems,
-              ),
-              Text(
-                quantity.toString(),
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(
-                width: TSizes.spaceBtwItems,
-              ),
+              const SizedBox(width: TSizes.spaceBtwItems),
+              Obx(() => Text(
+                    cartController.quantity.value.toString(),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  )),
+              const SizedBox(width: TSizes.spaceBtwItems),
               GestureDetector(
-                onTap: _incrementQuantity,
+                onTap: cartController.incrementQuantity,
                 child: const TCircularIcon(
                   icon: Iconsax.add,
                   backgroundColor: TColors.black,
@@ -94,42 +67,40 @@ class _TBottomAdToCartState extends State<TBottomAdToCart> {
             ],
           ),
           ElevatedButton(
-              onPressed: () {
-                // selectct color and size if empty add Tsnackbar
-                if (selectedColorobs.value == "") {
-                  TLoaders.warningSnackBar(
-                      title: "Select Color for the product");
-                  return;
-                }
-                if (selectedSizeobs.value == "") {
-                  TLoaders.warningSnackBar(
-                      title: "Select Size for the product");
-                  return;
-                }
-                // get the selected color name
-                if (selectedColorobs.hashCode == 265523868) {
-                  selectedColorName = "Red";
-                } else if (selectedColorobs.hashCode == 213129631) {
-                  selectedColorName = "Green";
-                } else if (selectedColorobs.hashCode == 397551850) {
-                  selectedColorName = "Blue";
-                }
+            onPressed: () {
+              // Check selected color and size
+              if (selectedColorObs.value.isEmpty) {
+                TLoaders.warningSnackBar(title: "Select Color for the product");
+                return;
+              }
+              if (selectedSizeObs.value.isEmpty) {
+                TLoaders.warningSnackBar(title: "Select Size for the product");
+                return;
+              }
 
-                cartcontroller.addToCart(
-                  widget.product,
-                  selectedColorName,
-                  selectedSizeobs.value,
-                  quantity,
-                );
-                TLoaders.successSnackBar(
-                    title: "Product added to cart",
-                    message: "Product added to cart successfully");
-              },
-              style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(TSizes.md),
-                  backgroundColor: TColors.black,
-                  side: const BorderSide(color: TColors.black)),
-              child: const Text("Add to Cart"))
+              // Add to cart
+              cartController.addToCart(
+                product.toJson(),
+                selectedColorObs.value,
+                selectedSizeObs.value,
+                cartController.quantity.value,
+              );
+
+              TLoaders.successSnackBar(
+                title: "Product added to cart",
+                message: "Product added to cart successfully",
+              );
+
+              // Reset quantity
+              cartController.quantity.value = 1;
+            },
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(TSizes.md),
+              backgroundColor: TColors.black,
+              side: const BorderSide(color: TColors.black),
+            ),
+            child: const Text("Add to Cart"),
+          ),
         ],
       ),
     );

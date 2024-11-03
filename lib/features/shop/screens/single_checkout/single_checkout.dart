@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartshop/common/widget/appbar/appbar.dart';
@@ -42,19 +40,6 @@ class SingleCheckoutScreen extends StatelessWidget {
     shoppingFee = double.parse(shoppingFee.toStringAsFixed(2));
     var totalPrices = product.price! + shoppingFee + taxFee;
     totalPrices = double.parse(totalPrices.toStringAsFixed(2));
-
-    ///////////////////////////////////
-
-
-
-// Example usage
-
-    // fetchAddress_data().then((address) {
-    //   print("Order Address: $address");
-    // });
-    // Call fetchAddress() somewhere in your code
-
-    /////////////////////////////////
 
     return Scaffold(
       appBar: TAppBar(
