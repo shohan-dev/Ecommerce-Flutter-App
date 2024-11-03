@@ -26,6 +26,7 @@ class WishlistController extends GetxController {
       print("No user is currently logged in.");
       return;
     }
+    isLoading.value = true;
 
     // Listen for changes to the user's document
     _db
@@ -38,8 +39,10 @@ class WishlistController extends GetxController {
         final List<String> wishlistIds =
             List<String>.from(documentSnapshot.data()?['wishlist'] ?? []);
         updateWishlist(wishlistIds);
+        isLoading.value = false;
       } else {
         print("User document does not exist.");
+        isLoading.value = false;
       }
     });
   }

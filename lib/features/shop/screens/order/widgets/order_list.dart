@@ -24,7 +24,7 @@ class TOrderListItems extends StatelessWidget {
     return Obx(() {
       // Check if loading
       if (controller.isLoading.value) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       }
@@ -68,18 +68,20 @@ class TOrderListItems extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: TSizes.defaultSpace),
-                      // color and size
+                      // Color and Size
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             orderlist[index]['productColor'],
-                            style: TextStyle(color: textColor),
+                            style: TextStyle(
+                                color: textColor, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: TSizes.sm),
                           Text(
                             orderlist[index]['productSize'],
-                            style: TextStyle(color: textColor),
+                            style: TextStyle(
+                                color: textColor, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -118,7 +120,7 @@ class TOrderListItems extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '\$${orderlist[index]['totalPrice']}',
+                    '${orderlist[index]['totalPrice']}',
                     style: const TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
@@ -172,22 +174,48 @@ class TOrderListItems extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: TSizes.md),
-              // Action Buttons
+              // Action Buttons delete the order popup dialog box
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: () {}, // Implement action
-                      icon: const Icon(Iconsax.trash),
-                      label: const Text('Cancel'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: errorColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                  // Delete Order
+                  GestureDetector(
+                    onTap: () {
+                      _showDeleteConfirmationDialog(context, index);
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(
+                          Iconsax.trash,
+                          color: errorColor,
+                          size: 16,
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                      ),
+                        SizedBox(width: TSizes.spaceBtwItems),
+                        Text(
+                          'Remove Order',
+                          style: TextStyle(color: errorColor),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Track Order
+                  GestureDetector(
+                    onTap: () {
+                      // Track Order
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(
+                          Iconsax.map,
+                          color: primaryColor,
+                          size: 16,
+                        ),
+                        SizedBox(width: TSizes.spaceBtwItems),
+                        Text(
+                          'Track Order',
+                          style: TextStyle(color: primaryColor),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -203,5 +231,34 @@ class TOrderListItems extends StatelessWidget {
         ),
       );
     });
+  }
+
+  // Function to show delete confirmation dialog
+  void _showDeleteConfirmationDialog(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirm Remove Order'),
+          content: const Text('Are you sure you want to Remove this order?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Delete the order
+                OrderController.instance.deleteOrder(index);
+                Navigator.of(context).pop(); // Close the dialog after deletion
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

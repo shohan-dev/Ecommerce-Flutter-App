@@ -25,6 +25,7 @@ class TProductAttributes extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedColorobs = Get.put(ProductDetailsController()).selectedColor;
     final selectedSizeobs = Get.put(ProductDetailsController()).selectedSize;
+
     var selectedColorName = "";
 
     return Column(

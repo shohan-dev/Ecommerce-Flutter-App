@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:smartshop/features/personailzation/controllers/address/address_controller.dart';
 import 'package:smartshop/features/shop/models/product_models.dart';
 
 class ProductSuccessController extends GetxController {
@@ -29,7 +28,8 @@ class ProductSuccessController extends GetxController {
       // orderDate convert to string and make it only date
       var orderDate = DateTime.now().toString().substring(0, 10);
 
-      var address = AddressController.instance.addressList[0]['address'];
+      // var address = AddressController.instance.addressList[0]['address'];
+      var address = await fetchAddress_active();
 
       final totalPrice = product.price!.toInt() * orderQuantity;
 
@@ -62,6 +62,44 @@ class ProductSuccessController extends GetxController {
       Get.snackbar('Error',
           'Failed to update order data.'); // Inform the user of the failure
       rethrow;
+    }
+  }
+
+  Future<String?> fetchAddress_active() async {
+    final FirebaseFirestore _db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser;
+
+    final snapshot = await _db.collection("Users").doc(user?.uid).get();
+
+    if (snapshot.exists) {
+      final data = snapshot.data();
+      print("Snapshot ===================>>>>>>> $data");
+
+      // Check if the address field exists and filter for active addresses
+      if (data?['address'] != null) {
+        final activeAddresses = (data!['address'] as List)
+            .where((address) => address['isActive'] == true)
+            .toList();
+
+        if (activeAddresses.isNotEmpty) {
+          // Get the first active address
+          final String orderAddress = activeAddresses[0]['address'];
+
+          print("Order Address: $orderAddress");
+
+          // Return the order address
+          return orderAddress;
+        } else {
+          print("No active addresses found.");
+          return null; // No active addresses
+        }
+      } else {
+        print("No address field found.");
+        return null; // No address field
+      }
+    } else {
+      print("User document does not exist.");
+      return null; // User document does not exist
     }
   }
 }

@@ -52,4 +52,24 @@ class OrderController extends GetxController {
       isLoading.value = false; // Ensure loading is set to false after attempt
     }
   }
+
+  // delete order index
+  Future<void> deleteOrder(index) async {
+    final FirebaseFirestore _db = FirebaseFirestore.instance;
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      print("No user is currently logged in.");
+      return;
+    }
+
+    try {
+      await _db.collection("Users").doc(user.uid).update({
+        'orderInfo': FieldValue.arrayRemove([orderList[index]])
+      });
+      
+    } catch (e) {
+      print("An error occurred while deleting order: $e");
+    }
+  }
 }

@@ -20,7 +20,7 @@ class ProductDetailScreen extends StatelessWidget {
     double avgRating = AvgRating();
 
     return Scaffold(
-      bottomNavigationBar: const TBottomAdToCart(),
+      bottomNavigationBar:  TBottomAdToCart(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [

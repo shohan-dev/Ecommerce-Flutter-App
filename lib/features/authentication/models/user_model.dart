@@ -10,8 +10,8 @@ class UserModel {
   // ignore: non_constant_identifier_names
   final String date_of_birth;
   // gender and date of birth
-  // add Wishlist map
-  final List<String> Wishlist;
+  // add wishlist map
+  final List<String> wishlist;
 
   // Full name is computed based on firstName and lastName
   String get fullName => "$firstName $lastName";
@@ -27,7 +27,7 @@ class UserModel {
     required this.gender,
     // ignore: non_constant_identifier_names
     required this.date_of_birth,
-    this.Wishlist = const [],
+    this.wishlist = const [],
   });
 
   static Future<UserModel> fromSnapshot(Map<String, dynamic> map) {
@@ -41,7 +41,7 @@ class UserModel {
       firstName: map['firstName'],
       lastName: map['lastName'],
       imgUrl: map['imgUrl'],
-      Wishlist: List<String>.from(map['Wishlist'] ?? []),
+      wishlist: List<String>.from(map['wishlist'] ?? []),
     ));
   }
 
@@ -56,7 +56,7 @@ class UserModel {
       imgUrl: '',
       gender: '',
       date_of_birth: '',
-      Wishlist: [],
+      wishlist: [],
     );
   }
 
@@ -72,7 +72,7 @@ class UserModel {
       imgUrl: map['imgUrl'] ?? '',
       gender: map['gender'] ?? '',
       date_of_birth: map['date_of_birth'] ?? '',
-      Wishlist: List<String>.from(map['Wishlist'] ?? []),
+      wishlist: List<String>.from(map['wishlist'] ?? []),
     );
   }
 }
@@ -91,7 +91,7 @@ extension UserModelX on UserModel {
       'imgUrl': imgUrl,
       'gender': gender,
       'date_of_birth': date_of_birth,
-      'Wishlist': Wishlist,
+      'wishlist': wishlist,
     };
   }
 }

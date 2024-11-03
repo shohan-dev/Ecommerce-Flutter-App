@@ -4,4 +4,7 @@ class ProductDetailsController extends GetxController {
   static ProductDetailsController get instance => Get.find();
   var selectedColor = "".obs;
   var selectedSize = "".obs;
+  var colornamedata = "".obs;
+
+  decrementQuantity() {}
 }

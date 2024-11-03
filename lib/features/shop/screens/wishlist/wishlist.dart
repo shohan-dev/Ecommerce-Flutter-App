@@ -19,7 +19,6 @@ class WishListScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
         actions: [
           Obx(() {
-            // Reactive check for wishlist items
             return wishlistController.wishlistProducts.isNotEmpty
                 ? IconButton(
                     onPressed: () {
@@ -27,11 +26,15 @@ class WishListScreen extends StatelessWidget {
                     },
                     icon: const Icon(Icons.delete),
                   )
-                : const SizedBox.shrink(); // Hide icon if wishlist is empty
+                : const SizedBox.shrink();
           }),
         ],
       ),
       body: Obx(() {
+        if (wishlistController.isLoading.value) {
+          return const Center(child: CircularProgressIndicator()); // Show loading indicator
+        }
+
         final products = wishlistController.wishlistProducts;
 
         if (products.isNotEmpty) {
@@ -117,8 +120,7 @@ class WishListScreen extends StatelessWidget {
                 onPressed: () => Get.back(),
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.blue,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                     side: const BorderSide(color: Colors.blue),
@@ -134,8 +136,7 @@ class WishListScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.red,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
